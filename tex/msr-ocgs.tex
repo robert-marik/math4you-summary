@@ -1,0 +1,48 @@
+\begin{insDLJS}[OcgOnOff]{OcgOnOff}{OcgOnOff}
+  var aOCGs = this.getOCGs(); 
+  var jmenoOCGs = []; 
+  var viditelnostOCGs = []; 
+  
+  function odkryjocg(jmeno)
+  {
+    var a = jmenoOCGs[jmeno]
+    if (a != null) {a.state=true; viditelnostOCGs[jmeno]=true;}
+    this.dirty=false;
+  }
+  
+  function schovejocg(jmeno)
+  {
+    var a = jmenoOCGs[jmeno]
+    if (a != null) {a.state=false; viditelnostOCGs[jmeno]=false;}
+    this.dirty=false;
+  }
+
+  for(var i=0; aOCGs && i<aOCGs.length;i++) 
+  {
+    jmenoOCGs[aOCGs[i].name]=aOCGs[i]; 
+    aOCGs[i].state=false;
+    viditelnostOCGs[aOCGs[i].name]=false; 
+  }
+
+  function CustomFullscreen ()
+  {
+    if (app.fullscreen) 
+    {
+      app.fullscreen = false;
+      for(var i=0; aOCGs && i<aOCGs.length;i++) 
+      {
+        aOCGs[i].state=viditelnostOCGs[aOCGs[i].name];
+      }
+    }
+    else
+    {app.fullscreen = true;}
+  }
+
+\end{insDLJS}
+
+
+%%% Local Variables: 
+%%% coding: cp1250
+%%% End: 
+
+

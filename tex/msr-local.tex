@@ -1,0 +1,29 @@
+\usepackage{tikz}\usetikzlibrary{decorations.pathmorphing} 
+\pgfdeclaredecoration{free hand}{start}
+{
+  \state{start}[width = +0pt,
+                next state=step,
+                persistent precomputation =
+\pgfdecoratepathhascornerstrue]{}
+  \state{step}[auto end on length    = 3pt,
+               auto corner on length = 3pt,               
+               width=+2pt]
+  {
+    \pgfpathlineto{
+      \pgfpointadd
+      {\pgfpoint{2pt}{0pt}}
+      {\pgfpoint{rand*0.15pt}{rand*0.15pt}}
+    }
+  }
+  \state{final}
+  {}
+}
+ \tikzset{free hand/.style={
+    decorate,
+    decoration={free hand}
+    }
+ } 
+
+ \tikzset{--/.style={decorate,
+    decoration={free hand}
+ }}

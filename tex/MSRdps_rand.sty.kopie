@@ -1,0 +1,406 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{MSRdps_rand}
+ [2012/10/10 MSR: Das Puzzle Spiel: randomized when opening PDF file]
+
+\RequirePackage{multido}
+
+\RequirePackage{xkeyval}
+
+\DeclareOptionX{neprehazovatotazky}{\def\MSRoptNechatPoradiOtazek{for(var i = 0; i < \MSRpocetotazek; i++){  otazky_perm[i] = i; }}}
+\ifx\MSRoptNechatPoradiOtazek\undefined \def\MSRoptNechatPoradiOtazek{}\fi
+
+\DeclareOptionX{neprehazovatodpovedi}{\def\MSRoptNechatPoradiOdpovedi{for(var i = 0; i < \MSRpocetodpovedi; i++){  odpovedi_perm[i] = i; }}}
+\ifx\MSRoptNechatPoradiOdpovedi\undefined \def\MSRoptNechatPoradiOdpovedi{}\fi
+
+\newif\if@msr@checkboxy\@msr@checkboxyfalse
+\DeclareOptionX{checkboxy}{\@msr@checkboxytrue}
+
+\ProcessOptionsX
+
+
+\QuesAppearance{\W1%\Ff\FfReadOnly
+}
+\AnsAppearance{\W1%\Ff\FfReadOnly
+}
+
+\newcount\dpsQcount
+
+\def\msr@test@A{A}\newcounter{msr@test@count}\def\hbox@sparuj#1{\hbox to 14bp{\hss #1\hss}}
+\def\obalit@checkbox#1#2#3{\def\temp{#3}\ifx\temp\msr@test@A\setcounter{msr@test@count}{#2}\def\temp@msr@{\alph{msr@test@count}}\else\def\temp@msr@{#2}\fi\hbox to 0 pt{\hss\hbox@sparuj{#1}\hss\lower 2pt\hbox@sparuj{\includegraphics{msr_testy_checkbox_gray.pdf}}\hss
+\ifx\temp\msr@test@A\lower 2pt\hbox@sparuj{\begin{ocg}{OD#2}{OD#2}0\includegraphics{msr_testy_checkbox_green.pdf}\end{ocg}}\else\lower 2pt\hbox@sparuj{\begin{ocg}{OT#2}{OT#2}0\includegraphics{msr_testy_checkbox_green.pdf}\end{ocg}}\fi\hss\hbox@sparuj{\temp@msr@}}}
+
+\newcommand{\RMdpsQ}[1]{\global\advance\dpsQcount by 1\item[]\relax\ifeqforpaper\else
+    \edef\checkboxTmp{\noexpand\checkBox[\the\QuesAppearancetoks
+    \noexpand\A{\noexpand\JS{activeQuestion = \the\dpsQcount; clearRedCrosses ();}}%
+    \noexpand\AA{\noexpand\AAOnFocus{\noexpand\JS{this.resetForm(["ckbxQ"]);}}}\noexpand\BC{}]%
+    {ckbxQ.\the\dpsQcount}{14bp}{11bp}{Yes}}\makebox[0pt][r]{\obalit@checkbox{\checkboxTmp}{\the\dpsQcount}{Q}\enspace}\fi
+    \ignorespaces}% R.M.
+
+\newcount\dpsAcount
+
+\newcommand{\RMdpsA}[2][]{\global\advance\dpsAcount by 1\item[]\relax\ifeqforpaper\else
+    \edef\checkboxTmp{\noexpand\checkBox[\the\AnsAppearancetoks
+    \noexpand\A{\noexpand\JS{processChoice2("\the\dpsAcount","")}}\noexpand\BC{}]%
+    {ckbxA.\the\dpsAcount}{14bp}{11bp}{Yes}}\makebox[0pt][r]{\obalit@checkbox{\checkboxTmp}{\the\dpsAcount}{A}\enspace}\fi
+    %\makebox[0pt][r]{\Hy@pdfstringfalse \MSR@pismeno{\the\dpsAcount}\enspace\kern2bp}%
+    \ignorespaces
+}
+
+
+\def\MSR@pismeno#1{
+\ifcase #1\relax 0
+\or a
+\or b
+\or c
+\or d
+\or e
+\or f
+\or g
+\or h
+\or i
+\or j
+\or k
+\or l
+\or m
+\or n
+\or o
+\or p
+\or q
+\or r
+\or s
+\or t
+\or u
+\or v
+\or w
+\or x
+\or y
+\or z
+\else
+???
+\fi
+}
+
+
+\def\pracuj{}
+\def\MSRaaa{}
+\ifx\MSRpocetotazek\undefined\def\MSRpocetotazek{1}\fi
+\ifx\MSRpocetodpovedi\undefined\def\MSRpocetodpovedi{1}\fi
+
+\def\MSRoptReseni{}
+
+%\if@msr@preview\def\MSRoptReseni{app.alert("Reseni je "+nahodnyklic);}\fi
+
+
+\begin{insDLJS}[initialize]{matchB}{JS Update of Matching Puzzle B}
+app.focusRect = false;
+
+// return a random permutation of a range (similar to randperm in Matlab)
+function randperm(maxValue){
+  // first generate number sequence
+  var permArray = new Array(maxValue);
+  for(var i = 0; i < maxValue; i++){
+    permArray[i] = i;
+  }
+  // draw out of the number sequence
+  for (var i = (maxValue - 1); i >= 0; --i){
+    var randPos = Math.floor((i+1) * Math.random());
+    if (randPos > i) {randPos = i;}
+    var tmpStore = permArray[i];
+    permArray[i] = permArray[randPos];
+    permArray[randPos] = tmpStore;
+  }
+  return permArray;
+}
+
+
+var otazky_perm = new Array();
+var tajenka_perm = new Array();
+var odpovedi_perm = new Array();
+
+var KonstPocetOdpovedi=\MSRpocetodpovedi;
+var KonstPocetOtazek=\MSRpocetotazek;
+
+nahodnyklic = "";
+
+function randperms()
+{
+  this.resetForm();
+  otazky_perm=randperm(\MSRpocetotazek);
+  otazky_perm=randperm(\MSRpocetotazek);
+  otazky_perm=randperm(\MSRpocetotazek);
+  tajenka_perm=randperm(\MSRpocetotazek);
+  tajenka_perm=randperm(\MSRpocetotazek);
+  tajenka_perm=randperm(\MSRpocetotazek);
+  odpovedi_perm=randperm(\MSRpocetodpovedi);  
+  odpovedi_perm=randperm(\MSRpocetodpovedi);  
+  odpovedi_perm=randperm(\MSRpocetodpovedi);  
+  \MSRoptNechatPoradiOtazek
+  \MSRoptNechatPoradiOdpovedi
+  for (var i = 1; i <= \MSRpocetotazek; i++) { nahodnyklic=nahodnyklic+i+""+najdipozici(otazky_perm[i-1])+", "; }
+  nahodnyklic=nahodnyklic.slice(0,-2)+".";
+  \MSRoptReseni
+  for (var i = 1; i <= \MSRpocetotazek; i++){ zakryjocgZacinajici("q"+i); odkryjocg("q"+i+"-"+(otazky_perm[i-1]+1)); }
+  for (var i = 1; i <= \MSRpocetodpovedi; i++){ zakryjocgZacinajici("a"+i); odkryjocg("a"+i+"-"+(odpovedi_perm[i-1]+1));}
+  this.dirty=false;
+}
+
+function zakryjocg(jmeno)
+{
+  schovejocg(jmeno);
+}
+
+function zakryjocgZacinajici(jmeno)
+{
+  for(var i=0; aOCGs && i<aOCGs.length;i++) {if((aOCGs[i].name).substring(0,2) == jmeno) schovejocg(aOCGs[i].name); }
+}
+
+zakryjocgZacinajici("ta");
+zakryjocgZacinajici("OT");
+zakryjocgZacinajici("OD");
+
+function najdipozici(prvek)
+{
+  for (var i = 1; i <= \MSRpocetodpovedi; i++){ if (odpovedi_perm[i-1] == prvek) {return String.fromCharCode(96 + i);}}
+  return ("?");
+}
+
+
+randperms();
+
+
+function processChoice2(fieldname,klic)
+{
+  clearMessages();
+    // Get the question field that corresponds to this question,
+    // see if checked.
+    //app.alert(odpovedi_perm.join(", ")+"\n"+otazky_perm.join(", ")+"\n\n Otazka "+activeQuestion+" : "+odpovedi_perm[fieldname-1]+" versus "+otazky_perm[activeQuestion-1]+"\n activeQuestion !=nic:"+(activeQuestion != ""));
+    var f = this.getField("ckbxQ."+ activeQuestion);
+    if ( (activeQuestion != "") && (odpovedi_perm[fieldname-1] == otazky_perm[activeQuestion-1]) ) { // right
+        //app.alert("Spravne zodpovezena otazka "+activeQuestion);
+        clearRedCrosses ();
+        //this.resetForm(["puzzle."+fieldname]);
+        pol=this.getField("puzzle."+(tajenka_perm[activeQuestion-1]+1));
+        if (pol!=null) {pol.hidden=true;}
+        odkryjocg("ta"+(tajenka_perm[activeQuestion-1]+1));
+        odkryjocg("OT"+activeQuestion);
+        odkryjocg("OD"+fieldname);
+        //event.target.textColor = ["RGB", 0, 0.6, 0];
+        //f.strokeColor = ["RGB", 0, 0.6, 0];
+        f.readonly = true;
+        f.hidden = true;
+        g=this.getField("otazka."+activeQuestion);
+        if (g != null)
+        {
+          g.readonly=true;
+          g.hidden=true;
+        }
+        g=this.getField("ckbxA."+fieldname);
+        g.readonly=true;
+        g.hidden=true;
+        g=this.getField("odpoved."+fieldname);
+        if (g != null)
+        {
+          g.readonly=true;
+          g.hidden=true;
+          g.textColor=["RGB", 0, 0, 0];
+        }
+        checkForFinished(\dspassing,nahodnyklic);
+    } else { // wrong
+        if ( activeQuestion != "" ) var h = this.getField("ckbxQ."+activeQuestion);
+        if ( (activeQuestion=="") || (h.readonly) ) { // active question already answered
+            this.getField("ckbxA."+fieldname).value = "Off";
+            str = \chooseQ;
+            var g = this.getField("report.1");
+            if (g!=null)
+            {
+              g.value = str;
+              var to = app.setTimeOut("clearMessages()", 2000);
+            }
+            else 
+            {app.alert(str,3);}
+        } else {
+            g=this.getField("ckbxA."+fieldname);
+            g.style = style.cr;
+            g.value = "Yes";
+            g.textColor = color.red;
+            g.readonly = true;
+            g=this.getField("odpoved."+fieldname);
+            if (g!=null)
+            {
+              g.readonly = true;
+            }
+            ++nMissed;
+        }
+    }
+    this.dirty=false;
+}
+
+\end{insDLJS}
+
+\newcount\otazkaNaRade
+\newcount\odpovedNaRade
+
+\renewcommand{\dpsQ}[1]{}% R.M.
+\renewcommand{\dpsA}[2][]{}
+
+% Do nasledujicich delkovych registru se sesbira maximalni sirka,
+% hloubka a vyska otazek a odpovedi
+\newdimen\zadani@max@sirka
+\newdimen\zadani@max@vyska
+\newdimen\zadani@max@hloubka
+\def\vynuluj@rozmery@zadani{\zadani@max@sirka = 0pt \zadani@max@vyska= 0pt \zadani@max@hloubka=0pt}
+
+% Prvni argument se pouzije pro jmeno  boxu ve kterem je ulozeny obsah s druhym argumentem
+%
+\def\@ulozitbox#1{\@uulozitbox{#1}}
+\def\@uulozitbox#1#2{\expandafter\newsavebox\csname mybox:#1\endcsname
+   \expandafter\savebox\csname mybox:#1\endcsname{\msr@klic\OdpovedBox{#2}}%
+ \expandafter\setbox\expandafter0\expandafter\hbox\expandafter{\expandafter\usebox\csname mybox:#1\endcsname}%
+ \ifdim\wd0>\zadani@max@sirka \global\zadani@max@sirka = \wd0\fi
+ \ifdim\ht0>\zadani@max@vyska \global\zadani@max@vyska = \ht0\fi
+ \ifdim\dp0>\zadani@max@hloubka \global\zadani@max@hloubka = \dp0\fi
+}
+
+% Makro pozvedne box tak, aby jeho dolni hrana byla na lince
+\def\msr@pozvednout@box#1{\setbox2=\hbox{#1}\raise \dp2 \box2}
+
+% Vystiskne box, ktery je ulozen prikazem \@ulozitbox
+\def\@pouzitbox#1{\expandafter\usebox\csname mybox:#1\endcsname}
+
+\def\OT@ulozitbox#1{\OT@uulozitbox{#1}}
+\def\OT@uulozitbox#1#2{\expandafter\newsavebox\csname OTmybox:#1\endcsname
+   \expandafter\savebox\csname OTmybox:#1\endcsname{\msr@klic\OtazkaBox{#2}}%
+ \expandafter\setbox\expandafter0\expandafter\hbox\expandafter{\expandafter\usebox\csname OTmybox:#1\endcsname}%
+ \ifdim\wd0>\zadani@max@sirka \global\zadani@max@sirka = \wd0\fi
+ \ifdim\ht0>\zadani@max@vyska \global\zadani@max@vyska = \ht0\fi
+ \ifdim\dp0>\zadani@max@hloubka \global\zadani@max@hloubka = \dp0\fi
+}
+\def\OT@pouzitbox#1{\expandafter\usebox\csname OTmybox:#1\endcsname}
+
+\def\OtazkaBox#1{\hbox{#1}}
+\def\OdpovedBox#1{\hbox{#1}}
+
+\def\MSRotazka#1{\OT@pouzitbox{#1}}
+\def\MSRodpoved#1{\@pouzitbox{#1}}
+
+\def\msr@klic{}
+
+\if@msr@checkboxy
+  \def\MSR@vsechny@otazky#1{#1}
+  \def\MSR@vsechny@odpovedi#1{#1}
+\else
+  \def\MSR@vsechny@otazky#1{\lower \zadani@max@hloubka \hbox to 0pt{\msr@pozvednout@box{\pushButton[%
+    \A{\JS{this.getField("ckbxQ.\the\dpsQcount").value="Yes"; activeQuestion = \the\dpsQcount; clearRedCrosses ();}}%
+    \AA{\AAOnFocus{\JS{this.resetForm(["ckbxQ"]);}}}\BG{}\BC{}\S{}\H{O}\CA{}]{otazka.\the\dpsQcount}{\the\zadani@max@sirka}{\zadani@max@vyska}}\hss}#1}
+
+  \def\MSR@vsechny@odpovedi#1{\lower \zadani@max@hloubka \hbox to 0pt{\msr@pozvednout@box{\pushButton[\A{\JS{processChoice2("\the\dpsAcount","")}}\BG{}\BC{}\S{}\H{O}\CA{}]{odpoved.\the\dpsAcount}{\the\zadani@max@sirka}{\zadani@max@vyska}}\hss}#1}
+\fi
+
+\if@msr@preview \def\msr@klic{\leavevmode\hbox to 0 pt{\hss \footnotesize\color{blue}\n\qquad\quad}\ignorespaces}\fi
+
+% Prikaz ulozi otazky do boxu a na pozici kazde otazky vytiskne vsechny boxy a neviditelne tlacitko definovane prikazem \MSR@vsechny@otazky
+\def\displayRandomizedQuestions{\vynuluj@rozmery@zadani
+\write\@auxout{\global\MsrOtazkyStranka=\thepage}%
+\Multido{\n=1+1}{\MSRpocetotazek}{\expandafter\OT@ulozitbox\expandafter{\n}{\input{\jobname_q\n.cut}}}%
+\advance\zadani@max@vyska by \zadani@max@hloubka
+\multido{\n=1+1}{\MSRpocetotazek}{\RMdpsQ{}\MSR@vsechny@otazky{\multido{\i=1+1}{\MSRpocetotazek}{\msr@boxOtazka{\begin{ocg}{q\n-\i}{q\n-\i}0\MSRotazka{\i}\end{ocg}}}}}%
+}
+
+\def\displayRandomizedAnswers{%
+\vynuluj@rozmery@zadani
+\Multido{\n=1+1}{\MSRpocetodpovedi}{\expandafter\@ulozitbox\expandafter{\n}{\input{\jobname_a\n.cut}}}%
+\advance\zadani@max@vyska by \zadani@max@hloubka
+\multido{\n=1+1}{\MSRpocetodpovedi}{\RMdpsA[]{}\MSR@vsechny@odpovedi{\multido{\i=1+1}{\MSRpocetodpovedi}{\msr@boxOdpoved{\begin{ocg}{a\n-\i}{a\n-\i}0 \MSRodpoved{\i}\end{ocg}}}\phantom{\OT@pouzitbox{1}}}}%
+}
+
+\if@msr@for@png
+\def\displayRandomizedQuestions{\vynuluj@rozmery@zadani
+\write\@auxout{\global\MsrOtazkyStranka=\thepage}%
+\Multido{\n=1+1}{\MSRpocetotazek}{\expandafter\OT@ulozitbox\expandafter{\n}{\input{\jobname_q\n.cut}}}%
+\advance\zadani@max@vyska by \zadani@max@hloubka
+\multido{\n=1+1}{\MSRpocetotazek}{\RMdpsQ{}\MSR@vsechny@otazky{{\msr@boxOtazka{\begin{ocg}{q\n-\n}{q\n-\n}1\MSRotazka{\n}\end{ocg}}}}}%
+}
+
+\def\displayRandomizedAnswers{%
+\vynuluj@rozmery@zadani
+\Multido{\n=1+1}{\MSRpocetodpovedi}{\expandafter\@ulozitbox\expandafter{\n}{\input{\jobname_a\n.cut}}}%
+\advance\zadani@max@vyska by \zadani@max@hloubka
+\multido{\n=1+1}{\MSRpocetodpovedi}{\RMdpsA[]{}\MSR@vsechny@odpovedi{{\msr@boxOdpoved{\begin{ocg}{a\n-\n}{a\n-\n}1 \MSRodpoved{\n}\end{ocg}}}\phantom{\OT@pouzitbox{1}}}}%
+}
+\fi
+
+\def\msr@boxOtazka#1{\hbox to 0 pt{#1 \hss}}
+\def\msr@boxOdpoved#1{\hbox to 0 pt{#1 \hss}}
+
+\renewenvironment{Composing}{}{}
+\werandomizefalse
+\def\ds@randomizeQuestionList#1{}
+\def\ds@randomizeAnswerList#1{}
+
+\edef\msr@hashchar{\string#}
+\def\DeclarePuzzle{\PackageError{msr-sparuj}{^^J^^J!!!! Prikaz DeclarePuzzle byl zrusen !!!! ^^J http://user.mendelu.cz/marik/wiki/doku.php?id=msr:parovaci_hry.md\msr@hashchar tajenka/ ^^J^^J!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!^^J}}
+
+\def\insertpuzzle{\PackageError{msr-sparuj}{^^J^^J!!!! Prikaz insertpuzzle byl zrusen !!!! ^^J http://user.mendelu.cz/marik/wiki/doku.php?id=msr:parovaci_hry.md\msr@hashchar tajenka/ ^^J^^J!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!^^J}}
+
+\def\pismeno{\PackageError{msr-sparuj}{^^J^^J!!!! Prikaz pismeno byl zrusen !!!! ^^J http://user.mendelu.cz/marik/wiki/doku.php?id=msr:parovaci_hry.md\msr@hashchar tajenka/ ^^J^^J!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!^^J}}
+
+\newcount\Maketextfieldcount
+
+\def\viditelnost@tajenky{0}
+\if@msr@for@png\def\viditelnost@tajenky{1}\fi
+
+
+\def\makeTextField#1#2{%
+  \penalty0%
+  \def\MSR@tajenka{#2}%
+  \def\tempPolickoName{#1}%
+  % \advance\MSR@questions by 1\relax
+  \setbox0=\hbox{\,\MSR@tajenka\,}%
+  % \ifdim \wd0<\minwidth  \setbox0=\hbox to \minwidth{\hfil\,\MSR@tajenka\,\hfil}\fi
+  \begin{ocg}{tajenka}{tajenka}{\viditelnost@tajenky}\hbox to 0 pt{\copy0\hss}\end{ocg}%
+  % \expandafter\ifx\csname jmenopolicka:#2\endcsname\relax
+  %     \global\advance\Maketextfieldcount by 1
+  %     \edef\tempPolickoName{\the\Maketextfieldcount}%
+  %     \expandafter\xdef\csname jmenopolicka:#2\endcsname{\the\Maketextfieldcount}%
+  % \else
+  %     \edef\tempPolickoName{\csname jmenopolicka:#2\endcsname}%
+  % \fi
+  \raisebox{\dpsyshift}{\makebox[0pt][l]{\makebox[\wd0][c]{%
+        \hss}}}%
+  %%%%%%%%% Fix to accept more than one command inside \PuzzleAppearance
+  \edef\textfieldTmp{\noexpand\textField[\noexpand\BG{gray}\noexpand\S{U}%
+    \noexpand\Ff\noexpand\FfReadOnly\the\PuzzleAppearancetoks]%
+    {puzzle.\tempPolickoName}{\wd0}{16bp}}\Hy@pdfstringtrue\textfieldTmp}
+
+
+\newcount\msr@tajenkacount
+\newtoks\predtajenkou
+\predtajenkou{\color{red}}
+
+\def\msr@user{user}
+\newcommand\taj[2][]{%
+\write\@auxout{\global\MsrTajenkaStranka=\thepage}%
+\leavevmode \def\temp{user#1}%
+\ifx\temp\msr@user\global
+% Nebyl zadan klic -> posunume pocitadlo policek
+\global\advance\msr@tajenkacount by 1\relax\edef\msr@cislotaj{\the\msr@tajenkacount}%
+\else
+% Byl zadan klic
+\expandafter\ifx\csname tajenka:#1\endcsname\relax
+% Klic byl zadan poprve -> posuneme pocitadlo a zapamatujeme si cislo do prikazu tajenka:klic
+\global\advance\msr@tajenkacount by 1\relax
+\edef\msr@cislotaj{\the\msr@tajenkacount}%
+\expandafter\xdef\csname tajenka:#1\endcsname{\the\msr@tajenkacount}%
+\else
+\edef\msr@cislotaj{\csname tajenka:#1\endcsname}%
+\fi
+\fi
+\makeTextField{\msr@cislotaj}{{\the\predtajenkou #2}}%
+}
+
+
+\def\tajenka#1{\let\msr@next\do@next@taj\msr@next #1{****}}
+\def\msr@hvezdicky{****}
+
+\newcommand\do@next@taj[2][]{\def\temp{#2}\ifx\temp\msr@hvezdicky\let\msr@next\relax\else\taj[#1]{#2}\fi\msr@next}

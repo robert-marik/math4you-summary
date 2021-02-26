@@ -1,0 +1,47 @@
+bash download_csv 
+rm easy.csv
+rm clonable.csv
+wget http://math4u.vsb.cz/tex/flags/easy.csv
+wget http://math4u.vsb.cz/tex/flags/clonable.csv
+bash prikaz
+bash prikaz_texfilter
+bash prikaz_texgen 
+
+bash prepocitej_qa.sh > html_un_qa/pocet.php
+bash prepocitej_translation.sh > html_un_translation/pocet.php
+cat html_un_translation/??.html > html_un_translation/all.html
+
+cp pdf/*.* /var/www/math4you/data/pdf
+cp html/*.* /var/www/math4you/data/html
+cp pdf_easy/*.* /var/www/math4you/data/pdf_easy
+cp html_easy/*.* /var/www/math4you/data/html_easy
+cp pdf_clonable/*.* /var/www/math4you/data/pdf_clonable
+
+cp html_un_qa/*.* /var/www/math4you/data/html_un_qa
+cp html_un_translation/*.* /var/www/math4you/data/html_un_translation
+cp pdf_un_qa/*.* /var/www/math4you/data/pdf_un_qa
+cp pdf_un_translation/*.* /var/www/math4you/data/pdf_un_translation
+
+cp html_clonable/*.* /var/www/math4you/data/html_clonable
+cp pics/*.* /var/www/math4you/data/pics
+date > /var/www/math4you/data/last_update
+
+grep -E "(ID)|(LANG)|\!" pdf/??.log | grep -B 5 ! > /var/www/math4you/data/errors.txt
+
+bash recent pl > /var/www/math4you/data/html/recent_pl.html
+bash recent cs > /var/www/math4you/data/html/recent_cs.html
+bash recent en > /var/www/math4you/data/html/recent_en.html
+bash recent sk > /var/www/math4you/data/html/recent_sk.html
+bash recent es > /var/www/math4you/data/html/recent_es.html
+
+bash save_to_html
+
+
+bash spellcheck cs
+bash spellcheck sk
+bash spellcheck en
+bash spellcheck pl
+bash spellcheck es
+
+cp txt/list_*.txt /var/www/temp/
+cp spell_correct.* /var/www/temp/

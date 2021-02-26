@@ -1,0 +1,134 @@
+#! /bin/bash
+
+wget http://math4u.vsb.cz/tex/ctests/csv -O testy.csv
+
+sed -i "s/\",\"/\";\"/g" testy.csv
+
+cat testy.csv | cut -d\; -f1 | uniq | sed 's/"//g' | tac | head -n -1 | tac > test_numbers.dat
+
+
+if [ -f /var/www/m4uproject/m4u-cache/tests/import.csv ]; then
+    cp /var/www/m4uproject/m4u-cache/tests/import.csv /var/www/m4uproject/m4u-cache/tests/import_old.csv 
+fi
+
+echo "nid,file,generate,languageCode" > /var/www/m4uproject/m4u-cache/tests/import_new.csv
+
+for i in `cat test_numbers.dat`
+do
+    echo $i
+    # cut je mozno zamenit za awk kvuli problemum s priapdnym strednikem v nazvu
+    #       awk 'BEGIN {FS="\";\"";}{print $2}' testy.csv
+    subarea=`grep ^\"$i\" testy.csv | head -n 1 | cut -d\; -f8 | sed 's/"//g'`
+    language=`grep ^\"$i\" testy.csv | head -n 1 | cut -d\; -f3 | sed 's/"//g'`
+    #perm=`grep ^\"$i\" testy.csv | head -n 1 | cut -d\; -f4 | sed 's/"//g'`
+    #paper=`grep ^\"$i\" testy.csv | head -n 1 | cut -d\; -f10 | sed 's/"//g'`
+    title=`grep ^\"$i\" testy.csv | head -n 1 | cut -d\; -f2 | sed 's/"//g' | sed 's/_/ /g'`
+    what=`grep ^\"$i\" testy.csv | head -n 1 | cut -d\; -f9 | sed 's/"//g'`
+    echo WHAT: $what
+    permute=0
+    cp template_noperm.tex t_${i}.tex
+    cp template_paper.tex tp_${i}.tex
+    #if [ "$perm" = "1" ];
+    if [ "${what:0:1}" == "p" ];
+    then
+	permute=1
+	echo TEST PERMUTOVANY
+        cp template_perm.tex t_${i}.tex
+    fi
+    
+    sed -i "s/TITLE/${title}/" t_${i}.tex
+    sed -i "s/TITLE/${title}/" tp_${i}.tex
+    
+    echo $subarea > test_${i}.def
+    if [ "$language" = "English" ];
+    then
+	echo "en"  >> test_${i}.def
+        sed -i "s/%options/\\\\PassOptionsToClass{en}{vsb_m4u}/" t_${i}.tex
+        langcode="en"
+    fi
+    if [ "$language" = "" ];
+    then
+	echo "en"  >> test_${i}.def
+        sed -i "s/%options/\\\\PassOptionsToClass{en}{vsb_m4u}/" t_${i}.tex
+        sed -i "s/%EN//" tp_${i}.tex
+        langcode="en"
+    fi
+    if [ "$language" = "Czech" ];
+    then
+	echo "cs" >> test_${i}.def
+        sed -i "s/%options/\\\\PassOptionsToClass{cs}{vsb_m4u}/" t_${i}.tex
+        sed -i "s/%options/\\\\usepackage[czech]{babel}/" tp_${i}.tex
+        sed -i "s/%manifest/Tento test byl vygenerov\\\\'an v aplikaci Math for Teacher,\\\\\\\\ kter\\\\'a je sou\\\\v c\\\\'ast\\\\'i vzd\\\\v el\\\\'avac\\\\'iho port\\\\'alu Math for You -- math4u.vsb.cz./" tp_${i}.tex
+	sed -i "s/%CS//" tp_${i}.tex
+        langcode="cs"
+    fi
+    if [ "$language" = "Slovak" ];
+    then
+	echo "sk" >> test_${i}.def
+        sed -i "s/%options/\\\\PassOptionsToClass{sk}{vsb_m4u}/" t_${i}.tex
+        sed -i "s/%options/\\\\usepackage[slovak]{babel}/" tp_${i}.tex
+	sed -i "s/%SK//" tp_${i}.tex
+        langcode="sk"
+    fi
+    if [ "$language" = "Polish" ];
+    then
+	echo "pl" >> test_${i}.def
+        sed -i "s/%options/\\\\PassOptionsToClass{pl}{vsb_m4u}/" t_${i}.tex
+        sed -i "s/%options/\\\\usepackage[polish]{babel}/" tp_${i}.tex
+	sed -i "s/%PL//" tp_${i}.tex
+        langcode="pl"
+    fi
+    if [ "$language" = "Spanish" ];
+    then
+	echo "es" >> test_${i}.def
+        sed -i "s/%options/\\\\PassOptionsToClass{es}{vsb_m4u}/" t_${i}.tex
+        sed -i "s/%options/\\\\usepackage[spanish]{babel}/" tp_${i}.tex
+	sed -i "s/%ES//" tp_${i}.tex
+        langcode="es"
+    fi
+    sed -i "s/%manifest/This test has been prepared in the Math for Teacher application,\\\\\\\\a part of the Math for You site -- math4u.vsb.cz./" tp_${i}.tex
+
+    #echo $i, $language, $permute
+    cat testy.csv | grep $i | cut -d\; -f4,5 | sed 's/"//g' | sort -n | cut -d\; -f2 | uniq >> test_${i}.def
+    # mozno vymenit prvni cut za       awk 'BEGIN {FS="\";\"";}{print $4";"$5}'
+
+#    if [ "${what:0:1}" != "w" ];
+#    then
+    #    echo "TEST interactive version"
+
+    sed -i "s/input data_m4u.tex/input test_${i}_data/" t_${i}.tex
+    sed -i "s/input data_m4u.tex/input test_${i}_data/" tp_${i}.tex
+
+    bash prikaz_vytvor_test $i
+    mv t_${i}.pdf test_${i}.pdf
+    mv t_${i}.log test_${i}.log
+    mv test_${i}.pdf /var/www/m4uproject/m4u-cache/tests/
+#A    fi
+
+
+    #echo "PAPER VERSION"
+    echo $paper
+    if [ "${what:0:1}" = "w" ];
+    then
+        echo "TEST PAPER VERSION"
+        mv tp_${i}-2up.pdf test_${i}.pdf
+        mv tp_${i}.log test_${i}.log
+        mv test_${i}.pdf /var/www/m4uproject/m4u-cache/tests/
+    fi
+    
+    echo "$i,http://msr-latex.vsb.cz/m4uproject/m4u-cache/tests/test_${i}.pdf,0,$langcode" >> /var/www/m4uproject/m4u-cache/tests/import_new.csv
+
+done
+
+cp /var/www/m4uproject/m4u-cache/tests/import_new.csv /var/www/m4uproject/m4u-cache/tests/import.csv
+
+
+echo importing ...
+curl http://math4u.vsb.cz/cron.php?cron_key=pZE8H6pSBMOwNifz8l8mUseF-KeEawh6mzoktM6xHhU 
+
+#echo "4 vteriny pauza"
+#sleep 4
+#echo importing again ...
+#curl http://math4u.vsb.cz/cron.php?cron_key=pZE8H6pSBMOwNifz8l8mUseF-KeEawh6mzoktM6xHhU 
+
+

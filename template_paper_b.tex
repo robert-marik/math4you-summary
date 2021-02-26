@@ -1,0 +1,62 @@
+\nonstopmode
+
+\documentclass[10pt]{article}
+
+\def\projectID#1{\par\bigskip #1\par}
+\def\projectID#1{}
+
+\usepackage{hyperref, graphicx}
+\usepackage[forpaper,pdftex]{exerquiz}
+\usepackage{geometry, mi21, m4u-skeletons, amsmath, amsfonts, tikz}
+
+\geometry{margin=1in}
+\geometry{a5paper, margin=0.5cm, bottom=1.5cm}
+
+\usepackage[slovak]{babel}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+
+\usepackage{eurosym}
+\DeclareUnicodeCharacter{20AC}{\euro}
+
+\input m4u-spolecne.tex
+
+\newcommand\NepermutujKonec[1][1]{}
+\newcommand\Nepermutuj{}
+
+
+\newenvironment{blok}{\bigskip\bigskip\item\begin{minipage}[t]{\linewidth}}{\end{minipage}}
+\makeatletter
+\newif\if@msr@pointsfield
+\renewcommand\eq@bqlabel{}
+\renewcommand\eq@eqlabel{}
+
+\def\MYincludegraphics#1{\setbox0=\hbox{\includegraphics[width=0.85\linewidth]{#1}}%
+\ifdim\ht0>0.35\vsize \setbox0=\hbox{\includegraphics[height=0.35\vsize]{#1}}\fi
+\setbox1=\hbox{\includegraphics{#1}}%
+\ifdim\wd1>\wd0 $\vcenter{\box0}$ \else $\vcenter{\box1}$ \fi}
+
+\makeatother
+
+%%MSR
+
+\title{Test Math4u}
+
+%%MSR
+
+\rowsepDefault{10pt}
+\setlength\aboveanswersSkip{20pt}
+\begin{document} 
+
+\begin{quiz}{msr}
+\begin{questions}
+
+\input data_m4u.tex
+
+\end{questions} \end{quiz} \end{document}
+
+%%% Local Variables: 
+%%% coding: cp1250
+%%% End: 

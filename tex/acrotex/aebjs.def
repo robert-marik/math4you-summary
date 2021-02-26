@@ -1,0 +1,474 @@
+%%
+%% This is file `aebjs.def',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% exerquiz.dtx  (with options: `copyright,aebjs')
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Exerquiz.sty package,             2011-1-15          %%
+%% Copyright (C) 1999-2011  D. P. Story                 %%
+%%   dpstory@uakron.edu                                 %%
+%%                                                      %%
+%% This program can redistributed and/or modified under %%
+%% the terms of the LaTeX Project Public License        %%
+%% Distributed from CTAN archives in directory          %%
+%% macros/latex/base/lppl.txt; either version 1 of the  %%
+%% License, or (at your option) any later version.      %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ProvidesFile{aebjs.def}
+ [2011/08/10 v6.4i %
+  Exerquiz document level JavaScript (dps)]
+\def\aeb@array(#1){new Array (#1)}
+\newcommand{\defaultReqFormMsg}{%
+    "The expression is not in the expected form."}
+\def\refac{\\(.+\\)}\def\rediv{\\/}\def\repow{\\^}\def\redigit{\\d}
+\def\rechrclass(#1){[#1]}
+\begin{insDLJS*}[exerquizLoaded]{exerquiz}
+\begin{newsegment}{AeB: AcroTeX eDucation Bundle}
+/*
+        Document Level JavaScript
+        AcroTeX eDucation Bundle
+        D. P. Story copyright 2000-\the\year
+*/
+var exerquizLoaded = true;
+this.disclosed = true;
+\end{newsegment}
+\begin{newsegment}{Eq: Global Data}
+var ok2Continue = true;
+var ProcessIt = true;
+var retn;
+var Score=0;
+var ptScore=0;
+var pcScore=0;
+var quizGrade="C";
+var e = Math.E;
+var pi = Math.PI;
+var replaceExclaim = \replaceexclaim;
+var negPointsAllowed = \negpointsallowed;
+var aQuizControl = new Array();
+var RightWrong=new Array();
+var ProbValue = new Array();
+var ProbDist = new Array();
+var ProbType = new Array();
+var Responses=new Array();
+var appAlerts = new Object;
+var _mathVars;
+\end{newsegment}
+\begin{newsegment}{Eq: Quiz Management}
+function InitMsg(msg) { return (\eqInitQuizMsg) }
+function syntaxError() { app.alert(\eqSyntaxErrorUndefVar,3); }
+function ProcUserResp(key,userresp,probno,notify)
+{
+    if ( arguments.length > 4 ) {
+        if ( typeof RightWrong[probno] == "undefined" ) {
+            RightWrong[probno] = new Array();
+            RightWrong[probno][0] = "grp";
+            Responses[probno] = new Array();
+        }
+        RightWrong[probno][arguments[4]] = (!!key) ? 1 : 0;
+        Responses[probno][arguments[4]] = userresp;
+    } else {
+        if ( typeof key == "object" ) {
+            RightWrong[probno][0] = key[0];
+            RightWrong[probno][1] = key[1];
+        } else
+            RightWrong[probno] = (!!key) ? 1 : 0;
+        Responses[probno] = userresp;
+    }
+}
+function InitializeQuiz(qtfield,mark)
+{
+    Score=0;
+    retn = null;
+    if (!isQuizInitialized(qtfield)&&!isAQuizUnfinished()) return null;
+    neutralizeQuizzes();
+    ProcessIt = false;
+    aQuizControl[qtfield] = 1;
+    this.resetForm(["ScoreField." + qtfield,"mc."+qtfield,
+        "obj."+qtfield,"mck."+qtfield,"Ans."+qtfield,
+        "PointsField."+qtfield,"PercentField."+qtfield,
+        "essay."+qtfield,"GradeField."+qtfield,
+        "grpobj."+qtfield,"qMark."+qtfield, qtfield+"SanityCheck",
+        qtfield+"SanityCheckPts"]);
+    ProcessIt = true;
+    var f = this.getField("qMark."+qtfield);
+    if ( f != null ) f.display = display.hidden;
+    if (arguments.length<3)  {
+        f = this.getField("obj." + qtfield);
+        if ( f != null ) f.readonly = false;
+    }
+    RightWrong=new Array();
+    Responses=new Array();
+    ProbValue=new Array();
+    ProbDist=new Array();
+    ProbType=new Array();
+    if (mark==1)
+    {
+        var f = this.getField("mcq." + qtfield);
+        if (f != null) {
+            f.delay=true;
+            f.display=display.hidden;
+            this.resetForm([f.name]);
+            if (typeof app.formsVersion != "undefined"
+                && app.formsVersion >=4.0) f.textColor = \correctColor;
+            else
+                f.fgColor = \correctColor;
+            var a = f.getArray();
+            for (var i=0; i<a.length; i++) a[i].style=style.ci;
+            f.delay=false;
+        }
+        f = this.getField("obj." + qtfield);
+        if ( f != null )
+            f.strokeColor = \eqDefaultColor;
+        f = this.getField("grpobj." + qtfield);
+        if ( f != null )
+            f.strokeColor = \eqDefaultColor;
+        f = this.getField("corr." + qtfield);
+        if ( f != null )
+            f.display = display.hidden;
+        f = this.getField(qtfield+"SanityCheck");
+        if ( f != null )
+            f.strokeColor=\eqDefaultColor;
+    }
+    return null;
+}
+function neutralizeQuizzes()
+{
+    for ( var qtfield in aQuizControl ) aQuizControl[qtfield] = 0;
+}
+function isAQuizUnfinished()
+{
+    for ( var qtfield in aQuizControl )
+        if ( aQuizControl[qtfield] == 1 )
+        {
+            app.alert(\eqerrUnfinishQuiz, 3);
+            return false;
+        }
+    return true;
+}
+function isQuizInitialized(qtfield)
+{
+    if (typeof (aQuizControl[qtfield]) == "undefined")
+    {
+        if ( (app.viewerVersion < 5 )&& (app.viewerVersion > 4)
+            && (aQuizControl.length == 0) ) {
+            aQuizControl[0] = -1;
+            return true;
+        }
+        return false;
+    }
+    else
+        return (aQuizControl[qtfield] == 1);
+}
+function isEndQuizPushed(qtfield)
+{
+    if (typeof (aQuizControl[qtfield]) == "undefined")
+        return false;
+    else
+        return (aQuizControl[qtfield] == -1);
+}
+function resetQuiz(qtfield)
+{
+    aQuizControl[qtfield] = -1;
+}
+function RecordPointValue(ptvalue,probno)
+{
+    if (arguments.length > 2) {
+        if ( typeof ProbValue[probno] == "undefined" ) {
+           ProbValue[probno]=[1,arguments[5],arguments[3],arguments[4]];
+           ProbValue[probno][3+arguments[2]] = ptvalue;
+        } else ProbValue[probno][3+arguments[2]] = ptvalue;
+    }
+    else {
+        ProbValue[probno]=ptvalue;
+    }
+}
+function RecordProblemType(qType,probno)
+{
+    ProbType[probno]=qType;
+}
+function GrpRight( a, nProb, qtfield )
+{
+    var f = this.getField("grpobj."+qtfield+"."+nProb);
+    var l = f.getArray().length
+    var prod = 1;
+    for ( var i=1; i <= l; i++) prod *= !!a[i];
+    return prod;
+
+}
+function DisplayQuizResults(qtfield,nPointTotal,nQuestions)
+{
+    Score = 0; ptScore = 0;
+    for (var i=1; i < RightWrong.length; i++)
+    {
+        if ( (typeof RightWrong[i] == "object" )
+            && ( RightWrong[i][0] == "grp" ) ) {
+            // grouped question
+                Score += GrpRight(RightWrong[i], i, qtfield);
+                var aWeights = ProbValue[i].slice(2);
+                var evalGrpJSValue = evalGrpJS(this,qtfield,i,
+                    RightWrong[i],aWeights);
+                ProbDist[i] = evalGrpJSValue;
+                ptScore = ptScore + evalGrpJSValue;
+        } else {
+            if (typeof RightWrong[i] == "object") {
+                if ( RightWrong[i][0] == 1 ) {
+                    Score++;
+                    ProbDist[i]=(typeof ProbValue[i] == "object") ?
+                        1*ProbValue[i][1] : 1*ProbValue[i];
+                    ptScore += (1*ProbDist[i]);
+                } else {
+                    if (RightWrong[i][1] == 1)
+                        ProbDist[i]=(typeof ProbValue[i]=="object") ?
+                            1*ProbValue[i][1] : 1*ProbValue[i];
+                    else
+                        ProbDist[i]=(typeof ProbValue[i] == "object") ?
+                            1*ProbValue[i][1] : 0;
+                    ptScore += (1*ProbDist[i]);
+                }
+            } else {
+                if (RightWrong[i]==1) {
+                    Score++;
+                    ProbDist[i] = ( typeof ProbValue[i] == "object") ?
+                        1*ProbValue[i][1] : 1*ProbValue[i];
+                    ptScore += (1*ProbDist[i]);
+                }
+                else {
+                    ProbDist[i] = ( typeof ProbValue[i] == "object") ?
+                        1*ProbValue[i][2] : 0;
+                    ptScore += (1*ProbDist[i]);
+                }
+            }
+        }
+    }
+    if (ptScore == nPointTotal) pcScore = 100;
+    else pcScore = util.printf("\%.1f", (100 * ptScore) / nPointTotal);
+    quizGrade = GetGrade(\eqGradeScale);
+    var f = this.getField("ScoreField."+qtfield);
+    if ( f != null ) f.value=(\eqQuizTotalMsg);
+    f = this.getField("PointsField."+qtfield);
+    if ( f != null) f.value=(\eqQuizPointsMsg);
+    f = this.getField("PercentField."+qtfield);
+    if ( f != null) f.value=(\eqQuizPercentMsg);
+    f = this.getField("GradeField."+qtfield);
+    if ( f != null) f.value=(\eqQuizGradeMsg);
+}
+function GetGrade()
+{
+    var cGrade, aRange;
+    if (pcScore >=100) return arguments[0];
+    for (var i=0; i<arguments.length/2; i++)
+    {
+        cGrade = arguments[2*i];
+        aRange = arguments[2*i+1];
+        if ( (pcScore >= arguments[2*i+1][0])
+            && (pcScore < arguments[2*i+1][1])) return cGrade;
+    }
+    return null;
+}
+function ProcessQuestion (key,letterresp,probno,
+    quizno,qtfield,notify,mark,msg) {
+    var silent = ( arguments.length > 8 ) ? true : false;
+    if (!isQuizInitialized(qtfield))
+    {
+        if (!silent) app.alert(InitMsg(msg),3);
+        this.resetForm(["mc."+qtfield+"."+probno,
+            "mck."+qtfield+"."+probno]);
+    }
+    else
+    {
+        ProcUserResp(key,letterresp,probno,notify);
+        if (mark==1)
+        {
+            var f = this.getField("mcq."+qtfield+"."+probno);
+            var fck = this.getField("mck."+qtfield+"."+probno);
+            var bMultiSelect = ( fck != null ) ? true : false;
+            f.delay=true;
+            this.resetForm([f.name]);
+            var a = f.getArray();
+            var l = a.length;
+            if ( bMultiSelect ) {
+                var ack = fck.getArray();
+                for ( var i=0; i<l; i++) {
+                    if ( ack[i].isBoxChecked(0)  ) {
+                        a[i].style = ( a[i].isDefaultChecked(0) ) ?
+                            style.ch : style.cr;
+                        a[i].textColor = ( a[i].isDefaultChecked(0) ) ?
+                            \checkColor : \crossColor;
+                        a[i].value = "Yes";
+                    } else {
+                        a[i].style = ( a[i].isDefaultChecked(0) ) ?
+                            style.ci : style.cr;
+                        a[i].textColor = ( a[i].isDefaultChecked(0) ) ?
+                            \checkColor : \crossColor;
+                        a[i].value = ( a[i].isDefaultChecked(0) ) ?
+                            "Yes" : "Off";
+                    }
+                }
+            } else {
+                for (var i=0; i < a.length; i++)
+                    if (a[i].style == style.ch)
+                    {
+                        a[i].style = style.ci;
+                        a[i].textColor = \correctColor;
+                    }
+                var qr=this.getField(
+                    "mcq."+qtfield+"."+probno+"."+quizno);
+                if (typeof app.formsVersion != "undefined"
+                    && app.formsVersion >=4.0)
+                    qr.textColor = key ? \checkColor\space :\crossColor;
+                else
+                    qr.fgColor = key ? \checkColor\space : \crossColor;
+                qr.style = key ? style.ch : style.cr;
+                qr.value="Yes"; // gr.checkThisBox(0);  // ver 5.0
+            }
+            this.getField("mcq."+qtfield+"."+probno).delay=false;
+        }
+    }
+}
+function correctQuiz(qtfield,nQuestions)
+{
+    var f = this.getField("mcq." + qtfield);
+    if ( f != null) f.display = display.visible;
+    f = this.getField("obj." + qtfield);
+    if ( f != null ) {
+        var a = f.getArray();
+        for (var i = 0; i < a.length; i++) {
+            var probno = a[i].name.replace(/.*\./g,"")
+            if ( RightWrong[probno] == 1 )
+                a[i].strokeColor = \correctColor;
+            else
+                a[i].strokeColor = \crossColor;
+        }
+    }
+    f = this.getField("grpobj." + qtfield);
+    if ( f != null ) {
+        var a = f.getArray();
+        for ( var i = 0; i < a.length; i++) {
+            var aX = a[i].name.split(".");
+            var probno = 1*aX[aX.length-2];
+            var grpProbno = 1*aX[aX.length-1];
+            if ( ( RightWrong[probno] != undefined )
+                && ( RightWrong[probno][grpProbno] == 1 ) )
+                a[i].strokeColor = \correctColor;
+            else
+                a[i].strokeColor = \crossColor;
+        }
+    }
+    f = this.getField("Ans." + qtfield);
+    if ( f != null ) f.strokeColor = \eqDefaultColor;
+    f = this.getField("promptButton." + qtfield)
+    if ( f != null ) f.display = display.hidden;
+    f = this.getField("corr." + qtfield);
+    if ( f != null ) f.display = display.noPrint;
+    f = this.getField("qMark."+qtfield);
+    if ( f != null )
+    {
+        for ( var i = 1; i <= nQuestions; i++)
+        {
+            if ( ProbValue[i] == undefined ) ProbValue[i]=0
+            f = this.getField("qMark."+qtfield+"."+(i-1));
+            if ( f != null )
+            {
+                // find the next non-null field
+                for ( var j=i; j <= nQuestions; j++)
+                {
+                    var h = this.getField("qMark."+qtfield+"."+j);
+                    if ( h != null ) break;
+                }
+                var g = f.getArray();
+                var qpts=(ProbDist[i]==undefined) ? 0 : ProbDist[i];
+                g[0].value = qpts + (( qpts == 1 ) ? "\eqptLabel\space"
+                    : " \eqptsLabel");
+            }
+        }
+        this.getField("qMark."+qtfield).display = display.visible;
+    }
+}
+\end{newsegment}
+\begin{newsegment}{Eq: Support for Multi-Selection}
+function ProcessMultiSelection(key,letterresp,probno,
+    quizno,qtfield,pts,ppts) {
+    var f = this.getField("mcq."+qtfield+"."+probno);
+    if ( ProbValue[probno] == null )  {
+        var g = f.getArray();
+        var nTotalCorrect = 0;
+        for ( var i=0; i<g.length; i++)
+            nTotalCorrect += (1*g[i].isDefaultChecked(0));
+        ProbValue[probno] = new Array();
+        RightWrong[probno] = new Array();
+        ProbValue[probno] = [nTotalCorrect,pts,[]];
+        RightWrong[probno][2] = new Array();
+    } else var nTotalCorrect = ProbValue[probno][0];
+    var fck = this.getField("mck."+qtfield+"."+probno+"."+quizno);
+    if ( fck.isBoxChecked(0) ) {
+        ProbValue[probno][2][quizno] = ppts;
+        RightWrong[probno][2][quizno] = key;
+    } else {
+        ProbValue[probno][2][quizno] = null;
+    }
+    var pointsThisProblem=0;
+    var scoreThisProblem = 0;
+    var letterResponses = new Array();
+    var areAllCorrect=1;
+    var numCorrect=0;
+    for ( var i=1; i< ProbValue[probno][2].length; i++ ) {
+        if (ProbValue[probno][2][i] != null )
+            letterResponses[i] = (String.fromCharCode(96+i));
+        pointsThisProblem += ((ProbValue[probno][2][i]==null) ?
+            0 : ProbValue[probno][2][i]);
+        if ( (ProbValue[probno][2][i]!=null) ) {
+            areAllCorrect *= (1*RightWrong[probno][2][i]);
+            numCorrect +=(1*RightWrong[probno][2][i]);
+        }
+    }
+    scoreThisProblem = areAllCorrect*numCorrect;
+    var scoreThisProblem = Number( scoreThisProblem == nTotalCorrect );
+    if (scoreThisProblem==1 && pointsThisProblem==0 )
+        pointsThisProblem=pts;
+    if (!negPointsAllowed)
+        pointsThisProblem =
+            (pointsThisProblem < 0) ? 0 : pointsThisProblem;
+    ProbValue[probno][1] =
+        ( (ProbValue[probno][1] == 0) && (scoreThisProblem == 1) )
+            ? pts : pointsThisProblem;
+    var passKey = ( pointsThisProblem > 0 ) ? 1 : 0;
+    var retn = [ [ scoreThisProblem, passKey ], letterResponses ] ;
+    return retn;
+}
+\end{newsegment}
+\begin{newsegment}{Eq: Miscellaneous JS}
+var oCB=\bcheckboxused
+function OnBlurRespBox (retn)
+{
+    var respMsg;
+    var cTitle = "AcroTeX eDucation Bundle";
+    if (retn != null) {
+        if ( typeof appAlerts[arguments[1]] == "undefined")
+            appAlerts[arguments[1]] = {bAfterValue: false};
+        var respMsg = (retn) ? \eqsqrtmsg : \eqsqwgmsg;
+        if ( (event.target == this) || !oCB)
+            app.alert({ cMsg: respMsg, nIcon: 3, cTitle: cTitle });
+        else {
+            if ( ! appAlerts[arguments[1]].bAfterValue )
+                app.alert({ cMsg: respMsg, nIcon: 3, cTitle: cTitle,
+                oCheckbox: appAlerts[arguments[1]]});
+        }
+    }
+    else {
+        var str = event.target.value.toString();
+        if (str.replace(/\s/g,"") == "")
+            event.target.strokeColor = \eqDefaultColor;
+    }
+}
+function lowThreshold(nQuestions)
+{
+    return true;
+}
+\end{newsegment}
+\end{insDLJS*}
+\endinput
+%%
+%% End of file `aebjs.def'.

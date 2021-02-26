@@ -1,0 +1,50 @@
+% Makra pro zivotopis v bubline, pro zobrazeni v Ano/Ne
+
+\makeatletter
+
+\long\def\bublinawraper#1{\begin{tikzpicture}\node[inner sep = 8 pt, fill=yellow!30,draw=black!30, rounded corners=13pt,very
+    thick]{#1};\end{tikzpicture}}
+
+
+\newcount\msr@bublinacount
+
+\newcommand\obalka@bubliny[1]{\hbox{\bublinawraper{#1}}}
+
+\long\def\msr@umistenibubliny#1{\vbox to 0pt{\vbox to \paperheight{\vss\hbox to \paperwidth{\hss\hbox{#1}\hss}\vss\vss}\vss}}
+\newbox\bublina@content
+\newbox\bublina@contentB
+\RequirePackage{pifont}
+
+\newbox\mojebublina
+\newcommand\bublina[3][]{\def\bubtemp@@{#1}%
+\ifx\bubtemp@@\empty\bublina@@{#2}{#3}\else\global\setbox\mojebublina=\hbox{\begin{minipage}{#1}#2\end{minipage}}\bublina@@{\copy\mojebublina}{#3}\fi%
+}
+
+\long\def\bublina@@#1#2{%
+  \global\advance\msr@bublinacount by 1
+  % \AddToShipoutPictureFG*{\AtPageUpperLeft{\begin{ocg}{kryt}{kryt}0\vbox to 0pt{\relax\transparent{0.5}\hrule width \paperwidth height 0 pt depth \paperheight\vss}\end{ocg}}}%
+  \expandafter\AddToShipoutPictureFG\expandafter{\expandafter\AtPageUpperLeft\expandafter{\expandafter\msr@umistenibubliny\expandafter{\expandafter\ZIVOTOPIS@\expandafter{\the\msr@bublinacount}{#1}}}}%
+  \setbox0=\hbox{{\color{blue}#2\hbox to 0 pt{\smash{\raisebox{0.4em}{\includegraphics[width=0.7em]{fancytipmark3.pdf}}}\hss}}}%
+  \leavevmode\hbox{\hbox to 0 pt{\copy0\hss}%
+    \pushButton[\A{\JS{this.getField("zivotopis.\the\msr@bublinacount").hidden=false;this.getField("jmeno.\the\msr@bublinacount").hidden=true}}\BG{}\BC{}\S{}\H{N}]{jmeno.\the\msr@bublinacount}{\wd0}{\ht0}}%
+}
+
+\long\def\ZIVOTOPIS@#1#2{
+     \global\setbox\bublina@content=\hbox{\obalka@bubliny{#2}}%
+     \global\setbox\bublina@contentB=\hbox{\hbox{\obalka@bubliny{#2}}\lower 5pt \hbox{\raise \ht\bublina@content\hbox to 0 pt{\hss\color{red}\LARGE\ding{56}}}}%
+     \dimen0=\ht\bublina@content
+     \advance\dimen0 by \dp\bublina@content
+     \global\ht\bublina@content = \dimen0
+     \immediate\pdfxform\bublina@contentB
+     \xdef\normalappearance{\the\pdflastxform\space 0 R}%
+     {\pushButton[\W{0}\BG{}\S{S}\BC{}\H{N}\F{\FHidden}%
+         \mkIns{
+           /TP 1 /IF<</S/P/SW/B/FB true/A [1 0]>>
+           /I \normalappearance%
+         }\A{\JS{this.getField("zivotopis.#1").hidden=true;this.getField("jmeno.#1").hidden=false;}}
+         ]{zivotopis.#1}{\the\pdfpagewidth-5mm}{\the\pdfpageheight-5mm}}%
+}
+
+
+
+\makeatother

@@ -1,0 +1,14 @@
+rm html/typo.html
+rm html_clonable/report_clonable.php 
+
+echo "<head><meta charset='UTF-8'></head><body>" > html/typo.html
+for i in {32..87};
+do 
+    echo CSV file $i
+    echo ===========
+    python read.py $i
+done
+
+
+python read_un.py
+

@@ -1,0 +1,125 @@
+% pdflatex "\long\def\LANGcs#1{} \long\def\LANGsk#1{} \long\def\LANGpl#1{} \input driver.tex "
+% pdflatex "\def\TWO{} \input driver.tex "
+
+\nonstopmode
+\ifx\soubor\undefined\def\soubor{50}\fi
+\ifx\TITLE\undefined \def\TITLE{Test title}\fi
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\usepackage{eurosym}
+\DeclareUnicodeCharacter{20AC}{\euro}
+
+
+\newif\ifinsideproblem
+\insideproblemfalse
+
+\everymath{\displaystyle}
+\usepackage{amsmath,amsfonts,enumerate, graphicx, xcolor, amssymb, datetime}
+
+\def\subareaToName#1#2{\def\temp{#1}\ifx\temp \soubor\def\TITLE{#2}\fi}
+\input subarea2name
+\title{\TITLE}
+\mdyyyydate
+\date{\today, \currenttime}
+\begin{document}
+
+\parindent 0 pt
+\def\ID#1{\null\hfill\bgroup\color{blue}\bfseries \texttt{#1}\message{^^J ID #1 ^^J}}
+\def\Level#1{Level \texttt{#1}\egroup\hfill\null\par\nopagebreak}
+\def\SubArea#1{}
+\def\Updated#1{, \texttt{#1}}
+\def\jazyk#1{\par\null\hfill \textbf{#1}\hfill\null\par}
+\def\jazyk#1{\def\curlang{#1}}
+
+
+\def\IMGanswer#1{\leavevmode\def\temp{#1}\ifx\temp\empty\else \MYincludegraphics{pics/#1}\quad\hfill\fi}
+
+\ifx\LANGcs\undefined\long\def\LANGcs{\jazyk{cs}\message{^^J LANGcs ^^J}}\fi
+\ifx\LANGpl\undefined\long\def\LANGpl{\jazyk{pl}\message{^^J LANGpl ^^J}}\fi
+\ifx\LANGsk\undefined\long\def\LANGsk{\jazyk{sk}\message{^^J LANGsk ^^J}}\fi
+\ifx\LANGen\undefined\long\def\LANGen{\jazyk{en}\message{^^J LANGen ^^J}}\fi
+\ifx\LANGes\undefined\long\def\LANGes{\jazyk{es}\message{^^J LANGes ^^J}}\fi
+
+\def\questionwidth{0.45\linewidth}
+
+\newbox\IMGbox
+\newlength\IMGwd
+\IMGwd=0.4\textwidth
+
+\def\MYincludegraphics#1{\setbox\IMGbox=\hbox{\includegraphics{#1}}%
+\ifdim \wd\IMGbox>\IMGwd
+\includegraphics[width=\IMGwd]{#1}%
+\else
+\includegraphics{#1}%
+\fi}
+
+
+\ifx\TWO\undefined
+\twocolumn[{\centering \Large \TITLE, \today, \currenttime\endgraf}\bigskip
+{\itshape The database of questions and exercises is property of the project Math
+Exercises for You.\\Please do not redistribute the material.}] \bigskip\def\questionwidth{0.95\linewidth}
+
+\def\IMGanswer#1{\leavevmode\def\temp{#1}\ifx\temp\empty\else
+\MYincludegraphics{pics/#1}\par\fi}
+
+\else
+\maketitle
+
+\bigskip
+
+{\itshape The database of questions and exercises is property of the project Math
+Exercises for You.\\Please do not redistribute the material. }
+
+\bigskip
+\fi
+
+\def\IMG#1{\def\temp{#1}\ifx\temp\empty\else \MYincludegraphics{pics/#1}\par\fi}
+
+\def\Data{\medskip\nopagebreak
+\ifinsideproblem
+\message{^^J Nekde je chyba, predchozi otazka asi nebyla korektne uzavrena! ^^J}
+\fi
+\insideproblemtrue
+}
+
+\def\End{\insideproblemfalse}
+
+\long\def\Question#1#2#3#4#5#6#7{\leavevmode\fbox{
+    \begin{minipage}[t]{\questionwidth}
+      #1 \par
+     \def\test{#2}\ifx\test\empty\else
+      \begin{enumerate}[a)]        
+        \item #2
+        \def\test{#3}\ifx\test\empty\else\item #3\fi
+        \def\test{#4}\ifx\test\empty\else\item #4\fi
+        \def\test{#5}\ifx\test\empty\else\item #5\fi
+        \def\test{#6}\ifx\test\empty\else\item #6\fi
+        \def\test{#7}\ifx\test\empty\else\item #7\fi
+      \end{enumerate}
+    \fi
+    \end{minipage}
+}\hfill\null}
+
+
+
+\def\PMATRIX#1{
+  \begin{pmatrix}
+    #1
+  \end{pmatrix}
+}
+
+\def\MATRIX#1{
+  \begin{matrix}
+    #1
+  \end{matrix}
+}
+
+
+
+\edef\myfile{tex/\soubor.tex}
+\expandafter\input \myfile
+
+\end{document}

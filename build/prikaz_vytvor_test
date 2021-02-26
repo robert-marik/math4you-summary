@@ -1,0 +1,34 @@
+cd ..
+
+if [ $# -eq 0 ]
+  then
+    python extract_one_geenrator.py> data_m4u.tex
+  else
+    python extract_one_generator.py -f build/test_$1.def > build/test_$1_data.tex
+fi
+
+echo "prikaz_vytvor_test $1"
+
+
+cd build
+
+sed -i "s/$(echo -ne '\u2061')/ /g" test_$1_data.tex
+sed -i "s/$(echo -ne '\u2013')/-/g" test_$1_data.tex
+sed -i "s/\\\\array/\\\\ARRAY/g" test_$1_data.tex
+
+
+#export TEXINPUTS=".:..//:/home/robmar/msrproject/msr/:/home/robmar/msrproject/msr/grafik/:/home/robmar/msrproject/msr/acrotex/:/home/robmar/msrproject/msr-tex//:/home/robmar/msrproject/msr-skripty//:/home/robmar/.TeX//:/home/robmar/msrproject/tikz_pdf/:/home/robmar/msrproject/msr-skripty/pdf_pomocne/:"
+export TEXINPUTS=".:..//:"
+
+cd ..
+bash generuj_hlasky.sh
+cd build
+
+pdflatex t_${1}.tex
+pdflatex t_${1}.tex
+pdflatex t_${1}.tex
+pdflatex tp_${1}.tex
+pdflatex tp_${1}.tex
+pdfnup --batch --suffix 2up tp_${1}.pdf 
+#cp templatep-2up.pdf /var/www/temp/paper.pdf
+#chmod a+r /var/www/temp/paper.pdf

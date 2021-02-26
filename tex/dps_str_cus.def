@@ -1,0 +1,33 @@
+%% This is file `dps_str_us.def',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% dps.dtx  (with options: `copyright,english')
+%%
+%
+% Modifikace pro projekt Matematika s radosti: Robert Marik, 2013
+%
+% 
+\def\chooseQ{"Zvolte nejprve otázku a teprve poté odpov\u0113\u010F!"}
+\def\triedTooMuch{"Zkou\u0161íte tuto otázku opakovan\u011B neúsp\u011B\u0161n\u011B. P\u0159idávám t\u0159i trestné body."}
+\def\congratFinished{"Dokon\u010Deno"
+        +((nMissed==0) ? " bez jediné chyby!"
+        : ", ale b\u011Bhem \u0159e\u0161ení jste se dopustili " + ( (nMissed==1) ? "jedné chyby!" : ""+ nMissed +" chyb!"))}
+\def\regretPleased{(( nMissed > n )
+        ? "I regret to report that you did not pass the test because you missed too many questions."
+        : "I am pleased to report that you passed the test!")}
+\def\reportPenaltyPoints{( (nPenaltyPoints>0) ? "Po\u010Det trestných bod\u016F za hádání je " + nPenaltyPoints +".":"")}
+\def\finalPenaltyScore{( (nPenaltyPoints>0) ? "Sou\u010Det po\u010Dtu chybných odpov\u011Bdí a trestných bod\u016F je " + nTotalPenaltyPoints + ". ":"")}
+\def\aPenaltyScale{[-1,0], [0,4], [4, 10], [10,25], [25,5000]}
+\def\aPenaltyMsgs
+{%
+    "Vynikajici!",
+    "Dobry vykon!",
+    "Neprilis dobry vykon!",
+    "Toto je pomerne spatny vysledek. Hadala/hadal jste?",
+    "Velmi spatny vysledek!"
+}
+\endinput
+%%
+%% End of file `dps_str_us.def'.

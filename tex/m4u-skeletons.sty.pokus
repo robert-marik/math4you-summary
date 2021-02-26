@@ -1,0 +1,103 @@
+\RequirePackage{xkeyval,calc,multicol}
+
+\define@key{template}{sloupce}[2]{\xdef\msr@pocetsloupcu{#1}}
+\define@key{template}{2}[]{\xdef\msr@pocetsloupcu{2}}
+\define@key{template}{3}[]{\xdef\msr@pocetsloupcu{3}}
+\define@key{template}{4}[]{\xdef\msr@pocetsloupcu{4}}
+\define@key{template}{5}[]{\xdef\msr@pocetsloupcu{5}}
+\define@key{template}{1}[]{\xdef\msr@pocetsloupcu{1}}
+\define@key{template}{sablona}[A]{\xdef\msr@sablona{#1}}
+\define@key{template}{multicol}[1]{\xdef\msr@multicol{#1}}
+\define@key{template}{minipage}[0.65\linewidth]{\msr@minipage=#1\relax}
+\define@key{template}{minipage0}[]{\msr@minipage=0.35\linewidth\relax}
+\define@key{template}{minipage1}[]{\msr@minipage=0.4\linewidth\relax}
+\define@key{template}{minipage2}[]{\msr@minipage=0.5\linewidth\relax}
+\define@key{template}{minipage3}[]{\msr@minipage=0.6\linewidth\relax}
+\define@key{template}{minipage4}[]{\msr@minipage=0.7\linewidth\relax}
+\define@key{template}{minipage5}[]{\msr@minipage=0.8\linewidth\relax}
+\define@key{template}{body}[1]{\def\msr@pts{#1}}
+\define@key{template}{varianta}[1]{\def\msr@pt@varianta{#1}}
+\define@key{template}{multichoice}[]{\@mi@forcemanswerstrue}
+\define@key{template}{top}[\relax]{\def\@msr@top{\leavevmode #1}}
+
+\let\opt@intervaly\relax
+\define@key{template}{intervaly}[]{\let\opt@intervaly\AktivniZavorky}
+\define@key{template}{zavorky}[]{\let\opt@intervaly\AktivniZavorky}
+
+\def\@zpracuj#1{\def\tempp{#1}%
+  \ifx\tempp\empty\pridejtoken{\eFreeze}%
+  \else
+    \@overhvezdu#1...*..\k@nec
+    \pridejtoken{\Ans}%
+    \if@hvezda 
+      \ifx\p@cetb@du\empty\else\pridejtoken{[\p@cetb@du]}\fi\pridejtoken{1 \nelamat{\removestar #1}\eAns}%
+    \else 
+      \ifx\p@cetb@du\empty\else\pridejtoken{[-\p@cetb@du]}\fi\pridejtoken{0 \nelamat{#1}\eAns}%
+    \fi 
+  \fi}
+
+\def\nelamat#1{%\begin{minipage}[t]{\linewidth} 
+#1 
+%\end{minipage}
+}
+
+\newlength\msr@minipage
+
+\def\sablona{\@ifstar\sablona@Star\sablona@NoStar}
+\def\sablona@Star{\let\msr@obalka@odpovedi\ensuremath\sablona@Both}
+\def\sablona@NoStar{\let\msr@obalka@odpovedi\relax\sablona@Both}
+
+\let\ObalkaOdpovedi\relax
+\def\sablona@Both{\ifx\ObalkaOdpovedi\relax\else\let\msr@obalka@odpovedi\ObalkaOdpovedi\fi\@ifnextchar[\@sablona{\@sablona[]}}
+
+\long\def\@sablona[#1]#2#3{%
+\def\msr@pocetsloupcu{1}%
+\def\msr@sablona{A}%
+\def\msr@multicol{1}%
+\msr@minipage = 0pt\relax
+\def\msr@pts{1}%
+\def\msr@pt@varianta{1}%
+\def\@msr@top{}%
+\@mi@forcemanswersfalse
+\let\opt@intervaly\relax
+\setkeys{template}{#1}%
+\csname @sablona\msr@sablona\endcsname{#2}{#3}
+% some operations to typeset #2
+}
+
+\def\jedna{1}
+ 
+\newbox\msr@outputbox
+
+\def\msr@vertikalni@autoposun{\relax}
+
+\long\def\@sablonaA@#1#2{
+  \begin{minipage}{\linewidth}\begin{blok}
+      %\ifx\msr@pts0\else %\PTsHook{($\eqPTs^{\text{pts}}$)}
+      \PTs{\msr@pts}%\fi
+      \opt@intervaly
+      \ifx\@msr@top\empty \else \@msr@top\par\fi
+      \ifx\msr@multicol\jedna\else\begin{multicols}{\msr@multicol}\fi
+        \ifdim\msr@minipage>1pt \begin{minipage}[t]{\msr@minipage}\fi
+          #1 \msr@vertikalni@autoposun
+          \ifdim\msr@minipage>1pt \end{minipage}\hskip 1em \begin{minipage}[t]{\linewidth-\msr@minipage-1em}\else \par\fi        
+          {\sloppy \pocetsloupcu{\msr@pocetsloupcu}\expandafter\odpovedi\expandafter[\expandafter\msr@pt@varianta\expandafter]\expandafter{#2}\par}%
+          \ifdim\msr@minipage>1pt \end{minipage}\fi        
+        \ifx\msr@multicol\jedna\else\end{multicols}\fi
+    \end{blok}\end{minipage}
+
+}
+
+\long\def\@sablonaA#1#2{
+
+\setbox\msr@outputbox=\hbox{\@sablonaA@{#1}{#2}}
+
+\addtocounter{eqquestionnoi}{-1}
+\ifdim \ht\msr@outputbox < 90pt 
+\def\msr@vertikalni@autoposun{\bigskip}
+\rowsep{15pt}\@sablonaA@{#1}{#2}
+\else
+\@sablonaA@{#1}{#2}
+\fi
+    
+}

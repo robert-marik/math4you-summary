@@ -1,0 +1,612 @@
+\usepackage{amsfonts,amsmath,amssymb}
+\def\R{\mathbb{R}}
+\def\Q{\mathbb{Q}}
+\def\N{\mathbb{N}}
+\def\Z{\mathbb{Z}}
+\def\C{\mathbb{C}}
+\def\Dom{\mathrm{Dom}}
+
+\def\I{\mathord{\mathrm{i}}}
+\def\E{\mathord{\mathrm{e}}}
+
+\def\tg{\mathop{\mathrm{tg}}\nolimits}
+\def\cotg{\mathop{\mathrm{cotg}}\nolimits}
+\def\sgn{\mathop{\mathrm{sgn}}\nolimits}
+
+\def\dx{\,\mathrm{d}x}
+\def\dy{\,\mathrm{d}y}
+\def\ds{\,\mathrm{d}s}
+\def\dt{\,\mathrm{d}t}
+
+\usetikzlibrary{calc, intersections, through}
+
+\tikzset{help lines/.style= {lightgray, ultra thin}}
+
+
+\makeatletter
+\def\obrMsr{\@ifstar\@obrMsr\@@obrMsr}
+
+\def\@@celacast#1.#2\koneccelecasti{#1}
+
+\def\obrMsr@test@hvezdicka{*}
+
+\newcommand\@obrMsr[2][]{%
+\def\@obrMsr@opt{#1}%
+\def\@obrMsr@hvezdicka{*}%
+\@obrMsr@detekuj@carku #2,*:::
+\next #2,
+}
+
+\newcommand\@@obrMsr[2][]{%
+\def\@obrMsr@opt{#1}%
+\let\@obrMsr@hvezdicka\empty%
+\@obrMsr@detekuj@carku #2,*:::
+\next #2,
+}
+
+\def\@obrMsr@detekuj@carku #1,#2:::{\def\pom@{#2}%
+  \ifx\pom@\obrMsr@test@hvezdicka\let\next\@nacti@ctyri\else\let\next\@nacti@jeden\fi
+}
+
+\def\@nacti@ctyri #1,#2#3#4{\def\MsrXmin{#1}\def\MsrXmax{#2}\def\MsrYmin{#3}\def\MsrYmax{#4}\obrMsr@dokonci}
+\def\@nacti@jeden #1,#2,#3,#4,{\def\MsrXmin{#1}\def\MsrXmax{#2}\def\MsrYmin{#3}\def\MsrYmax{#4}\obrMsr@dokonci}
+
+\def\obrMsr@nacti@rozmery #1,#2;{%
+\def\@@pom{#1}\ifx\@@pom\empty\def\@@pom{0.7\linewidth}\fi
+\def\@@@pom{#2}\ifx\@@@pom\empty\let\@@@pom\@@pom\fi
+\edef\temp{\toks0={\the\toks0 , x=\@@pom/(\MsrXmax-\MsrXmin), y=\@@@pom/(\MsrYmax-\MsrYmin)}}%
+\temp
+}
+
+\newcommand\obrMsr@dokonci[2][]{\def\pom@{#1}%
+\toks0{\begin{tikzpicture}[inner sep=3pt, }%
+\edef\temp{\toks0={\the\toks0 \@obrMsr@opt}}%
+\temp
+\ifx\pom@\empty\else
+\obrMsr@nacti@rozmery #1;
+\fi
+\edef\temp{\toks0={\the\toks0 ]}}%
+\temp
+\the\toks0
+\ifx\@obrMsr@hvezdicka\obrMsr@test@hvezdicka 
+\obrOsaY\obrOsaX
+\obrZnackyX{\expandafter\@@celacast\MsrXmin.\koneccelecasti,...,\MsrXmax}%
+\obrZnackyY{\expandafter\@@celacast \MsrYmin.\koneccelecasti,...,\MsrYmax}%
+\obrClip 
+\fi
+#2
+\end{tikzpicture}%
+}
+
+
+\def\obrOsaX{\def\obr@osa@sipka{->}\@ifstar\@obrOsaX\@@obrOsaX}
+\def\obrOsax{\def\obr@osa@sipka{-}\@ifstar\@obrOsaX\@@obrOsaX}
+\newcommand\@obrOsaX[1][right]{\draw[\obr@osa@sipka] (\MsrXmin,0) -- (\MsrXmax,0);}
+\newcommand\@@obrOsaX[1][right]{\draw[\obr@osa@sipka] (\MsrXmin,0) -- (\MsrXmax,0) node[#1] {$x$};}
+\def\obrOsaY{\def\obr@osa@sipka{->}\@ifstar\@obrOsaY\@@obrOsaY}
+\def\obrOsay{\def\obr@osa@sipka{-}\@ifstar\@obrOsaY\@@obrOsaY}
+\newcommand\@obrOsaY[1][above]{\draw[\obr@osa@sipka] (0,\MsrYmin) -- (0,\MsrYmax);}
+\newcommand\@@obrOsaY[1][above]{\draw[\obr@osa@sipka] (0,\MsrYmin) -- (0,\MsrYmax) node[#1] {$y$};}
+\newcommand\obrOsy{\obrOsaX\obrOsaY}
+\newcommand\obrFce[2][]{\draw[red,thick,samples=100,domain=\MsrXmin:\MsrXmax,#1] plot(\x,{#2});}
+\newcommand\obrFcePar[3][]{\draw[red,thick,samples=100,domain=-3:3,#1] plot({#2},{#3});}
+\newcommand\obrFceY[2][]{\draw[red,thick,samples=100,domain=\MsrYmin:\MsrYmax,#1] plot({#2},\x);}
+\newcommand\obrClip{\clip (\MsrXmin,\MsrYmin) rectangle (\MsrXmax,\MsrYmax);}
+\newcommand\obrBod[3][]{\draw [thin, dashed, #1] (0,{#3}) -- ({#2},{#3}) -- ({#2},0);} 
+\newcommand\obrAsX[2][]{\draw [thin, dashed, #1] (#2,\MsrYmin) -- (#2,\MsrYmax);} 
+\newcommand\obrAsY[2][]{\draw [thin, dashed, #1] (\MsrXmin,#2) -- (\MsrXmax,#2);} 
+
+\newcommand\obrNula[1][anchor = north west]{\draw (0,0) node[#1] {$0$};}
+
+\newcommand\obrZnackyX[2][]{\foreach \x/\xtext in {#2} \draw[shift={({\x},0)},#1] (0pt,2pt) -- (0pt,-2pt);}
+\newcommand\obrZnackyY[2][]{\foreach \y/\ytext in {#2} \draw[shift={(0,{\y})},#1] (-2pt,0pt) -- (2pt,0pt);}
+
+\def\@@MsrDetectLeft #1left#2\NeverAppears{\def\msr@tempkey{#2}}
+\def\@@MsrDetectAbove #1above#2\NeverAppears{\def\msr@tempkey{#2}}
+
+\newcommand\obrPopisX[2][below]{%
+\@@MsrDetectAbove #1above\NeverAppears
+\ifx\msr@tempkey\empty \def\msr@path{(0pt,2pt) -- (0pt,-2pt)} \else \def\msr@path{(0pt,-2pt) -- (0pt,2pt)} \fi
+\foreach \x/\xtext/\styl in {#2} {%
+\ifx\xtext\empty\let\xtext\x\fi
+\ifx\xtext\styl \toks0{node[#1] {$\xtext$}}\else \toks1{node[#1,}\toks2{] {$\xtext$}} \edef\act{\toks0{\the\toks1 \styl\the\toks2}}\act\fi
+\draw[shift={({\x},0)}] \msr@path\the\toks0;}}
+
+\newcommand\obrPopisY[2][right]{%
+\@@MsrDetectLeft #1left\NeverAppears
+\ifx\msr@tempkey\empty \def\msr@path{(-2pt,0pt) -- (2pt,0pt)} \else \def\msr@path{(2pt,0pt) -- (-2pt,0pt)} \fi
+\foreach \y/\ytext/\styl in {#2} {%
+\ifx\ytext\empty\let\ytext\y\fi
+\ifx\ytext\styl \toks0{node[#1] {$\ytext$}}\else \toks1{node[#1,}\toks2{] {$\ytext$}} \edef\act{\toks0{\the\toks1 \styl\the\toks2}}\act\fi
+\draw[shift={(0,{\y})}] \msr@path\the\toks0;}}
+
+\def\obr@popis@nacti@B #1/#2/#3/#4;{\def\obr@popis@nacti@a{#1}\def\obr@popis@nacti@b{#2}\def\obr@popis@nacti@c{#3}%
+\ifx\obr@popis@nacti@b\empty\def\obr@popis@nacti@b{below}\fi
+\ifx\obr@popis@nacti@c\empty\let\obr@popis@nacti@c\obr@popis@nacti@a\fi
+}
+\def\obr@popis@nacti@above{above}
+\def\obr@popis@nacti@below{below}
+
+\newcommand\obr@popis@nacti[1][]{\edef\obr@popis@nacti@styl{#1}\obr@popis@nacti@B}
+
+\def\@obrPopis#1{%
+\obr@popis@nacti #1//;
+\ifx\obr@popis@nacti@b\obr@popis@nacti@above
+  \edef\temp{[above,\obrPopis@styl,\obr@popis@nacti@styl]}%
+  \expandafter\obrPopisX\temp{\obr@popis@nacti@a/\obr@popis@nacti@c}%
+\else
+\ifx\obr@popis@nacti@b\obr@popis@nacti@below
+  \edef\temp{[below,\obrPopis@styl,\obr@popis@nacti@styl]}%
+  \expandafter\obrPopisX\temp{\obr@popis@nacti@a/\obr@popis@nacti@c}%
+\else
+\edef\temp{[\obr@popis@nacti@b,\obrPopis@styl,\obr@popis@nacti@styl]}%
+\expandafter\obrPopisY\temp{\obr@popis@nacti@a/\obr@popis@nacti@c}%
+\fi
+\fi
+}
+
+\newcommand\obrPopis[2][]{\edef\obrPopis@styl{#1}\foreach \cosi in {#2} {\expandafter\@obrPopis\expandafter{\cosi}}\let\obrPopis@styl\relax}
+
+\def\msr@letter@o{o}
+\def\msr@letter@n{n}
+\def\msr@letter@u{u}
+
+\def\msr@typ@save#1#2;{\def\temp{#1}%
+\def\msr@int@sipka{-}
+\def\msr@int@shorten{}
+\ifx\temp\msr@letter@o\let\msr@obr@vlevo\draw\fi
+\ifx\temp\msr@letter@u\let\msr@obr@vlevo\fill\fi
+\ifx\temp\msr@letter@n\let\msr@obr@vlevo\msr@letter@n \def\msr@int@sipka{<-}\else \def\msr@int@shorten{shorten <=2pt,}\fi
+\def\temp{#2}%
+\ifx\temp\empty{\PackageError{msr-spolecne}{Nepodarilo se rozpoznat typy pro konec intervalu u makra obrInterval}{}}\fi%
+\ifx\temp\msr@letter@o\let\msr@obr@vpravo\draw\fi
+\ifx\temp\msr@letter@u\let\msr@obr@vpravo\fill\fi
+\ifx\temp\msr@letter@n\let\msr@obr@vpravo\msr@letter@n \edef\msr@int@sipka{\msr@int@sipka>}\else \edef\msr@int@shorten{\msr@int@shorten,shorten >=2pt,}\fi
+}
+
+\newcommand{\obrInterval}[1][red]{\def\msr@interval@opt{#1}\interval@}
+\define@key{obr}{y}[0]{\def\msr@obor@y{#1}}
+\define@key{obr}{typ}[oo]{\msr@typ@save #1;}
+\newcommand{\interval@}[3][]{\def\msr@obor@y{16pt}\msr@typ@save uu;
+{\clip (\MsrXmin,\MsrYmin) rectangle (\MsrXmax,\MsrYmax);
+\setkeys{obr}{#1}%
+\edef\@msr@temp{thick, barva1, \msr@interval@opt}%
+% prazde krouzky, je-li potreba
+\ifx\msr@obr@vlevo\msr@letter@n\else
+  \expandafter\draw\expandafter[\@msr@temp] (#2,\msr@obor@y) circle (2pt);
+  \expandafter\draw\expandafter[\@msr@temp,thin,dashed,shorten >=2pt,shorten <=2pt]   (#2,\msr@obor@y) --  (#2,0);
+\fi
+\ifx\msr@obr@vpravo\msr@letter@n\else
+  \expandafter\draw\expandafter[\@msr@temp] (#3,\msr@obor@y) circle (2pt);
+  \expandafter\draw\expandafter[\@msr@temp,thin,dashed,shorten >=2pt,shorten <=2pt]   (#3,\msr@obor@y) --  (#3,0);
+\fi
+% plne krouzky, je-li potreba
+\ifx\msr@obr@vlevo\fill\expandafter\fill\expandafter[\@msr@temp] (#2,\msr@obor@y) circle (2pt);\fi
+\ifx\msr@obr@vpravo\fill\expandafter\fill\expandafter[\@msr@temp] (#3,\msr@obor@y) circle (2pt);\fi
+\edef\@msr@temp{very thick, barva1, \msr@int@shorten, \msr@int@sipka, \msr@interval@opt}%
+\def\msr@odkud@kreslit{#2} \ifx\msr@obr@vlevo\msr@letter@n \let\msr@odkud@kreslit\MsrXmin\fi
+\def\msr@kam@kreslit{#3} \ifx\msr@obr@vpravo\msr@letter@n \let\msr@kam@kreslit\MsrXmax\fi
+\expandafter\draw\expandafter[\@msr@temp] (\msr@odkud@kreslit,\msr@obor@y) -- (\msr@kam@kreslit,\msr@obor@y);
+}}
+
+
+\define@key{obruhel}{polomer}[6mm]{\def\msr@obruhel@polomer{#1}}
+\define@key{obruhel}{styl}[]{\def\msr@obruhel@styl{#1}}
+\define@key{obruhel}{fill}[vypln1]{\def\msr@obruhel@fill{#1}}
+\define@key{obruhel}{znacka}[]{\def\msr@obruhel@znacka{#1}}
+\define@key{obruhel}{polomerz}[0.65*(\msr@obruhel@polomer)]{\def\msr@obruhel@polomer@znacka{#1}}
+\define@key{obruhel}{stylz}[]{\def\msr@obruhel@stylznacky{#1}}
+
+\newtoks\@msr@obruhel@toks
+\newdimen\@msrdimen@
+\def\obrUhelpolomer{6mm}
+\newcommand\obrUhel[4][]{
+\def\msr@obruhel@polomer{\obrUhelpolomer}
+\def\msr@obruhel@styl{}
+\def\msr@obruhel@fill{}
+\def\msr@obruhel@stylznacky{}
+\def\msr@obruhel@znacka{}
+\def\msr@obruhel@polomer@znacka{}
+\setkeys{obruhel}{#1}
+\ifx\msr@obruhel@fill\empty\else
+  \expandafter\fill\expandafter[\msr@obruhel@fill] #2 -- ++ ({\msr@obruhel@polomer*cos(#3)},{\msr@obruhel@polomer*sin(#3)}) arc (#3:#4:\msr@obruhel@polomer) -- cycle;
+\fi
+\expandafter\draw\expandafter[\msr@obruhel@styl] #2 ++ ({\msr@obruhel@polomer*cos(#3)},{\msr@obruhel@polomer*sin(#3)}) arc (#3:#4:\msr@obruhel@polomer);
+\ifx\msr@obruhel@znacka\empty\else
+  \ifx\msr@obruhel@polomer@znacka\empty
+     \setbox0=\hbox{$\msr@obruhel@znacka$}
+     \@msrdimen@=\the\wd0
+     \advance\@msrdimen@ by \the\ht0
+     \divide\@msrdimen@ by 2
+     \def\msr@obruhel@polomer@znacka{\msr@obruhel@polomer+\the\@msrdimen@}
+  \fi
+  \@msr@obruhel@toks{\msr@obruhel@znacka}
+  \edef\msr@temp{#2 ++ ({(\msr@obruhel@polomer@znacka)*cos(((#3)+(#4))/2)},{(\msr@obruhel@polomer@znacka)*sin(((#3)+(#4))/2)}) node [\msr@obruhel@stylznacky] {$\the\@msr@obruhel@toks$}}
+  \expandafter\draw \msr@temp;
+\fi
+}
+
+
+\newcommand{\obrUhelB}{\@ifstar
+                     \@obrUhelB%
+                     \@obrUhelBstar%
+}
+
+
+\newcommand\@obrUhelB[3][8mm]{\def\msr@smer{left}\def\msr@savea{#1}\def\msr@saveb{#2}\def\msr@savec{#3}\@@obrUhelB}
+\newcommand\@obrUhelBstar[3][8mm]{\def\msr@smer{right}\def\msr@savea{#1}\def\msr@saveb{#2}\def\msr@savec{#3}\@@obrUhelB}
+
+
+\newcommand\@@obrUhelB[2][ ]{\def\msr@saved{#1}\def\msr@savee{#2}% 
+  \draw ($(\msr@savec)!\msr@savea!(\msr@saveb)$) to[bend \msr@smer] ($(\msr@savec)!\msr@savea!(\msr@savee)$);
+  \let\save@default@msr@poloha@znacky\@msr@poloha@znacky \let\@msr@poloha@znacky\msr@savea
+  \obrUhelBZnacka{\msr@saveb}{\msr@savec}{\msr@savee}{$\msr@saved$}\let\@msr@poloha@znacky\save@default@msr@poloha@znacky
+}
+
+
+\newcommand\obrUhelBZnacka[5][]{\coordinate (pom1) at ($(#3)!\@msr@poloha@znacky!(#2)$); \coordinate (pom2) at ($(#3)!\@msr@poloha@znacky!(#4)$); 
+  \draw ($0.333*(#3)+0.333*(pom1)+0.333*(pom2)$) node [#1] {#5};
+}
+\def\@msr@poloha@znacky{8mm}
+
+
+\newcommand{\obrUhelPravy}{\@ifstar
+                     \@obrUhelPravystar%
+                     \@obrUhelPravy%
+}
+
+\newcommand\@obrUhelPravy[4][5mm]{
+  \draw (#3) ($(#3)!#1!(#2)$) to[bend left] ($(#3)!#1!(#4)$) (#3) -- cycle;
+  \coordinate (pom1) at ($(#3)!#1!(#2)$); \coordinate (pom2) at ($(#3)!#1!(#4)$); 
+  \draw[fill] ($0.333*(#3)+0.333*(pom1)+0.333*(pom2)$) circle (0.5pt);
+}
+
+\newcommand\@obrUhelPravystar[4][5mm]{\@obrUhelPravy[#1]{#4}{#3}{#2}}
+
+\newcommand\obrBodNaOseUhlu[5][6cm]{\coordinate (#2) at ($($(#3)!#1!(#5)$)!0.5!($(#3)!#1!(#4)$)$);}
+% \obrBodNaOseUhlu[2cm]{A}{B}{C}{D} 
+% na ose uhlu CBD vytvorime bod A tak, ze rozpulime spojnici body na
+% ramenech uhlu ve vzdalenosti 2 cm od vrcholu.
+
+\newcommand\obrPataKolmice[4]{\coordinate (#1) at ($(#3)!(#2)!(#4)$);}
+% \obrPataKolmice{A}{B}{C}{D}
+% Z bodu C spustime kolmici na usecku BD, prusecik pojmenujeme A
+
+\def\obrTeziste#1#2#3#4{\coordinate (#1) at ($1/3*(#2)+1/3*(#3)+1/3*(#4)$);}
+% \obrTeziste {A}{B}{C}{D}
+% Bod A se umisti do teziste trojuhelniku BCD
+
+\newcommand\obrKrizek[4][1.5pt]{%
+\draw let \p1=(#2) in (\x1-#1,\y1-#1)--(\x1+#1,\y1+#1);
+\draw let \p1=(#2) in (\x1+#1,\y1-#1)--(\x1-#1,\y1+#1);
+\path (#2) node [#3] {${#4}$};
+}
+
+\def\obrStredOpsane#1#2#3#4{\path let \p1=($0.01*(#2)$), \p2=($0.01*(#3)$), \p3=($0.01*(#4)$), 
+    \n1={veclen(\x2-\x3,\y2-\y3)}, \n2={veclen(\x1-\x3,\y1-\y3)}, \n3={veclen(\x2-\x1,\y2-\y1)}
+    in 
+    \pgfextra{%
+      \pgfmathsetmacro{\Dres}{2*((\x2-\x1)*(\y3-\y1)-(\y2-\y1)*(\x3-\x1))}
+      \pgfmathsetmacro{\Xres}{(( (\y3-\y1) * ((\x2-\x1)^2+(\y2-\y1)^2)   -  (\y2-\y1) * ( (\x3-\x1)^2 + (\y3-\y1)^2 ))/\Dres ) + \x1}
+      \pgfmathsetmacro{\Yres}{(( - (\x3-\x1) * ((\x2-\x1)^2+(\y2-\y1)^2)   +  (\x2-\x1) * ( (\x3-\x1)^2 + (\y3-\y1)^2 ))/\Dres) + \y1}
+    } ($100*(\Xres pt,\Yres pt)$) coordinate (#1);}
+% \obrStredOpsane SABC
+% do stredu kruznice opsane trojuhleniku ABC se umisti bod S
+
+\def\obrStredVepsane#1#2#3#4{\path let \p1=($0.01*(#2)$), \p2=($0.01*(#3)$), \p3=($0.01*(#4)$), 
+  \n1={veclen(\x2-\x3,\y2-\y3)}, \n2={veclen(\x1-\x3,\y1-\y3)}, \n3={veclen(\x2-\x1,\y2-\y1)},
+  \n4={(\n1+\n2+\n3)}
+  in 
+  \pgfextra{%
+    \pgfmathsetmacro{\Xres}{(\n1*\x1+\n2*\x2+\n3*\x3)/(\n4)}
+    \pgfmathsetmacro{\Yres}{(\n1*\y1+\n2*\y2+\n3*\y3)/(\n4)}
+  } ($100*(\Xres pt,\Yres pt)$) coordinate (#1);}
+% \obrStredVepsane SABC
+% do stredu kruznice vepsane trojuhleniku ABC se umisti bod S
+
+
+% fixed exp function: http://tex.stackexchange.com/questions/31775/is-plotting-exponential-graphs-a-known-source-of-bugs-in-tikz
+%
+
+\let\pgfmath@function@exp\relax % undefine old exp function
+\pgfmathdeclarefunction{exp}{1}{%   
+  \begingroup
+    \pgfmath@xc=#1pt\relax
+    \pgfmath@yc=#1pt\relax
+    \ifdim\pgfmath@xc<-9pt
+      \pgfmath@x=1sp\relax
+    \else
+      \ifdim\pgfmath@xc<0pt
+        \pgfmath@xc=-\pgfmath@xc
+      \fi
+      \pgfmath@x=1pt\relax
+      \pgfmath@xa=1pt\relax
+      \pgfmath@xb=\pgfmath@x
+      \pgfmathloop%
+        \divide\pgfmath@xa by\pgfmathcounter
+        \pgfmath@xa=\pgfmath@tonumber\pgfmath@xc\pgfmath@xa%
+        \advance\pgfmath@x by\pgfmath@xa
+      \ifdim\pgfmath@x=\pgfmath@xb
+      \else
+        \pgfmath@xb=\pgfmath@x
+      \repeatpgfmathloop%
+      \ifdim\pgfmath@yc<0pt
+        \pgfmathreciprocal@{\pgfmath@tonumber\pgfmath@x}%
+        \pgfmath@x=\pgfmathresult pt\relax
+      \fi
+    \fi
+    \pgfmath@returnone\pgfmath@x%
+  \endgroup
+}
+
+
+\colorlet{barva1}{red}
+\colorlet{barva2}{blue}
+\colorlet{barva3}{black!80}
+\colorlet{barva4}{green!60!black}
+\colorlet{vypln1}{yellow!30}
+\colorlet{vypln2}{red!20}
+\colorlet{vypln3}{green!50!black!30}
+
+
+
+% makra pro tabulky
+
+\def\polozka@Star{\let\msr@obalka@odpovedi\ensuremath\polozka@Both}
+\def\polozka@NoStar{\let\msr@obalka@odpovedi\relax\polozka@Both}
+
+\let\polozkahrule\hrule
+\def\polozka@Both#1\odpovedi#2\par{\item\qquad\begin{minipage}{\MsrTabulkaB}
+      \msr@obalka@odpovedi{#1}
+    \end{minipage}\hfill
+    \begin{minipage}{\MsrTabulkaC}\ifx\ObalkaOdpovedi\relax\else\let\msr@obalka@odpovedi\ObalkaOdpovedi\fi\odpovedi{#2}
+    \end{minipage}\vspace*{\MsrTabulkaA}{\color[rgb]{0.8,0.8,0.8} \polozkahrule}}
+ 
+\newcommand\MsrTabulka[3][0pt]{%
+\graylettersOff
+\def\MsrTabulkaA{#1}%
+\def\MsrTabulkaB{#2}%
+\def\MsrTabulkaC{#3}%
+\pocetsloupcu{4}%
+\def\polozka{\@ifstar\polozka@Star\polozka@NoStar}%
+}
+
+\def\MsrTabulkaZahlavi#1#2#3{\leavevmode\hbox{\hspace*{#1}%
+\foreach \polozka in {#3} {\rlap{\polozka}\hspace{#2}}}}
+
+
+\def\seda{\color[rgb]{0.8,0.8,0.8}}
+\InputIfFileExists{msr-local.tex}{}{}
+
+\newcommand\napoveda[2][0.6\linewidth]{{\par{\begin{minipage}[t]{#1}\footnotetext{\textit{Návod:} #2\par}\end{minipage}}}}
+
+\def\zdroj#1{{\color[rgb]{0.5,0.5,0.5}\footnotesize Zdroj: #1}}
+\makeatother
+
+
+%% viz http://tex.stackexchange.com/questions/2003/the-trestle-problem-how-to-avoid-in-the-output/4381#4381
+\mathchardef\lt=\mathcode`\<
+\mathchardef\gt=\mathcode`\>
+%\mathchardef\strednik=\mathcode`\;
+\let\zavorkal(
+\let\zavorkap)
+{\catcode`\<=\active
+ \catcode`\>=\active
+% \catcode`\;=\active
+ \catcode`\(=\active
+ \catcode`\)=\active
+ \global\def<{\left\langle}
+ \global\def>{\right\rangle}
+ \global\def({\left\zavorkal}
+ \global\def){\right\zavorkap}
+% \global\def;{\strednik\ \ignorespaces}
+}
+
+\def\AktivniZavorky{
+\mathcode`\<="8000
+\mathcode`\>="8000
+\mathcode`\(="8000
+\mathcode`\)="8000
+}
+
+%\mathcode`\;="8000
+
+\let\setminus\smallsetminus
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+
+\def\textime#1{}
+\def\tiket#1{}
+\def\msr#1{}
+
+% komplexni konjugovanost: %http://tex.stackexchange.com/questions/22100/the-bar-and-overline-commands
+\newcommand{\overbar}[1]{\mkern1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+
+\makeatletter
+% Upravene makro z latex.ltx (doplneny \rightskip)
+\def\@parboxrestore{\@arrayparboxrestore\let\\\@normalcr\rightskip 0 pt plus 1em\relax}
+\makeatother
+
+
+%%% 31.8.2013 Makra pro vybarveni oblasti mezi dvema funkcemi
+\makeatletter
+
+
+\newtoks\msr@vyplntoks
+\newtoks\msr@vyplntoks@temp
+
+\newif\ifmsr@vypln@A \msr@vypln@Afalse
+\newif\ifmsr@vypln@B \msr@vypln@Bfalse
+
+\newcommand\save@vypln[1][NONE]{
+\expandafter\gdef\csname msr@vyplnopt@\vypln@co\endcsname{#1}
+\def\temp{#1}%
+\ifx\temp\msr@NONE \csname msr@vypln@\vypln@co true\endcsname\else \csname msr@vypln@\vypln@co false\endcsname\fi
+\save@vypln@b
+}
+
+\def\save@vypln@b#1;;--;;{\expandafter\gdef\csname msr@vypln@\vypln@co\endcsname{#1}}
+
+% Prvni parametr je ulozen do prikazu \msr@vypln@A, pokud zacina
+% hrnatou zavorkou, je obsah hranate zavorky v \msr@vyplnopt@A a
+% zbytek v \msr@vypln@A. Podobne i dalsi tri parametry a prismenka B C
+% a D.
+
+
+\def\pridej@msr@vyplntoks#1{\msr@vyplntoks@temp{#1}\edef\act{\global\msr@vyplntoks{\the\msr@vyplntoks \the\msr@vyplntoks@temp}}\act}
+
+
+\def\msr@none{none}
+\def\msr@NONE{NONE}
+
+\def\obrVypln{\@ifstar\obrVypln@Star\obrVypln@NoStar}
+\def\obrVypln@Star{\the\msr@vyplntoks \global\msr@vyplntoks={}}
+
+\newcommand\obrVypln@NoStar[5][]
+{%
+\msr@vyplntoks{}%
+\def\vypln@co{A}\save@vypln #2;;--;;%
+\def\vypln@co{B}\save@vypln #3;;--;;%
+\def\vypln@co{C}\save@vypln #4;;--;;%
+\def\vypln@co{D}\save@vypln #5;;--;;%
+{\let\x\relax
+\xdef\pom{[vypln1,#1] plot[domain=\msr@vypln@A:\msr@vypln@B] (\x,{\msr@vypln@C}) -- plot [domain=\msr@vypln@B:\msr@vypln@A] (\x,{\msr@vypln@D});}%
+}%
+\expandafter\fill\pom
+
+\ifx\msr@vyplnopt@C\msr@NONE\def\msr@vyplnopt@C{}\fi
+\ifx\msr@vyplnopt@D\msr@NONE\def\msr@vyplnopt@D{}\fi
+\ifx\msr@vyplnopt@C\msr@none\else \expandafter\pridej@msr@vyplntoks\expandafter{\expandafter\obrFce\expandafter[\msr@vyplnopt@C]{\msr@vypln@C}} \fi
+\ifx\msr@vyplnopt@D\msr@none\else \edef\msr@vyplnopt@D{blue,\msr@vyplnopt@D}\expandafter\pridej@msr@vyplntoks\expandafter{\expandafter\obrFce\expandafter[\msr@vyplnopt@D]{\msr@vypln@D}} \fi
+
+%\ifx\msr@vyplnopt@A\empty\else
+\ifmsr@vypln@A\else
+{
+\xdef\x{\msr@vypln@A}
+\xdef\msr@vypln@CC{\msr@vypln@C}
+\xdef\msr@vypln@DD{\msr@vypln@D}
+\pridej@msr@vyplntoks{\draw[thin, dashed, }
+\expandafter\pridej@msr@vyplntoks\expandafter{\msr@vyplnopt@A] (\msr@vypln@A,}
+\expandafter\pridej@msr@vyplntoks\expandafter{\expandafter{\msr@vypln@CC}) -- (\msr@vypln@A,}
+\expandafter\pridej@msr@vyplntoks\expandafter{\expandafter{\msr@vypln@DD});}
+}
+\fi
+
+%\ifx\msr@vyplnopt@B\empty\else
+\ifmsr@vypln@B\else
+{
+\xdef\x{\msr@vypln@B}
+\xdef\msr@vypln@CC{\msr@vypln@C}
+\xdef\msr@vypln@DD{\msr@vypln@D}
+\pridej@msr@vyplntoks{\draw[thin, dashed, }
+\expandafter\pridej@msr@vyplntoks\expandafter{\msr@vyplnopt@B] (\msr@vypln@B,}
+\expandafter\pridej@msr@vyplntoks\expandafter{\expandafter{\msr@vypln@CC}) -- (\msr@vypln@B,}
+\expandafter\pridej@msr@vyplntoks\expandafter{\expandafter{\msr@vypln@DD});}
+}
+\fi
+
+}
+
+
+% tikz3d
+\usetikzlibrary{3d}
+\usepgflibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.pathmorphing}
+
+\tikzoption{canvas is xy plane at z}[]{%
+  \def\tikz@plane@origin{\pgfpointxyz{0}{0}{#1}}%
+  \def\tikz@plane@x{\pgfpointxyz{1}{0}{#1}}%
+  \def\tikz@plane@y{\pgfpointxyz{0}{1}{#1}}%
+  \tikz@canvas@is@plane
+}
+\def\msrdecorate{decorate [decoration={random steps,segment length=2mm,amplitude=3pt},rounded corners=2pt]}
+
+
+\def\msrzpracujIIID#1=#2;{\expandafter\gdef\csname msr#1IIID\endcsname{#2}}
+
+\newif\ifMsrIIIDkreslitOsy
+\MsrIIIDkreslitOsytrue
+
+\newcommand\MsrIIID[2][]{
+%nastaveni parametru - defaultni hodnoty
+\gdef\msrdelkaIIID{0.9cm}\gdef\msrzvetseniIIID{0.85}\gdef\msrsirkaIIID{4cm}\gdef\msrvyskaIIID{5cm}
+\gdef\msrXmaxIIID{5}\gdef\msrYmaxIIID{5}\gdef\msrZmaxIIID{5}
+%nstaveni paremetru podle volitelneho parametru prikazu
+\foreach \polozka in {#1} {\expandafter\msrzpracujIIID\polozka;}
+%sestaveni obrazku
+\begin{tikzpicture}[scale=\msrzvetseniIIID,x = { ({-0.5*cos(45)*\msrdelkaIIID},{-0.5*sin(45)*\msrdelkaIIID})},
+                   y = { (\msrdelkaIIID,0cm)},
+                   z = { (0cm,\msrdelkaIIID)}
+]
+\ifMsrIIIDkreslitOsy
+\draw[->] (0,0,0)--(0,0,\msrZmaxIIID) node[above] {$z$};
+\draw[->] (0,0,0)--(0,\msrYmaxIIID,0) node[right] {$y$};
+\draw[->] (0,0,0)--(\msrXmaxIIID,0,0) node[below left] {$x$};
+\fi
+#2
+\end{tikzpicture}
+}
+
+\def\obrZnackyIIID#1#2#3{
+\begin{scope}
+  \clip (0.9*\msrXmaxIIID,0,0) rectangle (0,0.9*\msrYmaxIIID,0.9*\msrZmaxIIID);
+  \begin{scope}[canvas is yz plane at x=0]
+    \obrZnackyX{1,...,#1}
+    \obrZnackyY{1,...,#2}
+  \end{scope}
+  \begin{scope}[canvas is xz plane at y=0]
+    \obrZnackyX[rotate=-45,scale=2]{1,...,#3}
+  \end{scope}
+\end{scope}
+
+}
+
+\def\popisekIIIDxdefault{below right}
+\def\popisekIIIDydefault{below}
+\def\popisekIIIDzdefault{left}
+
+\def\msrtestX{x}
+\def\msrtestY{y}
+\def\msrtestZ{z}
+
+\def\PopisekIIID#1=#2;{\def\temp{#1}
+\ifx\temp\msrtestX \path(#2,0,0) node[below right] {$#2$}; \fi
+\ifx\temp\msrtestY \path(0,#2,0) node[below] {$#2$}; \fi
+\ifx\temp\msrtestZ \path(0,0,#2) node[left] {$#2$}; \fi
+}
+
+\def\PopiskyIIID#1{\foreach \pop in {#1} {\expandafter\PopisekIIID \pop;}}
+
+\pgfmathsetseed{1500}
+
+\makeatother
+
+
+%\def\Vec#1#2{\overrightarrow{#1#2}}
+
+\usepackage{esvect}
+
+\AtBeginDocument{\pdfmapfile{+esvect.map}}
+%\def\vec#1{\vv{#1}}
+\def\Vec#1#2{\vv{#1#2}}
+
+\def\primka{\mathord{\leftrightarrow}}
+\def\O{\mathcal{O}}
+\def\T{\mathcal{T}}
+\def\S{\mathcal{S}}
+\def\RR{\mathcal{R}}
+
+\def\ARRAY#1{
+  \begin{matrix}
+    #1
+  \end{matrix}
+}
+
+%%% Local Variables: 
+%%% coding: cp1250
+%%% End: 

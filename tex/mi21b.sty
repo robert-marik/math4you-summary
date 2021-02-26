@@ -1,0 +1,14 @@
+% soubor mi21b.sty
+\makeatletter  % v hlavicce pouzijte \usepackage{xkeyval}
+\define@key{mi}{interval}[{[0,1]}]{\def\miinterval{#1}}
+\define@key{mi}{promenna}[x]{\def\mipromenna{#1}}
+\define@key{mi}{funkce}[]{\def\mifunkce{#1}} 
+\define@key{mi}{procedura}[]{\def\miproc{#1}} 
+\define@key{mi}{*}[]{\def\mitemp##1{}} 
+\newcommand\MyRespBoxMath[2][]{\def\miinterval{[0,1]}\def\mipromenna{x}\def\mifunkce{}%
+  \def\miproc{}  \let\mitemp\relax  \setkeys{mi}{#1}%
+  \edef\params{{#2}(\mipromenna){4}{.001}{\miinterval}}
+  \ifx\mifunkce\empty\else \edef\params{\params[\mifunkce]}\fi
+  \ifx\miproc  \empty\else \edef\params{\params*{\miproc}}\fi
+  \expandafter\RespBoxMath\params \mitemp{\quad\hfill\CorrAnsButton{#2}}}
+\makeatother

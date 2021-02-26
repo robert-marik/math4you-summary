@@ -1,0 +1,29 @@
+echo "<pre>"> log.html
+hg log >> log.html
+echo "</pre>" >> log.html
+
+for i in `cat soubory.txt`; 
+do 
+  echo "processing $i"
+  if [ -e "$i" ]
+  then
+      scp -p $i cornus.mendelu.cz:html/msr/ 
+  elif [ -e "manual/$i" ]
+  then
+      scp -p manual/$i cornus.mendelu.cz:html/msr/ 
+  elif [ -e "sablony/$i" ]
+  then
+      scp -p sablony/$i cornus.mendelu.cz:html/msr/ 
+  fi
+done
+
+
+scp -p manual/manual.tex cornus.mendelu.cz:html/msr/
+scp -p manual/manual.pdf cornus.mendelu.cz:html/msr/
+#scp -p manual/manual.html cornus.mendelu.cz:html/msr/
+
+zip -j obrazky.zip grafik/*
+
+zip styly.zip obrazky.zip msr-ocg.sty msr-spolecne.tex msr-vzhled.tex mi21.sty msr.cls msr-skeletons.sty sablony/skeleton_test.tex msr-sparuj.cls MSRdps.sty MSRdps_rand.sty sablony/skeleton_sparuj.tex msr-jeopardy.cls dps_str_cus.def msr_autori.tex  msr_oblasti.tex  msr_podoblasti.tex
+
+scp styly.zip cornus.mendelu.cz:html/msr/

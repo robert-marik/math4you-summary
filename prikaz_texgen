@@ -1,0 +1,152 @@
+for i in {32..87};
+do 
+    echo CSV file $i
+    echo ===========
+    pdflatex "\def\soubor{${i}}\def\TWO{} \input driver.tex "	
+    cp driver.pdf pdf/$i.pdf
+    cp driver.log pdf/$i.log
+
+    pdflatex "\def\soubor{${i}}\long\def\LANGcs#1{} \long\def\LANGsk#1{} \long\def\LANGpl#1{} \long\def\LANGes#1{} \input driver.tex "
+    cp driver.pdf pdf/${i}en.pdf
+    cp driver.log pdf/${i}en.log
+
+    pdflatex "\def\soubor{${i}}\long\def\LANGen#1{} \long\def\LANGsk#1{} \long\def\LANGpl#1{} \long\def\LANGes#1{} \input driver.tex "
+    cp driver.pdf pdf/${i}cs.pdf
+    cp driver.log pdf/${i}cs.log
+
+    pdflatex "\def\soubor{${i}}\long\def\LANGcs#1{} \long\def\LANGsk#1{} \long\def\LANGen#1{} \long\def\LANGes#1{} \input driver.tex "
+    cp driver.pdf pdf/${i}pl.pdf
+    cp driver.log pdf/${i}pl.log
+
+    pdflatex "\def\soubor{${i}}\long\def\LANGcs#1{} \long\def\LANGen#1{} \long\def\LANGpl#1{} \long\def\LANGes#1{} \input driver.tex "
+    cp driver.pdf pdf/${i}sk.pdf
+    cp driver.log pdf/${i}sk.log
+
+    pdflatex "\def\soubor{${i}}\long\def\LANGcs#1{} \long\def\LANGen#1{} \long\def\LANGpl#1{} \long\def\LANGsk#1{} \input driver.tex "
+    cp driver.pdf pdf/${i}es.pdf
+    cp driver.log pdf/${i}es.log
+
+done
+
+
+for i in {32..87};
+do 
+    echo CSV file $i
+    echo ===========
+    pdflatex "\def\soubor{${i}}\def\TWO{} \input driver_easy.tex "	
+    cp driver_easy.pdf pdf_easy/$i.pdf
+    cp driver_easy.log pdf_easy/$i.log
+
+    pdflatex "\def\soubor{${i}}\long\def\LANGcs#1{} \long\def\LANGsk#1{} \long\def\LANGpl#1{} \long\def\LANGes#1{} \input driver_easy.tex "
+    cp driver_easy.pdf pdf_easy/${i}en.pdf
+    cp driver_easy.log pdf_easy/${i}en.log
+
+    pdflatex "\def\soubor{${i}}\long\def\LANGen#1{} \long\def\LANGsk#1{} \long\def\LANGpl#1{} \long\def\LANGes#1{} \input driver_easy.tex "
+    cp driver_easy.pdf pdf_easy/${i}cs.pdf
+    cp driver_easy.log pdf_easy/${i}cs.log
+
+    pdflatex "\def\soubor{${i}}\long\def\LANGcs#1{} \long\def\LANGsk#1{} \long\def\LANGen#1{} \long\def\LANGes#1{} \input driver_easy.tex "
+    cp driver_easy.pdf pdf_easy/${i}pl.pdf
+    cp driver_easy.log pdf_easy/${i}pl.log
+
+    pdflatex "\def\soubor{${i}}\long\def\LANGcs#1{} \long\def\LANGen#1{} \long\def\LANGpl#1{} \long\def\LANGes#1{} \input driver_easy.tex "
+    cp driver_easy.pdf pdf_easy/${i}sk.pdf
+    cp driver_easy.log pdf_easy/${i}sk.log
+
+    pdflatex "\def\soubor{${i}}\long\def\LANGcs#1{} \long\def\LANGen#1{} \long\def\LANGpl#1{} \long\def\LANGsk#1{} \input driver_easy.tex "
+    cp driver_easy.pdf pdf_easy/${i}es.pdf
+    cp driver_easy.log pdf_easy/${i}es.log
+
+done
+
+for i in {32..87};
+do 
+    echo CSV file $i
+    echo ===========
+    pdflatex "\def\soubor{${i}}\def\TWO{} \input driver_clonable.tex "	
+    cp driver_clonable.pdf pdf_clonable/$i.pdf
+    cp driver_clonable.log pdf_clonable/$i.log
+
+    pdflatex "\def\soubor{${i}}\long\def\LANGcs#1{} \long\def\LANGsk#1{} \long\def\LANGpl#1{} \long\def\LANGes#1{} \input driver_clonable.tex "
+    cp driver_clonable.pdf pdf_clonable/${i}en.pdf
+    cp driver_clonable.log pdf_clonable/${i}en.log
+
+    pdflatex "\def\soubor{${i}}\long\def\LANGen#1{} \long\def\LANGsk#1{} \long\def\LANGpl#1{} \long\def\LANGes#1{} \input driver_clonable.tex "
+    cp driver_clonable.pdf pdf_clonable/${i}cs.pdf
+    cp driver_clonable.log pdf_clonable/${i}cs.log
+
+    pdflatex "\def\soubor{${i}}\long\def\LANGcs#1{} \long\def\LANGsk#1{} \long\def\LANGen#1{} \long\def\LANGes#1{} \input driver_clonable.tex "
+    cp driver_clonable.pdf pdf_clonable/${i}pl.pdf
+    cp driver_clonable.log pdf_clonable/${i}pl.log
+
+    pdflatex "\def\soubor{${i}}\long\def\LANGcs#1{} \long\def\LANGen#1{} \long\def\LANGpl#1{} \long\def\LANGes#1{} \input driver_clonable.tex "
+    cp driver_clonable.pdf pdf_clonable/${i}sk.pdf
+    cp driver_clonable.log pdf_clonable/${i}sk.log
+
+    pdflatex "\def\soubor{${i}}\long\def\LANGcs#1{} \long\def\LANGen#1{} \long\def\LANGpl#1{} \long\def\LANGsk#1{} \input driver_clonable.tex "
+    cp driver_clonable.pdf pdf_clonable/${i}es.pdf
+    cp driver_clonable.log pdf_clonable/${i}es.log
+
+done
+
+for i in {32..87};
+do 
+    echo CSV file $i
+    echo ===========
+    pdflatex "\def\soubor{${i}}\def\TWO{} \input driver_translation.tex "	
+    cp driver_translation.pdf pdf_un_translation/$i.pdf
+    cp driver_translation.log pdf_un_translation/$i.log
+
+    pdflatex "\def\soubor{${i}}\long\def\LANGcs#1{} \long\def\LANGsk#1{} \long\def\LANGpl#1{} \long\def\LANGes#1{} \input driver_translation.tex "
+    cp driver_translation.pdf pdf_un_translation/${i}en.pdf
+    cp driver_translation.log pdf_un_translation/${i}en.log
+
+    pdflatex "\def\soubor{${i}}\long\def\LANGen#1{} \long\def\LANGsk#1{} \long\def\LANGpl#1{} \long\def\LANGes#1{} \input driver_translation.tex "
+    cp driver_translation.pdf pdf_un_translation/${i}cs.pdf
+    cp driver_translation.log pdf_un_translation/${i}cs.log
+
+    pdflatex "\def\soubor{${i}}\long\def\LANGcs#1{} \long\def\LANGsk#1{} \long\def\LANGen#1{} \long\def\LANGes#1{} \input driver_translation.tex "
+    cp driver_translation.pdf pdf_un_translation/${i}pl.pdf
+    cp driver_translation.log pdf_un_translation/${i}pl.log
+
+    pdflatex "\def\soubor{${i}}\long\def\LANGcs#1{} \long\def\LANGen#1{} \long\def\LANGpl#1{} \long\def\LANGes#1{} \input driver_translation.tex "
+    cp driver_translation.pdf pdf_un_translation/${i}sk.pdf
+    cp driver_translation.log pdf_un_translation/${i}sk.log
+
+    pdflatex "\def\soubor{${i}}\long\def\LANGcs#1{} \long\def\LANGen#1{} \long\def\LANGpl#1{} \long\def\LANGsk#1{} \input driver_translation.tex "
+    cp driver_translation.pdf pdf_un_translation/${i}es.pdf
+    cp driver_translation.log pdf_un_translation/${i}es.log
+
+done
+
+
+for i in {32..87};
+do 
+    echo CSV file $i
+    echo ===========
+    pdflatex "\def\soubor{${i}}\def\TWO{} \input driver_qa.tex "	
+    cp driver_qa.pdf pdf_un_qa/$i.pdf
+    cp driver_qa.log pdf_un_qa/$i.log
+
+    pdflatex "\def\soubor{${i}}\long\def\LANGcs#1{} \long\def\LANGsk#1{} \long\def\LANGpl#1{} \long\def\LANGes#1{} \input driver_qa.tex "
+    cp driver_qa.pdf pdf_un_qa/${i}en.pdf
+    cp driver_qa.log pdf_un_qa/${i}en.log
+
+    pdflatex "\def\soubor{${i}}\long\def\LANGen#1{} \long\def\LANGsk#1{} \long\def\LANGpl#1{} \long\def\LANGes#1{} \input driver_qa.tex "
+    cp driver_qa.pdf pdf_un_qa/${i}cs.pdf
+    cp driver_qa.log pdf_un_qa/${i}cs.log
+
+    pdflatex "\def\soubor{${i}}\long\def\LANGcs#1{} \long\def\LANGsk#1{} \long\def\LANGen#1{} \long\def\LANGes#1{} \input driver_qa.tex "
+    cp driver_qa.pdf pdf_un_qa/${i}pl.pdf
+    cp driver_qa.log pdf_un_qa/${i}pl.log
+
+    pdflatex "\def\soubor{${i}}\long\def\LANGcs#1{} \long\def\LANGen#1{} \long\def\LANGpl#1{} \long\def\LANGes#1{} \input driver_qa.tex "
+    cp driver_qa.pdf pdf_un_qa/${i}sk.pdf
+    cp driver_qa.log pdf_un_qa/${i}sk.log
+
+    pdflatex "\def\soubor{${i}}\long\def\LANGcs#1{} \long\def\LANGen#1{} \long\def\LANGpl#1{} \long\def\LANGsk#1{} \input driver_qa.tex "
+    cp driver_qa.pdf pdf_un_qa/${i}es.pdf
+    cp driver_qa.log pdf_un_qa/${i}es.log
+
+done
+

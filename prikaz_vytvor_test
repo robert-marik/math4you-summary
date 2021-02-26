@@ -1,0 +1,15 @@
+if [ $# -eq 0 ]
+  then
+    python extract_one.py> data_m4u.tex
+  else
+    python extract_one.py -f $1 > data_m4u.tex
+fi
+
+
+sed -i "s/$(echo -ne '\u2061')/ /g" data_m4u.tex
+sed -i "s/$(echo -ne '\u2013')/-/g" data_m4u.tex
+sed -i "s/\\\\array/\\\\ARRAY/g" data_m4u.tex
+
+pdflatex template_noperm.tex
+pdflatex template_noperm.tex
+pdflatex template_noperm.tex

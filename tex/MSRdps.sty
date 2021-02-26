@@ -1,0 +1,699 @@
+% Uprava 9.4.2012 Robert Marik, Matematika s radosti
+% 
+% 1) Pismeno tajenky je vysazeno TeXem a prekryto nepruhlednym
+% polickem. Po zodpovezeni otazky je policko skryto.
+%
+% 2) tajenka neni v prostredi tabular
+%
+% 3) showletters funguje jinak: jenom asociuje cisla policek tajenky s
+% cisly otazek.
+%
+% 4) Prikaz \insertPuzzleHookMSR
+%
+%
+% Uprava 17.7.2012 Robert Marik, Matematika s radosti
+%
+% 1) makro \insertPuzzle nema zadny parametr
+%
+% 2) javascripty zobrazuji hlaseni v okne pomoci app.alert, pokud
+% chybi textove policko "report".
+%
+% Uprava 5.9. a. 6.9. 2012
+%
+% volitelny parametr pred prvni polozkou dvojice "pismenko+jmeno
+% policka". Umozni vsunout mezi políčka tajenky text.
+%
+%
+%%
+%% This is file `dps.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% dps.dtx  (with options: `copyright,package')
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% dps.sty package,             2006-10-06              %%
+%% Copyright (C) 2006  D. P. Story                      %%
+%%   dpstory@acrotex.net                                %%
+%%                                                      %%
+%% This program can redistributed and/or modified under %%
+%% the terms of the LaTeX Project Public License        %%
+%% Distributed from CTAN archives in directory          %%
+%% macros/latex/base/lppl.txt; either version 1 of the  %%
+%% License, or (at your option) any later version.      %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{MSRdps}
+ [2012/04/09 MSR: Das Puzzle Spiel (dps)]
+\RequirePackage{xkeyval}
+\DeclareOptionX{nonrandomized}{\werandomizefalse}
+\DeclareOptionX{viewmode}{\viewModetrue\previewtrue}
+\DeclareOptionX{showletters}{\showletterstrue}
+\DeclareOptionX{showanswerkey}{\showsolutiontrue}
+\DeclareOptionX{savedata}{\savepuzzledatatrue}
+\newif\ifwerandomize \werandomizetrue
+\newif\ifviewMode \viewModefalse
+\newif\ifshowletters\showlettersfalse
+\newif\ifshowsolution\showsolutionfalse
+\newif\ifsavepuzzledata\savepuzzledatafalse
+\ifeqforpaper\showletterstrue\fi
+\define@choicekey*+{dps.sty}{lang}[\val\nr]{english,german,custom}
+{%
+    \ifcase\nr\relax
+        \def\dps@lang@type{\input{dps_str_us.def}}
+    \or
+        \def\dps@lang@type{\input{dps_str_de.def}}
+    \or
+        \def\dps@lang@type{\input{dps_str_cus.def}}
+    \else
+        \def\dps@lang@type{\input{dps_str_us.def}}
+    \fi
+}{\PackageWarning{dps}{Bad choice for lang, permissible values
+are english, german and custom. Try again}}
+\def\dps@lang@type{\input{dps_str_us.def}}
+\def\dps@lang@type{\input{dps_str_cus.def}}  % R.M. 16.7.2012
+\AtEndOfPackage{\dps@lang@type}
+\ProcessOptionsX
+\RequirePackage{verbatim}
+\RequirePackage{calc}
+\RequirePackage{multicol}
+\input{random.tex}
+\def\nextrandom{\begingroup
+ \ifnum\randomi<\@ne % then initialize with time
+    \global\randomi\time
+    \global\multiply\randomi388 \global\advance\randomi\year
+    \global\multiply\randomi31 \global\advance\randomi\day
+    \global\multiply\randomi97 \global\advance\randomi\month
+    \message{^^J MsR: Randomizer initialized to \the\randomi. ^^J}%
+    \xdef\ds@saveRandomSeed{\the\randomi}%
+    \nextrandom \nextrandom \nextrandom
+ \fi
+ \count@ii\randomi
+ \divide\count@ii 127773 % modulus = multiplier * 127773 + 2836
+ \count@\count@ii
+ \multiply\count@ii 127773
+ \global\advance\randomi-\count@ii % random mod 127773
+ \global\multiply\randomi 16807
+ \multiply\count@ 2836
+ \global\advance\randomi-\count@
+ \ifnum\randomi<\z@ \global\advance\randomi 2147483647\relax\fi
+ \endgroup
+}
+\newif\ifforquestions \forquestionstrue
+\newcount\ds@nCnt
+\newcount\ds@nMax
+\newcount\ds@qNumber\ds@qNumber=0
+\newcount\ds@aNumber\ds@aNumber=0
+\newcount\ds@probCnt \ds@probCnt=0
+\newcount\ds@nCntCols \ds@nCntCols=0
+\newcount\ds@getRanNum
+\newtoks\ds@listIn \ds@listIn={}
+\newtoks\ds@newListIn \ds@newListIn={}
+\newtoks\ds@listOut \ds@listOut={}
+\newtoks\ds@tmpToks \ds@tmpToks={}
+\newtoks\ds@qlistOut \ds@qlistOut={}
+\newtoks\ds@alistOut \ds@alistOut={}
+\newwrite \ds@question@write
+\ifsavepuzzledata
+\newwrite \ds@savedata
+\immediate\openout \ds@savedata \jobname_data.sav
+\fi
+\setlength{\multicolsep}{\topsep}
+\def\PuzzleAppearance#1{\def\pAppearance{#1}}
+\PuzzleAppearance{\W1}
+\def\DeclarePuzzle#1{\gdef\puzzleParameters{#1}}
+\def\insertPuzzleHookMSR{}
+
+\newcount \MsrTajenkaStranka
+\def\insertPuzzle{\leavevmode
+  \write\@auxout{\global\MsrTajenkaStranka=\thepage}%\gdef\nCols{#1}%R.M.
+  \expandafter\aeb@Puzzle\expandafter{\puzzleParameters}}%
+\def\rowsep#1{\gdef\@rowsep{[#1]}}\rowsep{\rowsep@default}
+\def\rowsep@default{1ex}
+\def\eq@tabSep{}\def\ds@punc{punc}% R.M.
+\def\aeb@Puzzle#1{\aeb@@Puzzle#1\relax\relax}%R.M.
+\def\aeb@@Puzzle{\bgroup\@aebPuzzlei}%R.M.
+\def\@aebPuzzlei#1#2{\ifx#1\relax\gdef\nextPuzzleChar{\@aebPuzzleDone}%
+    \else\gdef\nextPuzzleChar{\@aebPuzzleii{#1}{#2}}\fi\nextPuzzleChar}%
+\def\@aebPuzzleii#1#2{\def\dps@test{#1}\ifx\dps@test\ds@myspace{\ \ \ \ }\else\makeTextField{#1}{#2}\fi\@takeaPeek}
+\def\@takeaPeek#1#2{\def\argii{#2}\ifx\argii\ds@punc
+    \def\@puzzNext{#1\@setSep@aebPuzzleii}%
+    \else\def\@puzzNext{\@setSep@aebPuzzleii{#1}{#2}}\fi\@puzzNext}
+\def\@setSep@aebPuzzleii{\@aebPuzzlei}%
+\def\@aebPuzzleDone{\lineskip 4pt\rightskip 0 pt plus 1 fil\par\egroup\ds@buildAnswerKey}%R.M.
+\def\@aebPuzzleDone{\egroup\insertPuzzleHookMSR\ds@buildAnswerKey}%R.M.
+
+
+%%%%%%%%% Fix to accept more than one command inside \PuzzleAppearance  % R.M.
+\newtoks\PuzzleAppearancetoks
+\def\PuzzleAppearance#1{\PuzzleAppearancetoks{#1}}
+\PuzzleAppearance{\W1}
+
+\newdimen\minwidth
+\minwidth=1.2em
+\newdimen\dpsyshift
+\dpsyshift=-13pt
+
+\newcount\MSR@questions% R.M.
+\newcommand\MSR@saveopt[1][]{\def\MSR@parama{#1}\MSR@savetajenka}
+\def\MSR@savetajenka#1[#2]#3;;;---;;;{\def\MSR@tajenka{#1}\def\MSR@paramb{#2}}
+
+\newif\if@makeTextFieldDryRun
+\@makeTextFieldDryRunfalse
+
+\def\makeTextField#1#2{%
+  \penalty 0
+  \MSR@saveopt#1[];;;---;;;%
+  \advance\MSR@questions by 1\relax
+  \MSR@parama
+  \if@makeTextFieldDryRun
+    \setbox1=\hbox{\ds@getProbNumber{\MSR@tajenka}{#2}}%
+  \else
+  \setbox0=\hbox{\,\MSR@tajenka\,}%
+  \ifdim \wd0<\minwidth  \setbox0=\hbox to \minwidth{\hfil\,\MSR@tajenka\,\hfil}\fi
+  \begin{ocg}{tajenka}{tajenka}0\hbox to 0 pt{\copy0\hss}\end{ocg}%
+  \ifshowletters
+  \raisebox{\dpsyshift}{\makebox[0pt][l]{\makebox[\wd0][c]{%
+        \footnotesize\color{blue}\ds@getProbNumber{\MSR@tajenka}{#2}}}}%
+  \else
+  \setbox1=\hbox{\ds@getProbNumber{\MSR@tajenka}{#2}}%
+  \fi
+  \fi
+  \xdef\temp@MSR@qnumber{\@ifundefined{dps@probNum#2}{\ds@getProbNumber{\MSR@tajenka}{#2}}{\csname dps@probNum#2\endcsname}}% R.M.
+  \expandafter\ifx\csname processed-#2\endcsname\relax%
+  \expandafter\xdef\csname processed-#2\endcsname{111}% R.M.
+  \expandafter\xdef\csname Position2Question:\the\MSR@questions\endcsname{\temp@MSR@qnumber}% R.M.
+  \expandafter\xdef\csname Question2Position:\temp@MSR@qnumber\endcsname{\the\MSR@questions}% R.M.
+  \fi
+  \if@makeTextFieldDryRun
+  \def\textfieldTmp##1{}%
+  \else
+  %%%%%%%%% Fix to accept more than one command inside \PuzzleAppearance
+  \edef\textfieldTmp{\noexpand\textField[\noexpand\BG{gray}\noexpand\S{U}%
+    \noexpand\Ff\noexpand\FfReadOnly\the\PuzzleAppearancetoks]%
+    {puzzle.#2}{\wd0}{16bp}}%
+  \fi
+  \Hy@pdfstringtrue\textfieldTmp\MSR@paramb}
+
+
+\def\ds@buildAnswerKey
+{%
+    {% local
+        \count0=0 \toks0={}%
+        \loop
+            \advance\count0by1
+            \xdef\AnswerKey{\the\toks0
+            \the\count0--\noexpand\csname dps@probLetter\the\count0\noexpand\endcsname; }%
+            \toks0 = \expandafter{\AnswerKey}%
+        \ifnum\count0 < \ds@qNumber\repeat
+    }%
+    \ifshowsolution
+        \cfooter{\footnotesize\@ifundefined{rotatebox}{\AnswerKey}%
+        {\rotatebox{180}{\AnswerKey}}}%
+    \fi
+    \ifsavepuzzledata
+        \AtEndDocument{\ds@writePuzzleData}%
+    \fi
+}
+\def\ds@writePuzzleData{%
+    \let\verbatim@out\ds@savedata
+    \dps@IWVO{Initial seed: \string\randomi=\ds@saveRandomSeed}%
+    \dps@IWVO{Solution Key: \AnswerKey}%
+}
+\long\def\ObalkaOtazky#1{#1}
+\long\def\ObalkaOtazkyX#1\Konec{\ObalkaOtazky{#1}}
+\long\def\ObalkaOdpovedi#1{#1}
+\long\def\ObalkaOdpovediX#1\Konec{\ObalkaOdpovedi{#1}}
+\newenvironment{Composing}
+{\global\ds@qNumber=0 \global\ds@aNumber=0}
+{\aftergroup\ds@publishRandomLists}
+\newenvironment{cQ}[1]
+{%
+   \global\advance\ds@qNumber1
+   \immediate\openout \ds@question@write \jobname_q\the\ds@qNumber.cut
+    \let\verbatim@out\ds@question@write
+    \dps@IWVO{\noexpand\dpsQ{#1}}%
+    \dps@IWVO{\noexpand\ObalkaOtazkyX}%
+    \verbatimwrite}
+{%
+    \endverbatimwrite
+    \immediate\closeout \ds@question@write
+}
+
+\newenvironment{cA}[2][]
+{%
+   \def\argi{#1}\global\advance\ds@aNumber1
+   \immediate\openout \ds@question@write \jobname_a\the\ds@aNumber.cut
+    \let\verbatim@out\ds@question@write
+    \let\protect\noexpand
+    \dps@IWVO{\noexpand\dpsA\ifshowletters\ifx\argi\@empty\else[#1]\fi\fi{#2}}%
+    \dps@IWVO{\noexpand\ObalkaOdpovediX}%
+    \verbatimwrite}
+{%
+    \endverbatimwrite
+    \immediate\closeout \ds@question@write
+}
+
+\newtoks\QuesAppearancetoks
+\newtoks\AnsAppearancetoks
+\def\QuesAppearance#1{\QuesAppearancetoks{#1}}
+\def\AnsAppearance#1{\AnsAppearancetoks{#1}}
+\QuesAppearance{\W1}
+\AnsAppearance{\W1}
+\newcommand{\dpsQ}[1]{\item\relax\ifeqforpaper\else
+    \edef\checkboxTmp{\noexpand\checkBox[\the\QuesAppearancetoks
+    \noexpand\A{\noexpand\JS{activeQuestion = event.target.name; clearRedCrosses ();}}%
+    \noexpand\AA{\noexpand\AAOnFocus{\noexpand\JS{this.resetForm(["ckbxQ"]);}}}]
+    {ckbxQ.#1}{14bp}{11bp}{Yes}}\makebox[0pt][r]{\checkboxTmp\,}\fi\ \ignorespaces}% R.M.
+\newcommand{\dpsA}[2][]{\item[]\relax\ifeqforpaper\else
+    \edef\checkboxTmp{\noexpand\checkBox[\the\AnsAppearancetoks
+    \noexpand\A{\noexpand\JS{processChoice("#2","\MSRaaa")}}]%
+    {ckbxA.#2}{14bp}{11bp}{Yes}}\makebox[0pt][r]{\checkboxTmp\enspace}\fi
+    \def\argi{#1}%
+        \ifshowletters
+            \ifx\argi\@empty
+                \let\getLetterNext\relax
+                \let\ds@foundLetter=0\def\ds@currFN{#2}%
+                \def\getLetterNext{\ds@typesetPuzzleLetter}%
+                \expandafter\getLetterNext
+            \else
+                \makebox[0pt][r]{\Hy@pdfstringfalse#1\enspace\kern4bp}%
+            \fi
+        \fi
+    \ignorespaces
+}
+\def\ds@typesetPuzzleLetter{%
+    \expandafter\typeset@PuzzleLetter\expandafter{\puzzleParameters}}
+\def\typeset@PuzzleLetter#1{\typeset@@PuzzleLetter#1\relax\relax}%
+\def\typeset@@PuzzleLetter#1#2{\ifx#1\relax\gdef\nextPuzzleLetter{\relax}%
+    \else\gdef\nextPuzzleLetter{%
+    \typeset@PuzzleLetteri{#1}{#2}}\fi\nextPuzzleLetter}%
+\def\typeset@PuzzleLetteri#1#2{\def\argii{#2}\ifx\argii\ds@currFN
+    \if\ds@foundLetter0\makebox[0pt][r]{%
+        \Hy@pdfstringfalse#1\enspace\kern4bp}\let\ds@foundLetter=1\fi
+        \expandafter\typeset@@PuzzleLetter
+        \else\expandafter\typeset@@PuzzleLetter\fi}
+\def\ds@publishRandomLists{%
+    \ds@randomizeQuestionList{\the\ds@qNumber}%
+    \ds@randomizeAnswerList{\the\ds@aNumber}%
+  }
+
+  \def\pracuj{{% local      R.M. zacatek
+      {\count0=0\def\\##1{\advance\count0 by 1 \expandafter\xdef\csname Position2Answer:##1\endcsname{\the\count0}}% R.M.
+        \the\ds@alistOut}%
+      \def\MSRaaa{}%
+      \let\tempMSRaaa\MSRaaa
+      \newcount \c@qqq
+      \count0=0 \toks0={}%
+      \loop
+      \advance\count0by1
+      %\message{^^J cislo: \the\count0}%
+      \def\xxx{\csname Question2Position:\the\count0\endcsname}%
+      \ifx\MSRaaa\tempMSRaaa\else\xdef\MSRaaa{\MSRaaa, }\fi
+      \xdef\MSRaaa{\MSRaaa \the\count0}%
+      %\xdef\MSRaaa{\MSRaaa \csname Position2Question:\the\count0\endcsname}%
+      \expandafter\expandafter\expandafter\c@qqq\csname Position2Answer:\xxx\endcsname    
+      %\message{\the\c@qqq ^^J}%
+      \xdef\MSRaaa{\MSRaaa\alph{qqq}}%
+      \ifnum\count0 < \ds@qNumber\repeat
+    }%    R.M. konec
+    \message{^^J MsR: Tajenka je \MSRaaa ^^J}%
+  }
+
+\def\MSRaaa{}
+
+\def\ds@myspace{space}
+\def\predteckou#1.#2;{#1}
+\def\ds@getProbNumber#1#2{%
+    \gdef\ds@currentArgi{#1}\gdef\ds@currentArgii{\predteckou#2.;}%
+    \ifx\ds@currentArgii\ds@myspace\def\ds@probNumNext{\relax}\else
+        \def\ds@probNumNext{%
+            \@ifundefined{dps@probNum#2}{\global\advance\ds@probCnt1
+                \ds@@getProbNumber{\the\ds@probCnt}%
+            }{\csname dps@probNum#2\endcsname}%
+    }%
+    \fi
+    \ds@probNumNext
+}
+\def\ds@@getProbNumber#1{{\count0=0 \let\\=\ds@getNthOne\the\ds@qlistOut}%
+    \csname dps@probNum\ds@currentArgii\endcsname}
+\def\ds@getNthOne#1{\advance\count0by1
+    \ifnum\ds@probCnt=#1
+        \expandafter
+            \xdef\csname dps@probNum\ds@currentArgii\endcsname
+                {\the\count0 }%
+        \expandafter
+            \xdef\csname dps@probLetter\the\count0\endcsname
+                {\expandafter\noexpand\ds@currentArgi}%
+    \fi
+}
+\def\writeComposingEnv{%
+    \newwrite \ds@composing@write
+    \immediate\openout \ds@composing@write \jobname_comp.def
+    \let\verbatim@out\ds@composing@write
+    \dps@IWVO{\string\begin{Composing}}%
+    \dps@IWVO{}%
+    \expandafter\write@ComposingEnv\expandafter{\puzzleParameters}%
+}
+\def\write@ComposingEnv#1{\write@@ComposingEnv#1\relax\relax}%
+\def\write@@ComposingEnv#1#2{\ifx#1\relax
+    \gdef\nextPuzzlePair{%
+    \dps@IWVO{\string\end{Composing}}%
+    \immediate\closeout \ds@composing@write}%
+    \else\gdef\nextPuzzlePair{\write@@@ComposingEnv{#1}{#2}}\fi
+    \nextPuzzlePair}%
+\def\write@@@ComposingEnv#1#2{%
+    \gdef\ds@currentArgi{#1}\gdef\ds@currentArgii{#2}%
+    \ifx\ds@currentArgii\ds@myspace\def\ds@probNumNext{\write@@ComposingEnv}\else
+    \ifx\ds@currentArgii\ds@punc\def\ds@probNumNext{\write@@ComposingEnv}\else
+        \def\ds@probNumNext{%
+            \@ifundefined{dps@compQ#2}{% write to file
+            \expandafter\gdef\csname dps@compQ#2\endcsname{found}%
+            \dps@IWVO{\string\begin{cQ}{\noexpand#1}}%
+            \dps@IWVO{\string\end{cQ}}%
+            \dps@IWVO{\string\begin{cA}{\noexpand#1}}%
+            \dps@IWVO{\string\end{cA}}%
+            \dps@IWVO{}%
+            }{}%
+            \write@@ComposingEnv
+        }%
+    \fi\fi
+    \ds@probNumNext
+}
+\def\verbatimwrite{\@bsphack
+    \let\do\@makeother\dospecials
+    \catcode`\^^M\active \catcode`\^^I=12
+    \def\verbatim@processline{%
+        \immediate\write\verbatim@out
+        {\the\verbatim@line}}%
+    \verbatim@start}
+\def\endverbatimwrite{\@esphack}
+\def\dps@IWVO{\immediate\write\verbatim@out}
+\def\ds@populateList#1{%
+    \ds@listIn = {}%
+    \ds@nCnt=0
+    \@whilenum \ds@nCnt < #1\do {%
+        \advance\ds@nCnt1
+        \edef\ds@listInHold{\the\ds@listIn\noexpand\\{\the\ds@nCnt}}%
+        \ds@listIn = \expandafter{\ds@listInHold}%
+    }%
+}
+\def\ds@processi#1{\advance\ds@nCnt1
+    \ifnum\ds@nCnt=\ds@getRanNum\edef\ds@listOutHold{\the\ds@listOut}%
+        \global\ds@listOut=\expandafter{\ds@listOutHold\\{#1}}%
+    \else
+        \edef\ds@listInHold{\the\ds@newListIn}%
+        \ds@tmpToks = \expandafter{\ds@listInHold\\{#1}}%
+        \ds@newListIn = \expandafter{\the\ds@tmpToks}%
+    \fi
+}
+\def\ds@processii#1{\input{\jobname_q#1.cut}}
+\def\ds@processiii#1{\input{\jobname_a#1.cut}}
+\def\ds@processL#1{\advance\count0by1 %\divide\ds@aNumber2
+    \ifnum\count0>\ds@aNumber\relax\else\input{\jobname_a#1.cut}\fi}
+\def\ds@processR#1{\advance\count0by1 %\divide\ds@aNumber2
+    \ifnum\count0>\ds@aNumber\relax\input{\jobname_a#1.cut}\fi}
+
+\newcount \MsrOtazkyStranka
+\def\displayRandomizedQuestions{\write\@auxout{\global\MsrOtazkyStranka=\thepage}\let\\=\ds@processii\the\ds@qlistOut
+\ifx\MSRaaa\empty{\def\\##1{\makeTextField{##1}{##1}}{\@makeTextFieldDryRuntrue\the\ds@qlistOut}\message{^^Jq:\the\ds@qlistOut}\message{^^Ja:\the\ds@alistOut}\pracuj}\fi}
+\def\displayRandomizedAnswers{\let\\=\ds@processiii\the\ds@alistOut}
+\def\displayRandomizedAnswersLeftPanel{{\let\\=\ds@processL\count0=0 \divide\ds@aNumber2 \the\ds@alistOut}}
+\def\displayRandomizedAnswersRightPanel{{\let\\=\ds@processR\count0=0 \divide\ds@aNumber2 \the\ds@alistOut}}
+\def\ds@randomizeQuestionList#1{%
+    \global\ds@listIn={}\global\ds@newListIn={}\global\ds@listOut={}%
+    \global\ds@tmpToks={}%\global\ds@qlistOut={}\global\ds@alistOut={}%
+    \ds@nMax=#1\relax\ds@populateList{\the\ds@nMax}%
+    \global\forquestionstrue
+    \ifwerandomize
+        \expandafter\ds@randomizeList
+    \else
+        \global\ds@qlistOut=\expandafter{\the\ds@listIn}
+    \fi
+}
+\newcount\MSW@anscount % R.M.
+\def\ds@randomizeAnswerList#1{%
+    \global\ds@listIn={}\global\ds@newListIn={}\global\ds@listOut={}%
+    \global\ds@tmpToks={}%\global\ds@qlistOut={}\global\ds@alistOut={}%
+    \ds@nMax=#1\relax\ds@populateList{\the\ds@nMax}%
+    \global\forquestionsfalse
+    \ifwerandomize
+        \expandafter\ds@randomizeList
+    \else
+        \global\ds@alistOut=\expandafter{\the\ds@listIn}%
+    \fi
+  }
+
+\def\ds@randomizeList{%
+    \let\\=\ds@processi
+    \setrannum{\ds@getRanNum}{1}{\ds@nMax}%
+    \ds@nCnt=0 %
+    \the\ds@listIn
+    \ds@loopTest
+}
+\def\ds@loopTest{\advance\ds@nMax-1
+    \ifnum\ds@nMax>0\relax
+        \def\@next{%
+            \ds@listIn=\expandafter{\the\ds@newListIn}%
+            \ds@newListIn={}\ds@randomizeList}%
+    \else
+        \let\@next\relax
+        \ifforquestions
+            \global\ds@qlistOut=\expandafter{\the\ds@listOut}%
+        \else
+            \global\ds@alistOut=\expandafter{\the\ds@listOut}%
+        \fi
+    \fi
+    \@next
+}
+
+
+\newcommand{\placeMessageField}[3][]{%
+\ifx 1#1
+    \ifeqforpaper\else\vfill\begin{tikzpicture}\node[draw=black!30, rounded corners=5pt,very thick]{\textField[\Ff{\FfMultiline}\BC{}]{report.#1}{#2}{25pt}};\end{tikzpicture}\fi
+\else
+    \ifeqforpaper\else\leavevmode\hspace*{40pt}\begin{tikzpicture}\node[draw=black!30, rounded corners=5pt,very thick]{\textField[\BC{}\Ff{\FfMultiline}]{report.#1}{#2}{#3}};\end{tikzpicture}\fi
+\fi
+}
+\newcommand{\threshold}[1]{\def\dsthreshold{#1}}
+\threshold{3}
+\newcommand{\penaltypoints}[1]{\def\dspenaltypoints{#1}}
+\penaltypoints{3}
+\newcommand{\passing}[1]{\def\dspassing{#1}}
+\passing{4}
+\begin{insDLJS}[processChoice]{match}{JS Update of Matching Puzzle}
+
+var missesByQuestion = new Array();
+var nMissed = 0;
+var nPenaltyPoints = 0;
+var activeQuestion = "";
+var spusteno=0;
+var hotovo=0;
+
+var g= this.getField("report");
+if (g!=null)
+{
+  g.readonly = true;
+}
+
+
+var aOCGs = this.getOCGs(); 
+var jmenoOCGs = []; 
+
+for(var i=0; aOCGs && i<aOCGs.length;i++) 
+{ 
+  jmenoOCGs[aOCGs[i].name]=aOCGs[i]; 
+  if (aOCGs[i].name.substring(0,7) == "oblicej") {schovejocg(aOCGs[i].name);}
+}
+
+if (jmenoOCGs["tajenka"]!=null) {schovejocg("tajenka");}
+schovejocg("hotovo");
+\MsrBublinaZpozdenaA
+this.dirty=false;
+
+
+function PocetChybMsg(n)
+{
+if (n==0) return("Dokonceno bez jedine chyby!"); 
+return("Dokonceno, celkem "+ nMissed +" chyb!");
+}
+
+function processChoice(fieldname,klic)
+{
+  clearMessages();
+    // Get the question field that corresponds to this question,
+    // see if checked.
+    var f = this.getField("ckbxQ."+fieldname);
+    if ( (f != null) && (f.isBoxChecked(0)) ) { // right
+        clearRedCrosses ();
+        //this.resetForm(["puzzle."+fieldname]);
+        var ff=this.getField("puzzle."+fieldname);
+        if (ff!=null)
+        {
+          ff.hidden=true;
+        } 
+        event.target.textColor = ["RGB", 0, 0.6, 0];
+        f.strokeColor = ["RGB", 0, 0.6, 0];
+        f.readonly = true;
+        event.target.readonly=true;
+        checkForFinished(\dspassing,klic);
+    } else { // wrong
+        if ( activeQuestion != "" ) var h = this.getField(activeQuestion);
+        if ( (activeQuestion=="") || (h.readonly) ) { // active question already answered
+            event.target.value = "Off";
+            str = \chooseQ;
+            var g = this.getField("report.1");
+            if (g!= null)
+            {
+              g.value = str;
+              var to = app.setTimeOut("clearMessages()", 2000);
+            }
+            else {app.alert(str,3);}
+        } else {
+            event.target.style = style.cr;
+            event.target.textColor = color.red;
+            event.target.readonly = true;
+            ++nMissed;
+            if ( typeof missesByQuestion[activeQuestion] !="number" )
+                missesByQuestion[activeQuestion] = 1;
+            else
+                missesByQuestion[activeQuestion] += 1;
+            if (missesByQuestion[activeQuestion] > \dsthreshold) {
+                str = \triedTooMuch;
+                nPenaltyPoints += \dspenaltypoints;
+                missesByQuestion[activeQuestion] = 0;
+                clearRedCrosses ();
+                var f = this.getField("report.1");
+                if (f!=null)
+                {
+                  f.value = str;
+                  var to = app.setTimeOut("clearMessages()", 2000)
+                }
+                else
+                {app.alert (str,3);}
+            }
+        }
+    }
+}
+function clearMessages()
+{
+  var f = this.getField("report.1");
+  if (f!=null)
+  {
+    f.value = "";
+  }
+  var f = this.getField("report.2");
+  if (f!=null)
+  {
+    f.value = "";
+  }
+}
+
+function clearRedCrosses ()
+{
+    var g = this.getField("ckbxA");
+    h = g.getArray();
+    for ( i=0; i < h.length; i++) {
+        if ( h[i].style == style.cr) 
+        { 
+          h[i].checkThisBox(0,false);
+          h[i].readonly=false; 
+          jmeno=h[i].name.substr(6); 
+          odp=this.getField("odpoved."+jmeno)
+          if (odp != null) odp.readonly=false;
+        }
+        h[i].style = style.ch;
+    }
+ }
+function checkForFinished(n,klic)
+{
+  if (spusteno == 0)
+  {
+    spusteno=1;
+    if (jmenoOCGs["tajenka"]!=null) {odkryjocg("tajenka");}
+  }
+    var f = this.getField("ckbxQ");
+    var g = f.getArray();
+    var anyEmpty = false;
+    for ( var i=0; i < g.length; i++) {
+        if ( (g[i].name != "puzzle.space") && (g[i].readonly == false) ) {
+            anyEmpty = true;
+            break;
+        }
+    }
+    nPenaltyPoints = 0;
+    var nTotalPenaltyPoints=nMissed + nPenaltyPoints;
+    if ( !anyEmpty ) {
+        hotovo=1;
+        var f = this.getField("ckbxA");
+        if (f!=null) {f.readonly=true;}
+        var f = this.getField("odpoved");
+        if (f!=null) {f.readonly=true;}
+        stra = "\u0158e\u0161en\u00ed: "+klic;
+        str = PocetChybMsg(nMissed);
+        var f = this.getField("report.1");
+        if (f!=null) {f.value = stra;} else {str = str + "\n\n" + stra;}
+        var f = this.getField("report.2");
+        if (f!=null) {f.value = str;}
+        var P= (2* KonstPocetOdpovedi - KonstPocetOtazek + 1 ) * KonstPocetOdpovedi /2;
+        var znamka = "5";
+        if (nMissed <= 0.6 * ( P - KonstPocetOdpovedi )) znamka="4";
+        if (nMissed <= 0.4 * ( P - KonstPocetOdpovedi )) znamka="3";
+        if (nMissed <= 0.25 * ( P - KonstPocetOdpovedi )) znamka="2";
+        if (nMissed <= 0.1 * ( P - KonstPocetOdpovedi )) znamka="1";
+        if (nMissed <= 0.005 * ( P - KonstPocetOdpovedi )) znamka="0";
+        odkryjocg("oblicej"+znamka);
+        odkryjocg("hotovo");
+        \MsrBublinaZpozdenaB
+    }
+    this.dirty=false;
+}
+
+function finalRating(n) {
+    var aPenaltyScale = new Array( \aPenaltyScale\space);
+    var aPenaltyMsgs = new Array( \aPenaltyMsgs\space);
+    for ( var i=0; i<aPenaltyScale.length; i++)
+        if ( (n > aPenaltyScale[i][0]) && (n <= aPenaltyScale[i][1]) )
+            return aPenaltyMsgs[i];
+}
+
+\end{insDLJS}
+
+\AtEndDocument{\msr@hodnoceni \edef\ThisPage{/AA<</O<</S/JavaScript/JS( if (hotovo==0) {this.pageNum=this.pageNum-1;})>> >>}
+    \global\pdfpageattr=\expandafter{\ThisPage}}
+
+% \if@msr@for@png
+% \def\msr@hodnoceni{}
+% \else
+\newcount\msr@hlaska
+\def\msr@oblicej#1{%\vbox to 0 pt{\vss
+% Nevim proc, ale nasledujici radek zlepsi nahodnost pri vyberu ksichtiku k hodnoceni otazek. Poprve se generator nahodnych cisel pouzije nanecisto. R.M.
+\setrannum{\msr@hlaska}{1}{36}
+\ifcase#1 \relax\setrannum{\msr@hlaska}{1}{2}
+\or\setrannum{\msr@hlaska}{1}{2}
+\or\setrannum{\msr@hlaska}{1}{2}
+\or\setrannum{\msr@hlaska}{1}{2}
+\or\setrannum{\msr@hlaska}{1}{2}
+\or\setrannum{\msr@hlaska}{1}{2}
+\fi
+\hbox to 0 pt{\hss\includegraphics[page=1, width=0.6\paperwidth]{m4u_hod#1\the\msr@hlaska.pdf}}%}
+\message{^^J Hodnoceni #1, hlaska \the\msr@hlaska ^^J}%
+}
+\def\msr@hodnoceni{%
+\clearpage  \leavevmode
+\if@msr@for@png\else
+\hbox to \hsize{\hss \foreach \i in {0,1,2,3,4,5}{\begin{ocg}{oblicej\i}{oblicej\i}0\msr@oblicej{\i}\end{ocg}}}%
+\fi
+\par
+\bigskip
+\bigskip
+\bigskip
+\placeMessageField[2]{0.6\linewidth}{45pt}
+}
+%\fi
+
+\endinput
+
+%%
+%% End of file `dps.sty'.

@@ -1,0 +1,154 @@
+% File mi21.sty version 0.8 (August 27, 2012) 
+%
+% Documentation (in czech):
+% ------------------------
+%
+% prostredi test: expanduje na shortquiz nebo quiz (jmeno quizu je
+% prideleno automaticky). Ma jeden volitelny parametr - text ktery se
+% umistni pred \begin{questions}
+%
+% \PouzitShort, \PouzitQuiz - prepina jestli prostredi test expanduje na
+% shortquiz nebo quiz
+%
+% \pocetsloupcu[a]{b} - nastavi pocet sloupcu v pro prostredi manswers
+% a answers vytvorene prikazem \otazka ... \odpovedi{...} na b, z toho
+% jenom prvnich a sloupcu se pouzije pro umisteni odpovedi. Pokud se
+% volitelny parametr a nepouzije, klademe a=b.
+%
+% \otazka[a] TEXT \odpovedi {Odp1,*Odp2,Odp3} - expanduje na 
+%    \item\PTs{a} TEXT
+%      \begin{answers|manswers} 
+%        \bChoices \Ans0 Odp1 \eAns \Ans1 Odp2\eAns \Ans0 Odp3 \eAns \eChoices
+%      \end{answers|manswers}
+% Odpovedi Odp1, Odp2, ... jsou oddeleny carkou, spravna odpoved je
+% uvozena hvezdickou, podle poctu odpovedi s hvezdickou se voli
+% automaticky mezi answers a manswers. Pokud chcete v textu odpovedi
+% pouzit carku nebo hvezdicku, uzavrete odpoved do slozenych zavorek,
+% napr: \otazka ??? \odpovedi {*spravna odpoved, {spatna, opravdu uplne
+%     spatna odpoved}}
+%
+% Volitelny parametr za \otazka udava pocet bodu za otazku, volitelny
+% parametr za \odpovedi udava pocet bodu za jednotlivou otazku.
+%
+% \instrukce, \instrukcem - makra, ktera obsahuji text vlozeny k
+% prostredim answers a manswers. V puvodnim nastaveni nedelaji nic, po
+% prikazu \TiskniInstrukce tisknou instrukce. Je mozne si je
+% predefinovat jakkoliv jinak, napriklad
+% \def\instrukce{Z nasledujicich moznosti je prave jedna spravne.}
+
+\makeatletter    
+\newcommand{\pocetsloupcu}[2][]{\def\pocet@{#2}\def\temp{#1}
+\ifx\temp\empty\def\temp{#2}\fi\edef\pocet@@{\temp}}
+\pocetsloupcu[2]{2}
+
+\newif\if@odpovedi@manswers \@odpovedi@manswersfalse
+\newif\if@pocitat@body \@pocitat@bodyfalse
+\newtoks\mi@buffer
+\def\pridejtoken#1{\expandafter\mi@buffer\expandafter{\the\mi@buffer #1}}
+
+\newcommand\otazka[1][]{\def\temp{#1}
+  \ifx\temp\empty\else\global\@pocitat@bodytrue\PTs{#1}\fi
+  \otazka@}
+
+\long\def\otazka@#1\odpovedi{#1\odpovedi}
+\newtoks\mi@anstoks\mi@anstoks{\instrukce\begin{answers}}
+\newtoks\mi@manstoks\mi@manstoks{\instrukcem\begin{manswers}}
+\newtoks\mi@bChoicestoks\mi@bChoicestoks{\bChoices}
+\newif\if@mi@forcemanswers \@mi@forcemanswersfalse
+
+\long\def\odpovedi{\@ifstar\@@odpovediSTAR\@@odpovedi}
+\newif\if@separator@je@carka@
+
+\def\@@odpovediSTAR{\@separator@je@carka@false\@@@odpovedi}
+\def\@@odpovedi{\@separator@je@carka@true\@@@odpovedi}
+
+\newcommand\@@@odpovedi[2][]{\if@mi@forcemanswers \@odpovedi@manswerstrue\else\testuj@manswers #2***\k@n@c\fi
+  \@mi@forcemanswersfalse
+  \if@msr@pointsfield \@odpovedi@manswerstrue\fi  % pokud se pocitaji body, automaticky manswers
+  \def\p@cetb@du{#1}%
+  \if@odpovedi@manswers 
+    \edef\x{\mi@buffer={\the\mi@manstoks{\pocet@}\the\mi@bChoicestoks[\pocet@@]}}\x
+  \else \edef\x{\mi@buffer={\the\mi@anstoks{\pocet@}\the\mi@bChoicestoks[\pocet@@]}}\x%
+  \fi
+  \testuj@implicitni@spravnost #2*\@konec
+  \if@implicitni@spravnost
+  \desifruj *#2,*,%
+  \else  
+  \desifruj #2,*,%
+  \fi
+  \the\mi@buffer}
+
+\newif\if@implicitni@spravnost
+\def\testuj@implicitni@spravnost #1*#2\@konec{\@implicitni@spravnostfalse\def\temp{#2}\ifx\temp\empty\@implicitni@spravnosttrue\fi}
+
+\def\testuj@manswers #1*#2*#3*#4\k@n@c{\def\temp{#3}%
+  \ifx\temp\empty\@odpovedi@manswersfalse\else\@odpovedi@manswerstrue\fi}
+
+\def\desifruj {\let\next=\@nactijeden \next}
+\def\desifrujSTAR {\let\next=\@nactijedenSTAR \next}
+
+\let\msr@obalka@odpovedi\relax
+\newif\if@hvezda \def\hvezda{*}   \def\mi@mezera{ }   \def\removestar#1*{}   
+
+\def\@nactijeden #1,{\def\param{#1}%  podle Petra Olsaka, TBN str. 38 
+  \ifx\param\hvezda \let\next=\@dokonci \else \@zpracuj{#1}\fi \next}
+
+\def\@nactijedenSTAR #1\\{\def\param{#1}%  podle Petra Olsaka, TBN str. 38 
+  \ifx\param\hvezda \let\next=\@dokonci \else \@zpracuj{#1}\fi \next}
+
+\def\@overhvezdu#1*#2\k@nec{\def\tmp{#1}\@hvezdafalse
+  \ifx\tmp\empty\@hvezdatrue\fi
+  \ifx\tmp\mi@mezera\@hvezdatrue\fi}
+
+\def\@dokonci{\pridejtoken{\eChoices \end}%
+  \if@odpovedi@manswers\pridejtoken{{manswers}}\else\pridejtoken{{answers}}\fi}
+
+\def\@zpracuj#1{\def\tempp{#1}%
+  \ifx\tempp\empty\pridejtoken{\eFreeze}%
+  \else
+    \@overhvezdu#1...*..\k@nec
+    \pridejtoken{\Ans}%
+    \if@hvezda 
+      \ifx\p@cetb@du\empty\else\pridejtoken{[\p@cetb@du]}\fi\pridejtoken{1 \msr@obalka@odpovedi{\removestar #1} \eAns}%
+    \else 
+      \ifx\p@cetb@du\empty\else\pridejtoken{[-\p@cetb@du]}\fi\pridejtoken{0 \msr@obalka@odpovedi{#1} \eAns}%
+    \fi 
+  \fi}
+
+\def\instrukce{}\def\instrukcem{}
+\def\TiskniInstrukce{
+\def\instrukce{\par{\tiny \color{gray}(pr\'{a}v\v{e} jedna odpov\v{e}\v{d} je spr\'{a}vn\'{a})}}
+\def\instrukcem{\par{\tiny \color{gray}(za\v{s}krtn\v{e}te v\v{s}echny spr\'{a}vn\'{e} odpov\v{e}di)}}
+}
+
+\newenvironment{test}{}{}
+\def\PouzitShort{\renewenvironment{test}[1][]{\newpage\begin{shortquiz}##1
+      \begin{questions}}{\end{questions}\end{shortquiz}}}\PouzitShort
+
+\newcount\cislotestu
+\def\PouzitQuiz{\PTsHook{($\eqPTs\text{b.}$)}\showCreditMarkup 
+  \renewenvironment{test}[1][]{\global\advance\cislotestu by 1 \newpage 
+    \begin{quiz}{test\the\cislotestu}##1\begin{questions}}%
+      {\end{questions}\end{quiz}\quad
+  \if@pocitat@body \PointsField\currQuiz 
+  \else \ScoreField\currQuiz\fi \quad\eqButton\currQuiz}}
+
+\renewcommand{\aeb@creditmarkup}{%
+    \textField[\Ff\FfReadOnly\BC{}\F\FHidden
+    \BG{1}
+    \textColor{1 0 0 rg}\textSize{0}\autoCenter{n}\DV{0 \eqptsLabel}
+    \V{0 \eqptsLabel}]%
+    {qMark.\currQuiz.\thequestionno.\arabic{qMarkCnt}}{12bp}{8bp}%
+}
+\makeatother
+
+% A na zaver licence, aby kazdy vedel, ze soubor mi21.sty muze volne
+% pouzivat, sirit, modifikovat (s uvedenim jmena puvodniho autora)
+% ------------------------------------------------------------------
+%
+% Copyright 2010 Robert Marik  < marik at mendelu dot cz >
+% 
+% This program is free software, you can use and copy it freely. You
+% can mofify the source, but you have to rename the file. Keep track
+% of the original author if your modification is minor (less than
+% 10%).

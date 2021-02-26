@@ -1,0 +1,364 @@
+\def\barva#1{\def\@barva{#1}}
+\barva{Green}
+
+% Rozmery stranky
+
+% Rozmery stranky si ulozime
+\newdimen\msr@savepaperwidth
+\msr@savepaperwidth=\paperwidth
+\newdimen\msr@savepaperheight
+\msr@savepaperheight=\paperheight
+
+% Pokud se pouzilo \PassOptionsToPackage na balicek geometry (zmenil
+% se aspon jeden rozmer papiru), nedelame nic. Jinak pouzijeme nastave
+% rozmery, pripadne vynasobene parametrem scalepage.
+\RequirePackage{geometry}
+\ifdim \msr@savepaperwidth=\paperwidth
+\ifdim \msr@savepaperheight=\paperheight
+
+\def\msr@scalepaper{1}
+
+\ifx\msr@scalepaper\undefined
+\def\msr@scalepaper{1}
+\geometry{paperwidth=6.5in, paperheight=4.6in,margin=12pt, top=24pt, bottom=1.4cm}
+% paperheight zmenseno ze 4.875 na 4.5, kvuli aspect/ratio podkladu od grafika. RM 17.5.2018
+% 15.24cm krat 12.38cm, pomer 4:3
+\else
+\newdimen\msr@xrozmer \msr@xrozmer=6.5in \msr@xrozmer=\msr@scalepaper \msr@xrozmer
+\newdimen\msr@yrozmer \msr@yrozmer=4.875in \msr@yrozmer=\msr@scalepaper \msr@yrozmer
+\geometry{paperwidth={\the\msr@xrozmer}, paperheight={\the\msr@yrozmer},margin=12pt, top=12pt, bottom=1.4cm}
+\fi
+
+\fi\fi %ifdim
+
+% Konec nastaveni rozmeru stranky
+
+\usepackage{hyperref}
+\hypersetup{pdfborder={0 0 0}, pdfhighlight={/O}}
+
+% Nastaveni cestiny, typ pisma
+%\usepackage[]{babel}
+%\usepackage[cp1250]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\let\rmdefault\sfdefault
+\pagestyle{empty}
+\usepackage{xcolor}
+\colorlet{odkaz}{blue!60!black}
+
+% Spodni radek
+
+%\pagecolor{green!30!yellow!50}
+\usepackage{eso-pic}
+\RequirePackage{tikz}
+
+\def\kazdastranka{}
+%\definecolor{pozadi}{gray}{0.90234}
+%\pagecolor{pozadi}
+\AddToShipoutPicture{%
+  \logo%
+  \uvodnistranka%
+  \kazdastranka%
+  \dalsistranka
+  \ikonky%
+}%
+
+\def\dal@bez@loga{}
+\def\dal@bez@ikon{}
+\@ifclassloaded{msr-sparuj}
+  {\global\def\dal@bez@loga{\global\def\logo{}}}
+  {}%
+
+\@ifclassloaded{msr-krokovany}
+  {\global\def\dal@bez@loga{\global\def\logo{\logoKrokovane}}\global\def\dal@bez@ikon{\global\def\ikonky{}}}
+  {}%
+
+
+\def\logo{%
+\AtPageLowerLeft{%
+\hbox to 0 pt{%
+{\color{white}\vrule height 0.98cm width \paperwidth}%
+%\includegraphics[width=\paperwidth]{msr_stranka.pdf}
+\hss
+}%
+%\raise 3.2pt\hbox to 0 pt{\kern 2.35cm\includegraphics[width=4cm]{msr_logo.pdf}\hss}
+}%
+\dal@bez@loga
+}
+
+\def\logo{}
+
+\def\ikonky{}
+
+% Material pro prvni stranku
+\ifx\MsrObrazekKoncovka\undefined \def\MsrObrazekKoncovka{pdf}\fi
+\def\jedna{1}
+\def\uvodnistranka{\edef\test{\thepage}%
+\ifx\jedna\test
+% pokud jsme na prvni strance, pridame vesely obrazek, makro \MsrObrazek je definovano pri pouziti prikazu \oblast
+\AtPageLowerLeft{\vbox to \paperheight{\includegraphics[width=\paperwidth]{m4u_Layout_1.pdf}\vss}}%
+\global\xdef\tpb@pozadi{m4u_Layout_2.pdf}
+\fi}
+
+\def\dalsistranka
+{\edef\test{\thepage}%
+\ifx\jedna\test
+\else
+% pokud jsme na prvni strance, pridame vesely obrazek, makro \MsrObrazek je definovano pri pouziti prikazu \oblast
+\AtPageLowerLeft{\vbox to \paperheight{\includegraphics[width=\paperwidth]{\tpb@pozadi}\vss}}%
+\fi}
+
+
+% Ikonky 
+\def\msr@jedno@tlacitko#1{%
+#1{%\hbox to 0 pt{\vrule height 1 cm\hss}%
+\hbox{\vrule height 0.8cm depth -0.1cm width 0 pt
+\hskip  0.051\paperwidth 
+\vrule height 0.8cm depth -0.1cm width 0 pt}%
+%\hbox to 0 pt{\vrule height 1 cm\hss}%
+}\hskip 0.0052\paperwidth}
+
+\newdimen\msr@ikonka@vyska
+\msr@ikonka@vyska=0.88cm
+%\def\msr@jedno@tlacitko#1#2{#1{\includegraphics[height=\msr@scalepaper\msr@ikonka@vyska]{msr_#2.png}}\hskip \msr@ikony@c@dimen} %
+%\def\msr@jedno@tlacitko#1#2{#1{\raise 3pt\hbox to 0 pt{\vrule height 16pt depth -2pt width 0 pt\hss}\hskip 0.037\paperwidth}\hskip \msr@ikony@c@dimen}%
+
+\def\msr@jedno@tlacitko#1#2{#1{\includegraphics[height=%\msr@scalepaper
+\msr@ikonka@vyska]{m4u_Icon_#2.pdf}}\hskip \msr@ikony@c@dimen} %
+
+\newbox\fullscreenBox
+
+\def\MsrCustomFullscreen#1{\setbox\fullscreenBox\hbox{#1}%
+\raise 6pt \hbox to 0 pt{\pushButton[\S{}\H{N}\BG{}\BC{}\A{\JS{CustomFullscreen();}}]{MsrcustomFullscreen}{\wd\fullscreenBox}{\ht\fullscreenBox}\hss}%
+\box\fullscreenBox
+}
+
+%\def\MsrCustomFullscreen#1#2{}
+
+\def\msr@ikony@a@dimen{0.03\paperwidth} % mezera na zacatku
+\def\msr@ikony@a@dimen{0.01\paperwidth} % mezera na zacatku
+\def\msr@ikony@b@dimen{0.002\paperwidth} % mezera za domeckem
+\def\msr@ikony@c@dimen{8pt} % mezera mezi ikonkama
+
+\def\ikonky{%
+\AtPageLowerLeft{\hbox to 0 pt{\kern 10.5cm%
+% \hskip 0.53\paperwidth
+% %\hbox to 0 pt{\includegraphics[width=0.45\paperwidth]{msr_ikony_pozadi.png}\hss}%
+ \raise 12pt \hbox to 0 pt{\hskip \msr@ikony@a@dimen 
+ \msr@jedno@tlacitko{\Acrobatmenu{PrevPage}}{Back}%
+ \msr@jedno@tlacitko{\MsrCustomFullscreen}{Screen}%
+ \msr@jedno@tlacitko@next
+ \msr@jedno@tlacitko{\Acrobatmenu{FirstPage}}{Home}%
+ %\msr@jedno@tlacitko{\hyperlink{zacatek}}{first}%
+ %\msr@jedno@tlacitko{\Acrobatmenu{GoBack}}{back}%
+ %\msr@jedno@tlacitko{\Acrobatmenu{LastPage}}{last}%
+ \hss}\hss
+}%\dal@bez@ikon%
+}%
+}
+
+\def\msr@jedno@tlacitko@next{\msr@jedno@tlacitko{\Acrobatmenu{NextPage}}{Next}}
+
+
+\newdimen\msr@posun@ikonek
+\msr@posun@ikonek=15.5cm
+\newdimen\msr@posun@ikonekB
+\msr@posun@ikonekB=14.65cm
+\newdimen\msr@posun@ikonekC
+\msr@posun@ikonekC=10.65cm
+
+\def\ikonkyA{% V parovacich hrach
+\AtPageLowerLeft{\hbox to 0 pt{\kern \msr@scalepaper\msr@posun@ikonekB%
+ \raise 2pt \hbox to 0 pt{\hskip \msr@ikony@a@dimen 
+ \hskip -4pt
+ \msr@jedno@tlacitko{\MsrCustomFullscreen}{fullscreen}%
+ \msr@jedno@tlacitko{\Acrobatmenu{NextPage}}{next}%
+ \hss}\hss
+}\global\def\ikonky{\ikonkyB}
+}%
+}
+
+
+\definecolor{ramecekokraj}{RGB}{153,163,97}
+\definecolor{ramecekvnitrek}{RGB}{189,204,97}
+
+\tikzset{newnode/.style={inner sep=0.9mm, line width=2pt, rounded corners=5pt}}
+
+
+\def\logo@obalka#1{
+% \begin{tikzpicture}
+%   \fill[ramecekvnitrek, rounded corners=5pt] (0,0)--(0,0.8cm)--(\MsrPocetKrokuB*1.6em+0.8em,0.8cm)--(\MsrPocetKrokuB*1.6em+0.8em,0);
+%   \draw[ramecekokraj, line width=2pt, rounded corners=5pt] (0,0)--(0,0.8)--(\MsrPocetKrokuB*1.6em+0.8em,0.8)--(\MsrPocetKrokuB*1.6em+0.8em,0);
+% \end{tikzpicture}
+\begin{tikzpicture}
+    \node[newnode] (znacky) {#1};
+    \draw[draw=ramecekokraj, rounded corners=8pt, line width=2pt, fill=ramecekvnitrek]  ($(znacky.south west)+(0mm,0mm)$) 
+                -- ($(znacky.north west)+(0mm,-0.5mm)$)
+                -- ($(znacky.north east)+(0mm,-0.5mm)$)
+                -- ($(znacky.south east)+(0mm,0mm)$);
+    \node[newnode] (znacky) {#1};
+\end{tikzpicture}
+}%
+
+\def\ikonkyAJ{% 1. strana v jeopardy
+\AtPageLowerLeft{\hbox to 0 pt{\kern \msr@scalepaper\msr@posun@ikonekC%
+%\raise -1pt \hbox to 0 pt{\hbox to 0 pt{\includegraphics[height=0.91cm]{msr_tlacitka_podklad.pdf}\hss}\hss}
+ \raise -3pt \hbox to 0 pt{\logo@obalka{%
+ \msr@jedno@tlacitko{\MsrCustomFullscreen}{fullscreen}%
+ \msr@jedno@tlacitko{\Acrobatmenu{NextPage}}{next}%
+ }\hss}}\global\def\ikonky{\ikonkyBJ}%
+}%
+}
+
+\def\ikonkyAP{% 1. strana Poznej
+\AtPageLowerLeft{\hbox to 0 pt{\kern \msr@scalepaper\msr@posun@ikonekC%
+%\raise -1pt \hbox to 0 pt{\hbox to 0 pt{\includegraphics[height=0.91cm]{msr_tlacitka_podklad.pdf}\hss}\hss}
+ \raise -3pt \hbox to 0 pt{\logo@obalka{%
+ \msr@jedno@tlacitko{\MsrCustomFullscreen}{fullscreen}%
+ \msr@jedno@tlacitko{\Acrobatmenu{NextPage}}{next}%
+ }\hss}}}%
+}
+
+\def\ikonkyBJ{% 2. strana v jeopardy
+\AtPageLowerLeft{\hbox to 0 pt{\kern \msr@scalepaper\msr@posun@ikonekC%
+%\raise -1pt \hbox to 0 pt{\hbox to 0 pt{\includegraphics[height=0.91cm]{msr_tlacitka_podklad.pdf}\hss}\hss}
+ \raise -3pt \hbox to 0 pt{\logo@obalka{%
+ \msr@jedno@tlacitko{\MsrCustomFullscreen}{fullscreen}%
+ \msr@jedno@tlacitko{\Acrobatmenu{FirstPage}}{home}%
+ }\hss}}\global\def\ikonky{}%
+}%
+}
+
+\def\ikonkyBP{% 2. strana v Poznej
+\AtPageLowerLeft{\hbox to 0 pt{\kern \msr@scalepaper\msr@posun@ikonekC%
+%\raise -1pt \hbox to 0 pt{\hbox to 0 pt{\includegraphics[height=0.91cm]{msr_tlacitka_podklad.pdf}\hss}\hss}
+ \raise -3pt \hbox to 0 pt{\logo@obalka{%
+ \msr@jedno@tlacitko{\MsrCustomFullscreen}{fullscreen}%
+ \msr@jedno@tlacitko{\Acrobatmenu{FirstPage}}{home}%
+ }\hss}}%\global\def\ikonky{}%
+}%
+}
+
+
+\def\ikonkyAA{% V krokovanych prikaldech
+\AtPageLowerLeft{\hbox to 0 pt{\kern \msr@scalepaper\msr@posun@ikonek%
+%\raise -1pt \hbox to 0 pt{\hbox to 0 pt{\includegraphics[height=0.91cm]{msr_tlacitka_podklad.pdf}\hss}\hss}
+ \raise 2pt \hbox to 0 pt{\hskip \msr@ikony@a@dimen 
+ \hskip -4pt
+ \msr@jedno@tlacitko{\Acrobatmenu{NextPage}}{next}%
+ \hss}\hss
+}%
+}%
+}
+
+\def\ikonkyB{%
+\AtPageLowerLeft{\hbox to 0 pt{\kern \msr@scalepaper\msr@posun@ikonek%
+%\raise -1pt \hbox to 0 pt{\hbox to 0 pt{\includegraphics[height=0.91cm]{msr_tlacitka_podklad.pdf}\hss}\hss}
+ \raise 2pt \hbox to 0 pt{\hskip \msr@ikony@a@dimen 
+ \hskip -4pt
+ \msr@jedno@tlacitko{\MsrCustomFullscreen}{fullscreen}%
+ \hss}\hss
+}%
+}%
+}
+
+
+\@ifclassloaded{msr-sparuj}
+  {\def\ikonky{\ikonkyA}}
+  {}%
+
+\@ifclassloaded{msr-krokovany}
+  {\def\ikonky{\ikonkyAA\global\def\ikonky{}}}
+  {}%
+
+\@ifclassloaded{msr-jeopardy}
+  {\def\ikonky{\ikonkyAJ}}
+  {}%
+
+
+\everymath{\displaystyle}
+
+\def\oblast#1{\def\MsrObrazek{\csname oblast:#1\endcsname}}
+\oblast{}
+\expandafter\def\csname oblast:\endcsname{} 
+\oblast{7}
+
+\def\msr@obtiznost{}
+\def\obtiznost#1{\def\msr@obtiznost{#1}}
+% \@ifclassloaded{msr}
+% {
+% \expandafter\def\csname msr@@obtiznost@1\endcsname{lehký}
+% \expandafter\def\csname msr@@obtiznost@2\endcsname{středně těžký}
+% \expandafter\def\csname msr@@obtiznost@3\endcsname{těžký}
+% }
+% {
+% \expandafter\def\csname msr@@obtiznost@1\endcsname{lehká}
+% \expandafter\def\csname msr@@obtiznost@2\endcsname{středně těžká}
+% \expandafter\def\csname msr@@obtiznost@3\endcsname{těžká}
+% }
+
+\def\msr@autor{}
+\def\autor#1{\def\msr@autor{autor #1}}
+\autor{}
+
+% Resi problem s Acrobat Readerem v Linuxu (spatne barvy obrazku)
+% http://tex.stackexchange.com/questions/35868/color-distortion-using-transparent-images-in-non-beamer-documents
+% http://tug.org/pipermail/pdftex/2007-December/007482.html
+
+\pdfpageattr{/Group <</S /Transparency /I true /CS /DeviceRGB>>}
+
+% verze s upozornenim
+%\pdfpageattr{/AA << /O << /S /JavaScript /JS (var aOCGs = this.getOCGs(); for(var i=0; aOCGs && i<aOCGs.length;i++) { if (aOCGs[i].name == "upozorneni") aOCGs[i].state = false;}) >> >> /Group <</S /Transparency /I true /CS /DeviceRGB>>}
+
+
+
+% Hezci sipky v tikz.
+\tikzset{>=stealth}
+
+
+% \long\def\VarovaniAcrobatReader
+% {\begin{ocg}{upozorneni}{upozorneni}{1}{\vbox to 0 pt{\vss\colorbox{white}{\vbox{\hsize =0.9\linewidth
+% \leftskip 1cm \relax\rightskip 1cm plus 1 fil\relax
+% \bigskip\bigskip\color{red}
+% \large \textbf{Upozornění.} Tento dokument obsahuje Javascripty. K jejich správné funkcionalitě je nutno použít Adobe Reader nebo Adobe Acrobat.
+% \par
+% \bigskip\bigskip
+% }}}}\end{ocg}}
+
+
+\def\msr@polozka#1#2{\expandafter\def\csname autor #2\endcsname{\csname autor #1\endcsname}}
+%\input msr_autori.tex
+
+\def\msr@polozka#1#2{%
+\expandafter\def\csname oblast:#2\endcsname{#1}
+\expandafter\def\csname oblast:#1\endcsname{#1}
+}
+\input msr_oblasti.tex
+
+\def\msr@polozka#1#2#3{%
+\expandafter\def\csname podoblast:#2\endcsname{#3}
+\expandafter\ifx\csname podoblast:#1\endcsname\relax
+\expandafter\def\csname podoblast:#1\endcsname{#3}
+\else
+\expandafter\def\csname podoblast:#1\endcsname{}
+\fi
+}
+\input msr_podoblasti.tex
+
+\def\msr@tema{}
+\def\tema#1{\expandafter\ifx \csname podoblast:#1\endcsname\relax \MsrError{msr}{Spatne vyplnene jmeno podoblasti (argument prikazu tema)}\fi
+\oblast{\csname podoblast:#1\endcsname}}
+
+\PassOptionsToPackage{tooltipmark=3,mouseover,fg,movetips,blur}{msr-fancytooltips}
+
+\let\Otazka\sablona
+
+\usepackage{eurosym}
+\DeclareUnicodeCharacter{20AC}{\euro}
+
+
+%%% Local Variables: 
+%%% coding: utf-8
+%%% End: 
+

@@ -1,0 +1,26 @@
+\AtBeginDocument{\AddToShipoutPictureFG{\AtPageLowerLeft{\varovani \global\let\varovani\relax}}}
+
+\def\varovani{\hbox{\lower -0.8\pdfpageheight \vbox to 0 pt{\hbox to 0 pt{\hbox to \pdfpagewidth{\hss\begin{ocg}{kontrola}{kontrola}1\colorbox{red}{\color{yellow!80}\bf
+          \begin{minipage}[c]{0.6\linewidth}
+%            Upozorn\v en\'i: Omlouváme se, zdá se, \v ze soubor neotevíráte v
+%            aplikaci podporující práci s Javascripty. Pro
+%            bezproblémovou funk\v cnost tohoto PDF souboru si jej ulo\v zte
+%            na sv\r uj lokální disk a otev\v rete z tohoto disku v aplikaci Adobe
+%            Reader.
+\input msr-kontrolapluginu_\langfile.tex
+          \end{minipage}
+}\end{ocg}\hss}\hss}\vss}}}
+
+
+\begin{insDLJS}[kontrolaAcrobatReaderPlugin]{kontrolaAcrobatReaderPlugin}{kontrolaAcrobatReaderPlugin}
+
+  schovejocg("kontrola");
+  this.dirty = false;
+
+\end{insDLJS}
+
+%%% Local Variables: 
+%%% coding: utf-8
+%%% End: 
+
+

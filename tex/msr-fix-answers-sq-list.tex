@@ -1,0 +1,25 @@
+% The definition of the command from the file exerquiz.sty. We comment out the line with topsep and partopsep
+
+\renewenvironment{answers@sq@list}[1]
+{%
+    \if\aeb@answerType r
+        \let\endanswers\endanswers@sq@list\else
+        \let\endmanswers\endanswers@sq@list\fi
+    %\ifinner\else
+    \vspace*{\aboveanswersSkip}%
+    %\fi
+    \begin{list}{\strut\@Ans\eq@hspanner}%
+    {%
+        \if\sqstar*\relax
+            \settowidth{\labelwidth}{\eq@lw@f\eq@hspanner}\else
+            \settowidth{\labelwidth}{\eq@lw@l\eq@hspanner}\fi
+        \setlength{\parsep}{0pt}\setlength{\itemindent}{0pt}%
+%        \setlength{\topsep}{0pt}\setlength{\partopsep}{0pt}% Change 2015, Jan 15, Robert Marik
+        \setlength{\listparindent}{\parindent}%
+        \setlength{\leftmargin}{\labelwidth}%
+        \setlength{\labelsep}{0pt}%
+        \def\Ans{\Ans@list}%
+    }%
+}%
+{\end{list}\setcounter{quizno}{0}}
+

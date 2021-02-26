@@ -1,0 +1,135 @@
+% Modifikace pro kviz ano/ne
+% vykopirovane prikazy z mi21.sty a z msr-skeletons.sty
+
+\def\first@question{}
+\mi@anstoks{\legendaAnoNe\begin{questions}\first@question}
+\mi@manstoks{\legendaAnoNe\begin{questions}\first@question}
+
+\renewcommand\@@@odpovedi[2][]{\if@mi@forcemanswers \@odpovedi@manswerstrue\else\testuj@manswers #2***\k@n@c\fi
+  \@mi@forcemanswersfalse
+  \if@msr@pointsfield \@odpovedi@manswerstrue\fi  % pokud se pocitaji body, automaticky manswers
+  \def\p@cetb@du{#1}%
+   \if@odpovedi@manswers 
+     \edef\x{\mi@buffer={\the\mi@manstoks}}\x
+   \else \edef\x{\mi@buffer={\the\mi@anstoks}}\x%
+   \fi
+  \desifruj #2,*,%
+  \the\mi@buffer}
+
+\def\@dokonci{\pridejtoken{\end{questions}}}%
+
+\rowsepDefault{0pt}
+\def\@zpracuj#1{\def\tempp{#1}%
+  \ifx\tempp\empty\pridejtoken{\eFreeze}%
+  \else
+    \@overhvezdu#1...*..\k@nec
+    \if@hvezda 
+      \pridejtoken{\item\msr@obalka@odpovedi{\removestar #1}\msr@NASTAV@anone\ano}%
+    \else 
+      \pridejtoken{\item\msr@obalka@odpovedi{#1}\msr@NASTAV@anone\ne}%
+    \fi 
+    \pridejtoken{\vspace{\@rowskip}}%
+  \fi}
+
+
+
+\def\msr@test@list{list}
+\newif\if@msr@is@inside@list\@msr@is@inside@listtrue
+\newlength\msr@anone@skip
+
+
+\long\def\@sablonaA#1#2{\@msr@is@inside@listfalse
+    \ifx\msr@test@list\@currenvir\@msr@is@inside@listtrue\fi
+    \if@msr@is@inside@list\begin{blok}\else\noindent\begin{minipage}{\linewidth}\color{otazkacolor}\fi
+      %\ifx\msr@pts0\else %\PTsHook{($\eqPTs^{\text{pts}}$)}
+      \PTs{\msr@pts}%\fi
+      \opt@intervaly
+      \ifx\@msr@top\empty \else \@msr@top\par\fi
+      \ifx\msr@multicol\jedna\else\begin{multicols}{\msr@multicol}\fi
+        \ifdim\msr@minipage>1pt \begin{minipage}[t]{\msr@minipage}\fi
+          #1
+          \ifdim\msr@minipage>1pt \end{minipage}\hskip 1em \begin{minipage}[t]{\linewidth-\msr@minipage-1em}\else \par\fi        
+          {\sloppy \pocetsloupcu{\msr@pocetsloupcu}\expandafter\odpovedi\expandafter[\expandafter\msr@pt@varianta\expandafter]\expandafter{#2}\par}%
+          \ifdim\msr@minipage>1pt \end{minipage}\fi        
+        \ifx\msr@multicol\jedna\else\end{multicols}\fi
+      \if@msr@is@inside@list\end{blok}\else\end{minipage}\fi
+    
+}
+
+\let\msr@NASTAV@anone\relax
+\define@key{template}{rightskip}[0pt plus 10em]{\def\msr@NASTAV@anone{\rightskip=#1\relax \parfillskip=-#1\relax}}
+\define@key{template}{B}[A]{\xdef\msr@sablona{B}}
+\define@key{template}{typB}[A]{\xdef\msr@sablona{B}}
+\define@key{template}{C}[A]{\xdef\msr@sablona{C}}
+\newdimen\@sablonaBvlevo \@sablonaBvlevo=0pt
+\newdimen\@sablonaBvpravo \@sablonaBvpravo=0pt
+\newdimen\@sablonaBuprostred  \@sablonaBuprostred=1cm
+\newdimen\@sablonaBmezera  \@sablonaBmezera=0pt
+\define@key{template}{vlevo}[0pt]{\@sablonaBvlevo=#1\relax\xdef\msr@sablona{C}}
+\define@key{template}{vpravo}[0pt]{\@sablonaBvpravo=#1\relax\xdef\msr@sablona{C}}
+\define@key{template}{uprostred}[0pt]{\@sablonaBuprostred=#1\relax}
+\define@key{template}{mezera}[0pt]{\@sablonaBmezera=#1\relax\xdef\msr@sablona{C}}
+\def\msr@opt@vrule{}
+\define@key{template}{cara}[0pt]{\def\msr@opt@vrule{\kern-0.5pt\color[rgb]{0.8,0.8,0.8}\vrule width 1 pt\kern-0.5pt}\xdef\msr@sablona{B}}
+
+\long\def\@sablonaB#1#2#3{\@msr@is@inside@listfalse
+  \ifx\msr@test@list\@currenvir\@msr@is@inside@listtrue\fi
+  \if@msr@is@inside@list\begin{blok}\else\noindent\begin{minipage}{\linewidth}\color{otazkacolor}\fi
+      %\ifx\msr@pts0\else %\PTsHook{($\eqPTs^{\text{pts}}$)}
+  \PTs{\msr@pts}%\fi
+  \opt@intervaly
+  \ifx\@msr@top\empty \else \@msr@top\par\fi
+  \ifdim\msr@minipage>1pt \begin{minipage}[t]{\msr@minipage}\fi
+    #1
+    \ifdim\msr@minipage>1pt \end{minipage}\hskip 1em \begin{minipage}[t]{\linewidth-\msr@minipage-1em}\else \par\fi        
+    \vspace*{\@sablonaBmezera}%
+    \dvasloupce{\sloppy \pocetsloupcu{\msr@pocetsloupcu}\expandafter\odpovedi\expandafter[\expandafter\msr@pt@varianta\expandafter]\expandafter{#2}\par}{\setcounter{quizno}{6}\sloppy \pocetsloupcu{\msr@pocetsloupcu}\expandafter\odpovedi\expandafter[\expandafter\msr@pt@varianta\expandafter]\expandafter{#3}\par}%
+    \ifdim\msr@minipage>1pt \end{minipage}\fi        
+  \if@msr@is@inside@list\end{blok}\else\end{minipage}\fi
+}
+
+\newcount\last@question
+\newdimen\@sablona@sirka@sloupcu
+\long\def\dvasloupce#1#2{
+  \@sablona@sirka@sloupcu=\linewidth
+  \advance \@sablona@sirka@sloupcu by - \@sablonaBvlevo
+  \advance \@sablona@sirka@sloupcu by - \@sablonaBvpravo
+  \advance \@sablona@sirka@sloupcu by - \@sablonaBuprostred
+  \divide \@sablona@sirka@sloupcu by 2
+  \hspace*{\@sablonaBvlevo}%
+  \begin{minipage}[t]{\@sablona@sirka@sloupcu}
+    \def\first@question{\itemsep \rowsep@default}%
+    #1\expandafter\global\expandafter\last@question\value{eqquestionnoii}
+  \end{minipage}%
+  \hspace*{0.5\@sablonaBuprostred}{\msr@opt@vrule}\hspace*{0.5\@sablonaBuprostred}%
+  \begin{minipage}[t]{\@sablona@sirka@sloupcu}
+    \def\first@question{\itemsep \rowsep@default\relax\setcounter{eqquestionnoii}{\the\last@question}} #2
+  \end{minipage}%
+  \hspace*{\@sablonaBvpravo}
+}
+
+
+\long\def\@sablonaC#1#2#3{\@msr@is@inside@listfalse
+  \ifx\msr@test@list\@currenvir\@msr@is@inside@listtrue\fi
+  \if@msr@is@inside@list\begin{blok}\else\noindent\begin{minipage}{\linewidth}\color{otazkacolor}\fi
+      %\ifx\msr@pts0\else %\PTsHook{($\eqPTs^{\text{pts}}$)}
+  \PTs{\msr@pts}%\fi
+  \opt@intervaly
+  \ifx\@msr@top\empty \else \@msr@top\par\fi
+  \ifdim\msr@minipage>1pt \begin{minipage}[t]{\msr@minipage}\fi
+    #1
+    \vspace*{\@sablonaBmezera}%
+    \ifdim\msr@minipage>1pt \end{minipage}\hskip 1em \begin{minipage}[t]{\linewidth-\msr@minipage-1em}\else \par\fi        
+    \begin{minipage}[t]{1.0\linewidth}\hspace*{\@sablonaBvlevo}
+      \begin{minipage}[t]{1.0\linewidth-\@sablonaBvlevo-\@sablonaBvpravo}
+        {\sloppy \pocetsloupcu{\msr@pocetsloupcu}\expandafter\odpovedi\expandafter[\expandafter\msr@pt@varianta\expandafter]\expandafter{#2}\par}%
+      \end{minipage}
+    \end{minipage}
+    \ifdim\msr@minipage>1pt \end{minipage}\fi        
+  \if@msr@is@inside@list\end{blok}\else\end{minipage}\fi
+}
+
+
+\begin{insDLJS}[nahodneanone]{nahodneanone}{MSRnahodnostAnone}
+odkryjocg("konectestu");
+\end{insDLJS}
