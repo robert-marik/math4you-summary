@@ -26,7 +26,7 @@ with open("csv/"+subarea+'.csv', 'rb') as csvfile:
             seznam_vzoru.append(row['source_nid'])
 
 print seznam_vzoru
-            
+          
 with open("html_clonable/report_clonable.php", 'a') as the_file:
             the_file.write("<?php \n polozka( "+str(subarea)+","+str(len(seznam_vzoru))+"); \n ?> \n\n")
 
@@ -51,8 +51,9 @@ with open("csv/problem_img.csv", 'rb') as csvfile:
     spamreader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
     for row in spamreader:
         if row['subarea_id'] == subarea:
+            if "href" in row['title']:
+                row['title'] = row['title'][30:-4]
             database.append(row)
-
 
 database_easy=[]
 with open("easy.csv", 'rb') as csvfile:
@@ -71,7 +72,7 @@ SORT_ORDER = {"A": 0, "B": 1, "C": 2}
 database.sort(key=lambda val: (SORT_ORDER[val['level']],val['project_id']))
 
 downloadfiles=True
-#downloadfiles=False
+downloadfiles=False
 
 #os.remove("*.out")
 
@@ -99,6 +100,7 @@ def filenameSVGtoPDF(filename):
     return filename
 
 def download_images(img):
+    global downloadfiles
     if img!="":
         filename=img.split("/")
         if downloadfiles:

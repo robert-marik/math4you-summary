@@ -1,6 +1,10 @@
 bash download_csv 
 rm easy.csv
 rm clonable.csv
+rm html_un_qa/*
+rm html_translation/*
+rm html_clonable/*
+rm html_easy/*
 wget http://math4u.vsb.cz/tex/flags/easy.csv
 wget http://math4u.vsb.cz/tex/flags/clonable.csv
 bash prikaz
@@ -8,6 +12,8 @@ bash prikaz_texfilter
 bash prikaz_texgen 
 
 bash prepocitej_qa.sh > html_un_qa/pocet.php
+bash prepocitej_easy.sh > html_easy/pocet.php
+bash prepocitej_clonable.sh > html_clonable/pocet.php
 bash prepocitej_translation.sh > html_un_translation/pocet.php
 cat html_un_translation/??.html > html_un_translation/all.html
 
