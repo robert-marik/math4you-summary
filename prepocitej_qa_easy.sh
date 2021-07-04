@@ -1,7 +1,7 @@
 #! /bin/bash
 
 echo "<?php"
-for i in `ls html_un_qa/*.html`
+for i in `ls html_un_qa_easy/*.html`
 do
 
     j=`grep "class='header'" $i | wc -l`

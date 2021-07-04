@@ -2,6 +2,9 @@ bash download_csv
 rm easy.csv
 rm clonable.csv
 rm html_un_qa/*
+rm html_un_qa_easy/*
+rm tex_un_qa/*
+rm tex_un_qa_easy/*
 rm html_translation/*
 rm html_clonable/*
 rm html_easy/*
@@ -12,7 +15,9 @@ bash prikaz_texfilter
 bash prikaz_texgen 
 
 bash prepocitej_qa.sh > html_un_qa/pocet.php
+bash prepocitej_qa_easy.sh > html_un_qa_easy/pocet.php
 bash prepocitej_easy.sh > html_easy/pocet.php
+#bash prepocitej_easy_qa.sh > html_easy_qa/pocet.php
 bash prepocitej_clonable.sh > html_clonable/pocet.php
 bash prepocitej_translation.sh > html_un_translation/pocet.php
 cat html_un_translation/??.html > html_un_translation/all.html
@@ -21,11 +26,15 @@ cp pdf/*.* /var/www/math4you/data/pdf
 cp html/*.* /var/www/math4you/data/html
 cp pdf_easy/*.* /var/www/math4you/data/pdf_easy
 cp html_easy/*.* /var/www/math4you/data/html_easy
+#cp pdf_easy_qa/*.* /var/www/math4you/data/pdf_easy
+#cp html_easy_qa/*.* /var/www/math4you/data/html_easy
 cp pdf_clonable/*.* /var/www/math4you/data/pdf_clonable
 
 cp html_un_qa/*.* /var/www/math4you/data/html_un_qa
+cp html_un_qa_easy/*.* /var/www/math4you/data/html_un_qa_easy
 cp html_un_translation/*.* /var/www/math4you/data/html_un_translation
 cp pdf_un_qa/*.* /var/www/math4you/data/pdf_un_qa
+cp pdf_un_qa_easy/*.* /var/www/math4you/data/pdf_un_qa_easy
 cp pdf_un_translation/*.* /var/www/math4you/data/pdf_un_translation
 
 cp html_clonable/*.* /var/www/math4you/data/html_clonable
@@ -51,3 +60,6 @@ bash spellcheck es
 
 cp txt/list_*.txt /var/www/temp/
 cp spell_correct.* /var/www/temp/
+
+
+python read_un_pandas.py > /var/www/math4you/pandas.txt

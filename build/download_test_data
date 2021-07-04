@@ -2,6 +2,8 @@
 
 wget http://math4u.vsb.cz/tex/ctests/csv -O testy.csv
 
+sed -i 's/\([^"]\);\([^"]\)/\1,\2/g' testy.csv
+
 sed -i "s/\",\"/\";\"/g" testy.csv
 
 cat testy.csv | cut -d\; -f1 | uniq | sed 's/"//g' | tac | head -n -1 | tac > test_numbers.dat

@@ -150,3 +150,33 @@ do
 
 done
 
+for i in {32..87};
+do 
+    echo CSV file $i
+    echo ===========
+    pdflatex "\def\soubor{${i}}\def\TWO{} \input driver_qa_easy.tex "	
+    cp driver_qa_easy.pdf pdf_un_qa_easy/$i.pdf
+    cp driver_qa_easy.log pdf_un_qa_easy/$i.log
+
+    pdflatex "\def\soubor{${i}}\long\def\LANGcs#1{} \long\def\LANGsk#1{} \long\def\LANGpl#1{} \long\def\LANGes#1{} \input driver_qa_easy.tex "
+    cp driver_qa_easy.pdf pdf_un_qa_easy/${i}en.pdf
+    cp driver_qa_easy.log pdf_un_qa_easy/${i}en.log
+
+    pdflatex "\def\soubor{${i}}\long\def\LANGen#1{} \long\def\LANGsk#1{} \long\def\LANGpl#1{} \long\def\LANGes#1{} \input driver_qa_easy.tex "
+    cp driver_qa_easy.pdf pdf_un_qa_easy/${i}cs.pdf
+    cp driver_qa_easy.log pdf_un_qa_easy/${i}cs.log
+
+    pdflatex "\def\soubor{${i}}\long\def\LANGcs#1{} \long\def\LANGsk#1{} \long\def\LANGen#1{} \long\def\LANGes#1{} \input driver_qa_easy.tex "
+    cp driver_qa_easy.pdf pdf_un_qa_easy/${i}pl.pdf
+    cp driver_qa_easy.log pdf_un_qa_easy/${i}pl.log
+
+    pdflatex "\def\soubor{${i}}\long\def\LANGcs#1{} \long\def\LANGen#1{} \long\def\LANGpl#1{} \long\def\LANGes#1{} \input driver_qa_easy.tex "
+    cp driver_qa_easy.pdf pdf_un_qa_easy/${i}sk.pdf
+    cp driver_qa_easy.log pdf_un_qa_easy/${i}sk.log
+
+    pdflatex "\def\soubor{${i}}\long\def\LANGcs#1{} \long\def\LANGen#1{} \long\def\LANGpl#1{} \long\def\LANGsk#1{} \input driver_qa_easy.tex "
+    cp driver_qa_easy.pdf pdf_un_qa_easy/${i}es.pdf
+    cp driver_qa_easy.log pdf_un_qa_easy/${i}es.log
+
+done
+

@@ -8,6 +8,7 @@ import sys
 import hashlib
 from datetime import datetime, timedelta
 
+print ("Datum a cas generovani stranky: "+str(datetime.now()))
 
 seznamKoduPodoblasti={}
 
@@ -104,7 +105,7 @@ import pandas as pd
 
 df = pd.DataFrame(database)
 df1 = df[['project_id','level','subarea_id','subarea','clonable','easy','source_nid','state']]
-df1 = df[['subarea','state','clonable','easy']]
+df1 = df[['subarea','state','clonable','easy','project_id']]
 
 dfEasy=df1[df1['easy']=="1"]
 dfClon=df1[df1['clonable']=="1"]
@@ -115,19 +116,31 @@ dfClon=df1[df1['clonable']=="1"]
 #print(df1)
 #print (df1.groupby(by=["state","subarea"]).size())
 
+print ("--------------------------------------\n")
 print ("Easy\n")
 print ("--------------------------------------\n")
 results = dfEasy.groupby(by=["state","subarea"]).size()
-results_df = pd.DataFrame(results)
-results_df.to_html('output.html')
+#results_df = pd.DataFrame(results)
+#results_df.to_html('output.html')
 print (results)
 
+print ("--------------------------------------\n")
 print ("Clonable\n")
 print ("--------------------------------------\n")
 
 results = dfClon.groupby(by=["state","subarea"]).size()
 print (results)
-results_df = pd.DataFrame(results)
-# then, export to html
-results_df.to_html('output.html')
+
+print ("--------------------------------------\n")
+print ("Easy , subarea, state\n")
+print ("--------------------------------------\n")
+
+results = dfEasy.groupby(by=["state","subarea"]).size()
 print (results)
+
+print ("--------------------------------------\n")
+print ("No state, project_id\n")
+print ("--------------------------------------\n")
+
+results = dfEasy.query('state=="No state"')
+print (results['project_id'])

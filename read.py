@@ -72,7 +72,7 @@ SORT_ORDER = {"A": 0, "B": 1, "C": 2}
 database.sort(key=lambda val: (SORT_ORDER[val['level']],val['project_id']))
 
 downloadfiles=True
-downloadfiles=False
+#downloadfiles=False
 
 #os.remove("*.out")
 

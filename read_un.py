@@ -77,6 +77,7 @@ langlist=['en','pl','cs','sk','es']
 id=0
 
 database=[]
+database_easy=[]
 
 with open("csv/problem_txt_un.csv", 'rb') as csvfile:
     spamreader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
@@ -85,6 +86,8 @@ with open("csv/problem_txt_un.csv", 'rb') as csvfile:
             database.append(row)
         if row['state']=="qa":
             database.append(row)
+        if row['easy']=="1":
+            database_easy.append(row['title'])
 with open("csv/problem_img_un.csv", 'rb') as csvfile:
     spamreader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
     for row in spamreader:
@@ -92,6 +95,8 @@ with open("csv/problem_img_un.csv", 'rb') as csvfile:
             database.append(row)
         if row['state']=="qa":
             database.append(row)
+        if row['easy']=="1":
+            database_easy.append(row['title'])
 
 SORT_ORDER = {"A": 0, "B": 1, "C": 2}
 
@@ -105,7 +110,7 @@ downloadfiles=True
 #for i in filenames:
 
 
-os.system("rm tex_un_qa/*  tex_un_translation/*  html_un_qa/* html_un_translation/* ")
+os.system("rm tex_un_qa/* tex_un_qa_easy/*  tex_un_translation/*  html_un_qa/* html_un_qa_easy/* html_un_translation/* ")
 
 typos=""    
 
@@ -243,6 +248,9 @@ for row in database:
     outstr=outstr+"\End\n"
     with open("tex_un_"+row["state"]+"/"+(seznamKoduPodoblasti[row['subarea']])+'.tex', 'a') as the_file:
         the_file.write(outstr)
+    if row["state"]=="qa" and row["easy"]=="1":
+       with open("tex_un_qa_easy/"+(seznamKoduPodoblasti[row['subarea']])+'.tex', 'a') as the_file:
+          the_file.write(outstr)
 
     outstr="\n"
     outstr=outstr+"<div class='Question'><span class='header'>"+str(id)+": <span class='id'>"+row['project_id']+"</span>\n"
@@ -269,4 +277,7 @@ for row in database:
     outstr=outstr+"</div>\n"
     with open("html_un_"+row["state"]+"/"+(seznamKoduPodoblasti[row['subarea']])+'.html', 'a') as the_file:
         the_file.write(outstr)
+    if row["state"]=="qa" and row["easy"]=="1":
+       with open("html_un_qa_easy/"+(seznamKoduPodoblasti[row['subarea']])+'.html', 'a') as the_file:
+          the_file.write(outstr)
 
