@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-echo '<h1>Files with error in log</h1>'
+echo '<h1>Files with error in log after April 13, 2021</h1>'
 
 date
 

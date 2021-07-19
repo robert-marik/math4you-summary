@@ -314,13 +314,9 @@ function DisplayAnswer(fieldname,theanswer)
       if ((!isQuizInitialized("\curr@quiz")) && (typeof(spusteno\curr@quiz)=="undefined")) 
       \string{\@initQuiz 
         var spusteno\curr@quiz=1; 
-        var t = app.thermometer; 
-        t.begin(); 
-        t.text = "Probiha spousteni testu"; 
         var aOCGs = this.getOCGs(); 
         for(var i=0; aOCGs && i<aOCGs.length;i++) { if ( (aOCGs[i].name == "hodnoceni") || (aOCGs[i].name.substring(0,7) == "oblicej")) schovejocg(aOCGs[i].name);}
         this.dirty=false;
-        t.end(); 
       \string}) >> >>}%
     \fi
     \expandafter\global\expandafter\pdfpageattr\expandafter{\msr@temp@pageattr /Group <</S /Transparency /I true /CS /DeviceRGB>>}}%
@@ -350,8 +346,6 @@ function DisplayAnswer(fieldname,theanswer)
             app.alert(InitMsg("\bqlabelISO"),3);\jsR
         else {\jsR\jsT
             if (\minQuizResp(\thequestionno)) {\jsR\jsT\jsT
-                t.begin();
-                t.text = "Probiha vyhodnocovani testu";
                 if (typeof BodyMaximum =="undefined") {var BodyMaximum = \thequestionno;}
                 DisplayQuizResults("\curr@quiz",BodyMaximum,%
 \thequestionno);\jsR\jsT\jsT
@@ -378,7 +372,6 @@ function DisplayAnswer(fieldname,theanswer)
                 odkryjocg("hlaska:"+znamka+":"+hlaskanum);
                 correctQuiz("\curr@quiz",\thequestionno);  % RM: Pridano opraveni testu
                 this.getField("endQuiz.msr").hidden=true;
-                t.end();
                 this.dirty=false;
               }\jsR
             }}%
@@ -733,10 +726,6 @@ function randperm(maxValue){
 
 odkryjocg("konectestu");
 
-var t = app.thermometer; 
-t.begin(); 
-t.text = "Probiha inicializace testu ..."; 
-
 var pocetvariant = new Array();
 var spravnost = [];
 var nepermutovatKonec = [];
@@ -796,8 +785,6 @@ msr.Grp = {};
 var spustenomsr=1; 
 var aOCGs = this.getOCGs(); 
 for(var i=0; aOCGs && i<aOCGs.length;i++) { if ( (aOCGs[i].name == "hodnoceni") || (aOCGs[i].name.substring(0,7) == "oblicej")) {schovejocg(aOCGs[i].name);}}
-
-t.end(); 
 
 this.dirty=false;
 
