@@ -1,6 +1,6 @@
 #! /bin/bash
 
-wget http://math4u.vsb.cz/tex/ctests/csv -O testy.csv
+wget https://math4u.vsb.cz/tex/ctests/csv -O testy.csv
 
 sed -i 's/\([^"]\);\([^"]\)/\1,\2/g' testy.csv
 
@@ -118,7 +118,7 @@ do
         mv test_${i}.pdf /var/www/m4uproject/m4u-cache/tests/
     fi
     
-    echo "$i,http://msr-latex.vsb.cz/m4uproject/m4u-cache/tests/test_${i}.pdf,0,$langcode" >> /var/www/m4uproject/m4u-cache/tests/import_new.csv
+    echo "$i,https://msr-latex.vsb.cz/m4uproject/m4u-cache/tests/test_${i}.pdf,0,$langcode" >> /var/www/m4uproject/m4u-cache/tests/import_new.csv
 
 done
 
@@ -126,11 +126,11 @@ cp /var/www/m4uproject/m4u-cache/tests/import_new.csv /var/www/m4uproject/m4u-ca
 
 
 echo importing ...
-curl http://math4u.vsb.cz/cron.php?cron_key=pZE8H6pSBMOwNifz8l8mUseF-KeEawh6mzoktM6xHhU 
+curl https://math4u.vsb.cz/cron.php?cron_key=pZE8H6pSBMOwNifz8l8mUseF-KeEawh6mzoktM6xHhU 
 
 #echo "4 vteriny pauza"
 #sleep 4
 #echo importing again ...
-#curl http://math4u.vsb.cz/cron.php?cron_key=pZE8H6pSBMOwNifz8l8mUseF-KeEawh6mzoktM6xHhU 
+#curl https://math4u.vsb.cz/cron.php?cron_key=pZE8H6pSBMOwNifz8l8mUseF-KeEawh6mzoktM6xHhU 
 
 
