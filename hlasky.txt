@@ -1,0 +1,373 @@
+cs@1@Dnes ses vážně překonal!
+cs@1@Dobrá práce, kámo!
+cs@1@Jsi Einstein!
+cs@1@Jsi šampión!
+cs@1@Můžeš jít oslavovat!
+cs@1@Parádička!\\Tomu říkám fajnová prácička!
+cs@1@Perfektní! Jen tak dál!
+cs@1@Pozor, aby Sheldon Cooper nezačal žárlit!
+cs@1@Skvělé! Neuvěřitelné!
+cs@1@Super! Jen tak dál!
+cs@1@Super výsledek! Jenom buď opatrný a nechoď to zapíjet před zkouškou. Mohl by sis zničit ty mozkové buňky!
+cs@1@To bylo úžasné!
+cs@1@Výborně, můžeš se vrhnout na jeden z~Problémů tisíciletí!
+cs@1@Výborně, toto učivo zvládáš skvěle!
+cs@1@Wow! Neříkají ti náhodou přátelé Wolfram? Nebo snad Alpha?
+cs@2@Dobrá práce, ale Einstein zatím nejsi. 
+cs@2@Dobrá práce, dej si piškotek…
+cs@2@Dost dobrý, jako!
+cs@2@Hermionin titul \textit  {nejlepší v ročníku} je téměř ohrožen.
+cs@2@Jsi už tak blízko!\\Určitě ses jenom překliknul!
+cs@2@Jsi už tak blízko vítězství, nevzdávej to!
+cs@2@Malý kousek a máš to doma.\\ Zkus to znova!
+cs@2@Skoro to máš.\\ Příště to zvládneš bez chyby!
+cs@2@Skvěle! K dokonalosti chybí\\ jen milimetry.
+cs@2@To bylo těsné. Příště to už bude\\ na plný počet bodů. 
+cs@2@Udělal jsi nějaké chyby,\\ ale zasloužíš si pochvalu. 
+cs@2@Už to skoro ani nemohlo být lepší. Skoro. 
+cs@2@Výborně. Příště to bude bez chyby.
+cs@2@Zbývá malý krůček,\\příště pokus bude stylový!
+cs@3@Ani dobré, ani špatné. Jsi někde uprostřed. 
+cs@3@Buď optimista, polovina výsledků je bez chyby. 
+cs@3@Být průměrný, či nebýt průměrný?\\ Rozhodnutí je čistě na tobě!
+cs@3@Chybovat je lepší než předstírat dokonalost.\\ Ale nechybovat je dokonalé.
+cs@3@Každý může udělat chybu,\\ hlavní je se poučit a nevzdávat to!
+cs@3@Každý velký vědec v životě udělal nějaké chyby. Vedl sis dobře. 
+cs@3@Máš na víc! Musíš ještě zamakat!
+cs@3@Nebylo to nejhorší, ale příště si dej čokoládu a bude to ještě lepší. 
+cs@3@Není to špatné, ale máš na víc!
+cs@3@Není to špatné, ale mohlo by to být lepší…
+cs@3@Není to špatné, ale pořád máš co dohánět.
+cs@3@Nezoufej, je tu prostor pro zlepšení. 
+cs@3@Slušný výkon, ovšem vidíš, že máš v~určitých věcech mezery. 
+cs@3@Trochu tomu rozumíš,\\ ale chce to více procvičovat.
+cs@3@Zkus to znovu, trénink dělá mistra!
+cs@4@Fieldsomu medaili asi nikdy nezískáš, ale tenhle test můžeš zvládnout lépe.
+cs@4@Hej, mohlo to být i horší….
+cs@4@Hele, nejsi Ježíš, abys chodil po vodě.\\ Zpátky na zem!
+cs@4@Ještě se trochu zlepšit a budeš mezi průměrem. 
+cs@4@Mohlo to dopadnout ještě hůř!
+cs@4@Nebyla to žádná Enigma,\\ tak kde je problém?
+cs@4@Šetříš energii na příště?
+cs@4@Škoda, je třeba si učivo ještě párkrát zopakovat. 
+cs@4@To bylo o fous! Musíš zabrat, příště by to už nemuselo vyjít.
+cs@4@To dáš! Neházej flintu do žita!
+cs@4@To nedopadlo moc dobře. Měl by ses víc učit.
+cs@4@Udělal jsi hodně chyb. Zatím to moc neumíš. 
+cs@4@Unikl jsi pětce, ale to neznamená,\\ že se nemáš více učit!
+cs@4@Zkoušej to dále. Příště to bude lepší. 
+cs@4@Zvládl jsi to,\\ ale je tady stále prostor pro zlepšení.
+cs@5@Ajaj, tvařme se raději,\\ že se to nestalo.
+cs@5@Asi špatná konstalace hvězd…
+cs@5@Je to pro tebe jako cizí film;\\ stále potřebuješ titulky.
+cs@5@Mise se nezdařila. Příště to zvládneme.
+cs@5@Příště nenásob své znalosti nulou.
+cs@5@Tak tento test už nezměníš. Zkus jiný. 
+cs@5@Tak to je katastrofa!
+cs@5@Ten divný pocit, když jediná věc,\\ kterou v testu víš, je tvé jméno….
+cs@5@Ten trapný pocit, když dokončíš výpočet a tvůj výsledek není ani jedna z~možností….
+cs@5@Tvé znalosti jsou jako odmocnina z $-1$.
+cs@5@Ty za to přece nemůžeš?! A kdo tedy?
+cs@5@Určitě byla doba,\\ kdy ani Einstein nedokázal napočítat do 10. 
+cs@5@Většina tvýdh odpovědí\\ byla bohužel jako $\pi $ --- iracionální.\\ Příště to snad bude lepší. 
+cs@5@Viděl jsi někdy, jak slepice létá?\\ Tak takovým stylem ty počítáš…
+cs@5@Víš, že máš vybírat správné odpovědi!?
+en@1@Amazing! Incredible!
+en@1@Awesome! Keep it up!
+en@1@Good job, buddy!
+en@1@Great, now you can try solving one of the Millenium Prize problems!
+en@1@Great, you are very good at this!
+en@1@Perfect, keep it up!
+en@1@Super-duper!\\That is what I call a fine job!
+en@1@That was excellent!
+en@1@Wait! Sheldon might get jealous!
+en@1@Wow! Do your friends by any chance call you Wolfram or maybe Alpha?
+en@1@Wow, what a wonderful job! Just be careful about an alcohol party before an exam. You could damage your brain cells.
+en@1@You are an Einstein!
+en@1@You are the champion!
+en@1@You can go celebrate!
+en@1@You outdid yourself today!
+en@2@A little harder and you would kill it. Try it again. 
+en@2@Almost there.\\ I´m sure you'll even do better next time.
+en@2@A small step remains,\\ next time will be glorious!
+en@2@Good job, but you are no Einstein yet!
+en@2@Good work, have a biscuit.
+en@2@Great. Next time you won't make any mistakes
+en@2@Great! Only millimetres\\ away from perfect.
+en@2@Hermione's \textit  {top of the class} title is almost on the line.
+en@2@It almost couldn't have been better. Almost. 
+en@2@That's like when you end up second in a competition when you could have won it. 
+en@2@That was close! Next time you will\\ shine like a star.
+en@2@You are so close to victory,\\ don't give up!
+en@2@You are so close!\\You just made a misclick.
+en@2@You made some mistakes,\\ but you still deserve praise.
+en@2@You're almost rocking.
+en@3@All great scientists made some mistakes in their life. Just like you. 
+en@3@Don't worry, your result is more than half correct.
+en@3@Everyone can make a mistake. What's important is to learn from it and don't give up. 
+en@3@Hang in there, there is space for improvement.
+en@3@It is not bad, but it could be better.
+en@3@It is not so bad, but you still have\\ a lot to catch up on.
+en@3@It's not bad, but you can do better!
+en@3@Making mistakes is better than faking perfection.
+en@3@Not bad! In some areas you haven't got enough knowledge yet.
+en@3@Not great, not terrible.\\ You are somewhere in the middle. 
+en@3@To be average, or not to be average?\\ That is the question.
+en@3@Try again, practice makes perfect!
+en@3@Wasn't the worst, but next time eat a piece of chocolate and it will definitely be better.
+en@3@You can do better! You have to work harder!
+en@3@You understand this a bit,\\ but you still need to practice.
+en@4@Are you keeping your energy for later?
+en@4@Could be worse!
+en@4@Ehm, you aren't Jesus walking on water.\\ Get back on the ground!
+en@4@Hey, it could be worse, right?
+en@4@It wasn't Enigma,\\ so where is the problem?
+en@4@Just a little better and you will be average.
+en@4@Keep trying. It will be better next time.
+en@4@Pity, you might need to practice more. 
+en@4@That didn't end up very well.\\ You should study more.
+en@4@That was a close shave! Study more, next time you might not be that lucky to pass.
+en@4@You avoided an F, but that doesn't mean you don't have to study more. 
+en@4@You got it. Don't throw in the sponge!
+en@4@You made a lot of mistakes.\\ You aren't good at this yet.
+en@4@You made it,\\ but there's still room for improvement.
+en@4@You may not be a future Fields Medal laureate, but you can do better on this test.
+en@5@Do you know that you have to click\\ on the right answer?
+en@5@For this test - the goose is in the oven!\\ Try another test. 
+en@5@Have you ever seen the way a chicken flies?\\ You solve math problems that way…
+en@5@Let's pretend it never happened.
+en@5@Mission failed. We'll get them next time. 
+en@5@Most of your answers\\ were unfortunately like $\pi $ --- irrational.\\ You'll be better next time. 
+en@5@Next time don't multiply your knowledge by zero.
+en@5@The awkward moment, when the only thing on your exam you know is your name. 
+en@5@The awkward moment, when you finish a math problem and your answer isn't even one of the choices….
+en@5@There was a time\\ Einstein couldn't count to 10 either. 
+en@5@The stars weren't aligned in your favour today.
+en@5@This is like a foreign movie to you;\\ you still need subtitles. 
+en@5@We should blame the weather!
+en@5@What a calamity!
+en@5@Your math knowledge\\ is just like the square root of $-1$.
+es@1@¡Buen trabajo amigo!
+es@1@¡Buen trabajo! Sigue así. 
+es@1@¡Eres el mejor! Creo que es el momento de celebrar, ¿no?
+es@1@¡Eres un campeón!
+es@1@¡Eso fue exelente!
+es@1@Esperar! ¡Sheldon se va a poner celoso!
+es@1@¡Genial, ahora puedes intentar resolver uno de los problemas del Premio Millennium!
+es@1@¡Impresionante! ¡Seguid así!
+es@1@¡Magnífico! ¡Increíble!
+es@1@¡Perfecto!¡Eres muy bueno en esto!
+es@1@¡Qué buen trabajo! Solo tenga cuidado con el alcohol antes de un examen. Podría dañar sus células cerebrales.
+es@1@¡Super! ¡Eso es lo que yo llamo un buen trabajo!
+es@1@¡Tenemos un Einstein!
+es@1@¡Te superaste hoy!
+es@1@¡Vaya! ¿Tus amigos por casualidad te llaman Wolfram o quizás Alpha?
+es@2@¡Así me gusta! ¡Un poquito más y será perfecto!
+es@2@¡Casi la rompes!
+es@2@Casi lo logras. Casi.
+es@2@¡Casi perfecto! ¡La próxima vez será impecable!
+es@2@El título a \textit  {la mejor de la clase} Hermione 
+es@2@Eso es como cuando terminas segundo en una competencia cuando podrías haberla ganado.
+es@2@Estabas a punto de sacar un 1,\\ incluso así ¡muy bien hecho!
+es@2@¡Estuviste muy cerca!\\Acabas de hacer un mal paso.
+es@2@Estuviste tan cerca de la victoria. ¡Sigue intentando!
+es@2@¡Estuvo cerca! La próxima vez brillarás\\ como una estrella.
+es@2@¡Menudo trabajo! ¡Toma un biscuit!
+es@2@Te faltó muy poco. Inténtalo otra vez
+es@2@Te faltó un pequeño pas.\\¡Próxima vez será genial!
+es@2@Te ha faltado poco. 
+es@3@Aguanta, hay tiempo para mejorar.
+es@3@Aunque lo has hecho más o menos bien, puedes hacerlo mejor, ¿no crees?
+es@3@Cometer errores es mejor que la maldita perfección
+es@3@Está bien, pero podría ser mejor. 
+es@3@Justo medio. 
+es@3@La próxima vez será mejor, ya verás.
+es@3@¡Lo puedes hacer mejor!\\ ¡Tienes que esforzarte más!
+es@3@No es lo peor, pero puedes hacerlo mejor. ¡Inténtalo de nuevo!
+es@3@No está mal, pero podría estar mejor.\\Estás llegando
+es@3@No está nada mal… La próxima vez será mejor. 
+es@3@No fue lo peor, pero la próxima vez come un trozo de chocolate y definitivamente te ayudará.
+es@3@¿Ser promedio o no ser promedio?\\ Esa es la pregunta.
+es@3@Todos cometemos errores, sobre todo hay que aprender de ellos. 
+es@3@Todos los grandes científicos cometieron errores en su vida. Igual que tú.
+es@3@Ya lo comprendes pero tienes que practicar
+es@4@¡Aprobado por los pelos! Estudie más porque la próxima vez no tendrá tanta suerte
+es@4@Cometiste muchos errores.\\ Todavía no eres bueno en esto.
+es@4@Ehm, tú no tienes a Dios tomado de la barba ¡Bájate de esa nube!
+es@4@Eso no lo resolviste muy bien.\\ Deberias estudiar mas.
+es@4@Evitaste una F, pero eso no significa que no tengas que estudiar más.
+es@4@Intenta de nuevo.
+es@4@Lástima, es posible que debas practicar más.
+es@4@Lo tienes. ¡No tires la toalla!
+es@4@No era un enigma\\ ¿Dónde está el problema?
+es@4@Pudo acabar mucho peor.
+es@4@Puede que no seas un futuro ganador de la Medalla Fields, pero puedes hacerlo mejor en esta prueba.
+es@4@Se puede mejorar.
+es@4@Solo un poco mejor y estarás en la media.
+es@4@Tienes que currar, tú puedes.
+es@4@Tienes que ser positivo,\\ podría ser peor. 
+es@5@¡Deberíamos culpar al clima!
+es@5@El peor momento ha sido que lo único que sabes del exámen es tu nombre
+es@5@¡Estás en el horno!\\ Intenta con otra prueba.
+es@5@Esto es como una película extranjera para ti; todavía necesitas subtítulos
+es@5@Hagamos como que nunca sucedió.
+es@5@Hubo un tiempo en que Einstein tampoco podía contar hasta diez.
+es@5@La mayoría de sus respuestas fueron, lamentablemente, como $\pi $: irracionales.\\ Estarás mejor la próxima vez.
+es@5@Las estrellas no se alinearon\\ a tu favor hoy 
+es@5@¡Lo peor ha sido cuando terminas un problema de matemáticas y tu respuesta ni siquiera es una de las opciones…
+es@5@Misión fallida. Los conseguiremos la próxima vez.
+es@5@No se por dónd eempezar
+es@5@¡Que desastre!
+es@5@Resuelves problemas de matemáticas muy mal 
+es@5@¿Sabes que tienes que hacer clic en la respuesta correcta?
+es@5@Tu conocimiento matemático\\ es como la raíz cuadrada de $-1$.
+pl@1@Ale z ciebie Einstein!
+pl@1@Dzisiaj przeszedłeś samego siebie!
+pl@1@Jesteś mistrzem!
+pl@1@Łatwizna!
+pl@1@Możesz świętować. 
+pl@1@Nic prostszego!
+pl@1@Perfekcyjnie, oby tak dalej!
+pl@1@Pierwszorzednie! 
+pl@1@Super! To się nazywa świetna robota!
+pl@1@Świetnie, teraz każde zadanie matematyczne to dla ciebie łatwizna.
+pl@1@Uwaga! Robisz konkurencje Einsteinowi.
+pl@1@Wow! Chodząca z ciebie encyklopedia!
+pl@1@Wspaniale!
+pl@1@Wspaniały wynik! Tylko za bardzo nie świetuj.
+pl@1@Znakomicie!
+pl@2@Było blisko!\\ Następnym razem się uda.
+pl@2@Dobra robota, zasługujesz na ciastko.
+pl@2@Jesteś bliski zwycięstwa,\\nie poddawaj się!
+pl@2@Małymi kroczkami do przodu, następnym razem będzie znakomicie.
+pl@2@Miałbyś to
+pl@2@Mogłeś być pierwszy, a jesteś drugi.
+pl@2@Następnym razem będzie bezbłędnie.
+pl@2@Pomyliłeś się, ale jesteś blisko.
+pl@2@Popełniłeś błędy\\ ale i tak zasługujesz na nagrodę.
+pl@2@Prawie ci się udało.
+pl@2@Prawie dobrze.\\Następnym razem ci się uda.
+pl@2@Prawie się udało.
+pl@2@Super! O włos od perfekcji!
+pl@2@Świetnie, ale do Einsteina jeszcze ci daleko!
+pl@2@\textit  {Najlepszy w klasie} --- ten tytuł prawie jest twój.
+pl@3@Ani źle,ani dobrze.
+pl@3@Dużo już wiesz ale musisz jeszcze poćwiczyć.
+pl@3@Każdy popełnia błędy.
+pl@3@Momencik, tu są jakieś niedociągnięcia.
+pl@3@Możesz być lepszy! Pracuj więcej!
+pl@3@Nie jest tak źle, ale parę rzeczy musisz nadrobić.
+pl@3@Nie jest źle,ale może być lepiej.
+pl@3@Nie martw się-jesteś w połowie\\ drogi do sukcesu. 
+pl@3@Nie najgorzej ale nastepnym razem zjedz kawałek czekolady a będzie lepiej.
+pl@3@Nie tylko ty popełniasz błędy.
+pl@3@Nieźle, ale niektóre obszary\\ wymagają większej wiedzy.
+pl@3@Praktyka czyni mistrza.
+pl@3@Przeciętnie czy nieprzeciętnie?\\ To zależy od ciebie.
+pl@3@Stać cię na więcej!
+pl@3@Ucz się na błędach.
+pl@4@Było blisko! Pracuj więcejj.
+pl@4@Jeszcze trochę i będziesz przeciętny.
+pl@4@Mam nadzieję,\\ że nigdy sie nie poddajesz.
+pl@4@Nie jesteś przyszłym olimpijczykiem, ale stać cie na więcej na tym teście.
+pl@4@Nie poddawaj się!
+pl@4@Nie poddawaj się!\\ Następnym razem będzie lepiej.
+pl@4@Niezbyt dobrze ci poszło.\\ Musisz więcej pracować.
+pl@4@Popełniłeś wiele błędów. Jeszcze nie jesteś dobry w tej dziedzinie.
+pl@4@Przytul przyjaciela\\ i spróbuj jeszcze raz.
+pl@4@Szkoda, musisz jeszcze popracować.
+pl@4@To nie Enigma,\\ w czym leży problem?
+pl@4@Tym razem uniknąłeś 1, ale nie oznacza to,\\ ze nie musisz się uczyć wiecej.
+pl@4@Udało ci się, ale jeszcze dużo pracy przed tobą.
+pl@4@Zawsze mogło być gorzej
+pl@4@Zejdź na ziemię, pracuj dalej.
+pl@5@Były czasy,\\ ze i Einstein nie potrafił liczyć do 10.
+pl@5@Gwiazdy ci dziś nie sprzyjają.
+pl@5@Misja nieudana.\\ Następnym razem ich dopadniemy.
+pl@5@Następnym razem lepiej ci pójdzie.
+pl@5@Następnym razem nie mnóż wiedzy przez zero.
+pl@5@Ta niezręczna chwila kiey jedyne pytanie na jkie znasz odpowiedź to twoje imię i nazwisko…
+pl@5@Ten dziwny moment kiedy rozwiązałeś zadanie matematyczne, a twój wynik nawet nie jest jedną z odpowiedzi do wyboru…
+pl@5@To jest jak film obcojęzyczny,\\ wciąż potrzebujesz napisów.
+pl@5@To wszystko przez pogodę!
+pl@5@Tu już nic nie zmienisz.\\ Sopróbuj rozwiazać inny test.
+pl@5@Twoje wiedza matematyczna jest równa pierwiastkowi kwadratowemu z $-1$.
+pl@5@Udawajmy, ze to się nigdy\\ nie wydarzyło.
+pl@5@Widziałeś kiedyś jak kurczak lata? Właśnie tak rozwiazujesz zadania matematyczne…
+pl@5@Większość twoich odpowiedzi to niewymierna $\pi $.
+pl@5@Zdajesz sobie sprawę z tego,\\ że trzeba kliknąć na poprawną odpowiedź?
+sk@1@Dnes si sa teda poriadne prekonal!
+sk@1@Hannah Montana povedala, že nikto nie je dokonalý, ale pozrime sa na teba!
+sk@1@Kde je reCAPTCHA test,\\ keď ho človek potrebuje?
+sk@1@Môžeš ísť oslavovať!
+sk@1@Nezačína sa náhodou tvoje priezvisko\\ na Ein a končí stein?
+sk@1@Parádička! Tomu hovorím super práca!
+sk@1@Perfektné, len tak ďalej!
+sk@1@Pozor, ešte začne Sheldon žiarliť!
+sk@1@Si šampión!
+sk@1@Skvelé, len tak ďalej!
+sk@1@Super práca!
+sk@1@Takže, aké je to byť tan(45${}^\circ $)?
+sk@1@Výborne, toto ti naozaj ide!
+sk@1@Wau, pecka, si frajer!
+sk@1@Wow! Nevolajú ťa náhodou kamaráti Wolfram? Alebo snáď Alpha?
+sk@2@Bolo tam pár chýb, ale zaslúžiš si pochvalu.
+sk@2@Dobrá práca, ale Einstein z teba zatiaľ nie je.
+sk@2@Dobrá práca, daj si piškótik.
+sk@2@Ešte kúsok a máš to v kapse,\\ skús to znova!
+sk@2@Hermionin titul \textit  {najlepší v ročníku}\\ je takmer v ohrození.
+sk@2@Jó dosť dobré! Gratulujem jako.
+sk@2@Si tak blízko víťazstva, opováž sa vzdať!
+sk@2@Skoro to máš,\\ nabudúce si ideš po plný počet.
+sk@2@Skvelé, k dokonalosti ti chýba\\ už len milimeter.
+sk@2@To bolo tesné! Nabudúce to už bude na plný počet bodov.
+sk@2@Určite si sa len preklikol,\\ skús to znova!
+sk@2@Už to skoro ani nemohlo byť lepšie...skoro
+sk@2@Vidím to ako |výhru|.
+sk@2@Výborne, nabudúce to bude bez chyby!
+sk@2@Zostáva už len malý krôčik,\\ budúci pokus bude legendárny!
+sk@3@Buď rád, že toto nie je IQ test.
+sk@3@Byť priemerný alebo nie?\\ To je otázka na teba.
+sk@3@Dobrý výkon, ale vidíš, že sú tam určité medzery.
+sk@3@Harry Potter a polovičné skóre.
+sk@3@Každý robí chyby, hlavne sa pouč a nevzdaj!
+sk@3@Každý veľký vedec sa niekedy pomýlil,\\ dobrá práca.
+sk@3@Máš na viac! Musíš sa len do toho viac pozrieť.
+sk@3@Neboj sa, vždy sa dá zlepšiť.
+sk@3@Nebolo to až taká zlé, ale čokoláda by ti mohla nabudúce pomôcť.
+sk@3@Nebol to tvoj najlepší výkon.
+sk@3@Nie je to najhoršie, ale vždy to môže byť lepšie.
+sk@3@Nie je to zlé, ale môže to byť lepšie.
+sk@3@Robiť chyby je lepšie ako predstierať dokonalosť, no nerobiť ich je dokonalosť.
+sk@3@Stavím sa, že si si myslel, že sa môžeš vrátiť k otázke.
+sk@3@Treba spraviť okienko\\ s ostávajúcim časom väčšie?
+sk@4@Ešte trochu lepšie a si v priemere.
+sk@4@Fieldsovu cenu asi nedostaneš, ale aspoň tento test by si mohol dať lepšie.
+sk@4@Nabudúce to bude lepšie.
+sk@4@Nebola to žiadna Enigma,\\ tak kde je problém?
+sk@4@Nestrácaj nádej, stáva sa.
+sk@4@No, mohlo to byť aj horšie...
+sk@4@Potrebuješ sa zlepšiť.
+sk@4@Pozri, nie si Ježiš, aby si chodil po vode,\\ tak sa láskavo vráť naspäť na zem.
+sk@4@Škoda, bolo by fajn si to učivo ešte precvičiť.
+sk@4@Spravil si celkom dosť chýb,\\ ešte sa do toho pozri.
+sk@4@Tak toto nedopadlo najlepšie, ale predpokladám, že už si zvyknutý.
+sk@4@Takže, ako ti funguje kalkulačka?\\ Alebo skôr nefunguje...
+sk@4@To zvládneš, nič nie je stratené!
+sk@4@Ušiel si pred pätorkou, ale to neznamená,\\ že by si sa do toho nemal ešte pozrieť!
+sk@4@Zvládol si to, ale stále je čo zlepšovať.
+sk@5@Ajajaj, môžeme sa tváriť,\\ že sa to nestalo.
+sk@5@Asi len zlá konštelácia hviezd...
+sk@5@Keď za to nemôžeš ty, tak kto?
+sk@5@Misia neúspešná. Nabudúce to zvládneme.
+sk@5@Nabudúce, prosím ťa,\\ nenásob svoje vedomosti nulou.
+sk@5@Neboj, boli časy,\\ keď ani Einstein nevedel napočítať do 10.
+sk@5@No katastrofa...
+sk@5@Tento test už moc nezmeníš,\\skús šťastie pri inom.
+sk@5@Ten trápny pocit, keď dokončíš príklad a tvoj výsledok nie je ani jedna z~možností.
+sk@5@Ten trápny pocit, keď jedna z mála vecí,\\ ktorú na teste vieš, je tvoje meno.
+sk@5@Toto je pre teba ako zahraničný film;\\ stále potrebuješ titulky.
+sk@5@Tvoje vedomosti sú\\ ako odmocnina z $-1$.
+sk@5@Väčšina tvojich odpovedí je bohužial\\ ako $\pi $ --- iracionálna.
+sk@5@Videl si niekedy ako sliepka lieta?\\ Rovnako ty počítaš...
+sk@5@Vieš, že máš vyberať správne možnosti?
