@@ -27,6 +27,7 @@ cs@2@Udělal jsi nějaké chyby,\\ ale zasloužíš si pochvalu.
 cs@2@Už to skoro ani nemohlo být lepší. Skoro. 
 cs@2@Výborně. Příště to bude bez chyby.
 cs@2@Zbývá malý krůček,\\příště pokus bude stylový!
+cs@2@Jen jeden krůček od vrcholu.
 cs@3@Ani dobré, ani špatné. Jsi někde uprostřed. 
 cs@3@Buď optimista, polovina výsledků je bez chyby. 
 cs@3@Být průměrný, či nebýt průměrný?\\ Rozhodnutí je čistě na tobě!
@@ -42,7 +43,7 @@ cs@3@Nezoufej, je tu prostor pro zlepšení.
 cs@3@Slušný výkon, ovšem vidíš, že máš v~určitých věcech mezery. 
 cs@3@Trochu tomu rozumíš,\\ ale chce to více procvičovat.
 cs@3@Zkus to znovu, trénink dělá mistra!
-cs@4@Fieldsomu medaili asi nikdy nezískáš, ale tenhle test můžeš zvládnout lépe.
+cs@4@Fieldsovu medaili asi nikdy nezískáš, ale tenhle test můžeš zvládnout lépe.
 cs@4@Hej, mohlo to být i horší….
 cs@4@Hele, nejsi Ježíš, abys chodil po vodě.\\ Zpátky na zem!
 cs@4@Ještě se trochu zlepšit a budeš mezi průměrem. 
@@ -58,7 +59,7 @@ cs@4@Unikl jsi pětce, ale to neznamená,\\ že se nemáš více učit!
 cs@4@Zkoušej to dále. Příště to bude lepší. 
 cs@4@Zvládl jsi to,\\ ale je tady stále prostor pro zlepšení.
 cs@5@Ajaj, tvařme se raději,\\ že se to nestalo.
-cs@5@Asi špatná konstalace hvězd…
+cs@5@Asi špatná konstelace hvězd…
 cs@5@Je to pro tebe jako cizí film;\\ stále potřebuješ titulky.
 cs@5@Mise se nezdařila. Příště to zvládneme.
 cs@5@Příště nenásob své znalosti nulou.
@@ -69,13 +70,13 @@ cs@5@Ten trapný pocit, když dokončíš výpočet a tvůj výsledek není ani 
 cs@5@Tvé znalosti jsou jako odmocnina z $-1$.
 cs@5@Ty za to přece nemůžeš?! A kdo tedy?
 cs@5@Určitě byla doba,\\ kdy ani Einstein nedokázal napočítat do 10. 
-cs@5@Většina tvýdh odpovědí\\ byla bohužel jako $\pi $ --- iracionální.\\ Příště to snad bude lepší. 
+cs@5@Většina tvých odpovědí\\ byla bohužel jako $\pi $ --- iracionální.\\ Příště to snad bude lepší. 
 cs@5@Viděl jsi někdy, jak slepice létá?\\ Tak takovým stylem ty počítáš…
 cs@5@Víš, že máš vybírat správné odpovědi!?
 en@1@Amazing! Incredible!
 en@1@Awesome! Keep it up!
 en@1@Good job, buddy!
-en@1@Great, now you can try solving one of the Millenium Prize problems!
+en@1@Great, now you can try solving one of the Millennium Prize problems!
 en@1@Great, you are very good at this!
 en@1@Perfect, keep it up!
 en@1@Super-duper!\\That is what I call a fine job!
@@ -368,6 +369,6 @@ sk@5@Ten trápny pocit, keď dokončíš príklad a tvoj výsledok nie je ani je
 sk@5@Ten trápny pocit, keď jedna z mála vecí,\\ ktorú na teste vieš, je tvoje meno.
 sk@5@Toto je pre teba ako zahraničný film;\\ stále potrebuješ titulky.
 sk@5@Tvoje vedomosti sú\\ ako odmocnina z $-1$.
-sk@5@Väčšina tvojich odpovedí je bohužial\\ ako $\pi $ --- iracionálna.
+sk@5@Väčšina tvojich odpovedí je bohužiaľ\\ ako $\pi $ --- iracionálna.
 sk@5@Videl si niekedy ako sliepka lieta?\\ Rovnako ty počítaš...
 sk@5@Vieš, že máš vyberať správne možnosti?
