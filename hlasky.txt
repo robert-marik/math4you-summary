@@ -89,7 +89,7 @@ en@1@You are the champion!
 en@1@You can go celebrate!
 en@1@You outdid yourself today!
 en@2@A little harder and you would kill it. Try it again. 
-en@2@Almost there.\\ I´m sure you'll even do better next time.
+en@2@Almost there.\\ I'm sure you'll even do better next time.
 en@2@A small step remains,\\ next time will be glorious!
 en@2@Good job, but you are no Einstein yet!
 en@2@Good work, have a biscuit.
