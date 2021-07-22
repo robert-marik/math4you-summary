@@ -426,7 +426,7 @@ function DisplayAnswer(fieldname,theanswer)
 
 \def\msr@hlaska@text#1#2{%
   \hbox to 0 pt{\hss{\fboxsep 1em\colorbox{gray!20}{%
-  \begin{minipage}[t]{0.4\linewidth}\centering\bfseries
+  \begin{minipage}[t]{0.5\linewidth}\centering\bfseries
     \csname m4u-msg-\langfile-#1-#2\endcsname
   \end{minipage}%
 }}\hss}}
