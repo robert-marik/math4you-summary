@@ -8,8 +8,8 @@ rm tex_un_qa_easy/*
 rm html_translation/*
 rm html_clonable/*
 rm html_easy/*
-wget http://math4u.vsb.cz/tex/flags/easy.csv
-wget http://math4u.vsb.cz/tex/flags/clonable.csv
+wget https://math4u.vsb.cz/tex/flags/easy.csv
+wget https://math4u.vsb.cz/tex/flags/clonable.csv
 bash prikaz
 bash prikaz_texfilter
 bash prikaz_texgen 

@@ -105,7 +105,7 @@ def download_images(img):
         filename=img.split("/")
         if downloadfiles:
             print "Downloading "+img
-            os.system("wget http://math4u.vsb.cz/"+img+" -q -O pics/"+str(filename[-1]))
+            os.system("wget https://math4u.vsb.cz/"+img+" -q -O pics/"+str(filename[-1]))
             if filename[-1][-4:]==".svg":
                 os.system("inkscape --file=pics/"+str(filename[-1])+" --export-area-page --without-gui --export-pdf=pics/"+filenameSVGtoPDF(str(filename[-1])))
 
@@ -148,17 +148,17 @@ for row in database:
     for lang in [testen,testcs,testpl,testsk,testes]:
         langtest=lang.replace("\\text{ ,","").replace("\\text{ .","").replace(" ...","")
         if " ." in langtest:
-            typos=typos+"\n<br><br><a href='http://math4u.vsb.cz/problem/"+row['project_id']+"'>"+row['project_id']+"</a> SPACE.<br>\n"+lang
+            typos=typos+"\n<br><br><a href='https://math4u.vsb.cz/problem/"+row['project_id']+"'>"+row['project_id']+"</a> SPACE.<br>\n"+lang
         if " ," in langtest:
-            typos=typos+"\n<br><br><a href='http://math4u.vsb.cz/problem/"+row['project_id']+"'>"+row['project_id']+"</a> SPACE,<br>\n"+lang
+            typos=typos+"\n<br><br><a href='https://math4u.vsb.cz/problem/"+row['project_id']+"'>"+row['project_id']+"</a> SPACE,<br>\n"+lang
         if "....." in lang:
-            typos=typos+"\n<br><br><a href='http://math4u.vsb.cz/problem/"+row['project_id']+"'>"+row['project_id']+"</a> .....<br>\n"+lang
+            typos=typos+"\n<br><br><a href='https://math4u.vsb.cz/problem/"+row['project_id']+"'>"+row['project_id']+"</a> .....<br>\n"+lang
         if "–" in lang:
-            typos=typos+"\n<br><br><a href='http://math4u.vsb.cz/problem/"+row['project_id']+"'>"+row['project_id']+"</a> – (skarede minus)<br>\n"+lang
+            typos=typos+"\n<br><br><a href='https://math4u.vsb.cz/problem/"+row['project_id']+"'>"+row['project_id']+"</a> – (skarede minus)<br>\n"+lang
         if "--" in lang:
-            typos=typos+"\n<br><br><a href='http://math4u.vsb.cz/problem/"+row['project_id']+"'>"+row['project_id']+"</a> -- (dve pomlcky z TeXu)<br>\n"+lang
+            typos=typos+"\n<br><br><a href='https://math4u.vsb.cz/problem/"+row['project_id']+"'>"+row['project_id']+"</a> -- (dve pomlcky z TeXu)<br>\n"+lang
         #if u"\u2061" in lang:
-        #    typos=typos+"\n<br><br><a href='http://math4u.vsb.cz/problem/"+row['project_id']+"'>"+row['project_id']+"</a> neviditelny znak (U+2061)<br>\n"+lang
+        #    typos=typos+"\n<br><br><a href='https://math4u.vsb.cz/problem/"+row['project_id']+"'>"+row['project_id']+"</a> neviditelny znak (U+2061)<br>\n"+lang
             
 #    if testen==testcs:
 #        row['answer_1_cs']=""
@@ -236,7 +236,7 @@ for row in database:
         linklang=lang+"/"
         if lang=="en":
             linklang=""
-        outstr=outstr+"<div class='container lang"+lang+"'><a href=\"http://math4u.vsb.cz/"+linklang+"problem/"+row['project_id']+"\" target=\"_blank\"><span class='lang'>"+lang+"</span></a><div class='question'>"
+        outstr=outstr+"<div class='container lang"+lang+"'><a href=\"https://math4u.vsb.cz/"+linklang+"problem/"+row['project_id']+"\" target=\"_blank\"><span class='lang'>"+lang+"</span></a><div class='question'>"
         outstr=outstr+row['question_'+lang]
         outstr=outstr+"</div>"
         for i in [row['answer_1_'+lang],row['answer_2_'+lang],row['answer_3_'+lang],row['answer_4_'+lang],row['answer_5_'+lang],row['answer_6_'+lang]] :
@@ -252,7 +252,7 @@ for row in database:
                     linklang2=lang2+"/"
                     if lang2=="en":
                         linklang2=""
-                    outstr=outstr+"<div class='container lang"+lang2+"'><a href=\"http://math4u.vsb.cz/"+linklang2+"problem/"+hledamklon['project_id']+"\" target=\"_blank\"><span class='lang'>"+lang2+"</span></a><div class='question'>"
+                    outstr=outstr+"<div class='container lang"+lang2+"'><a href=\"https://math4u.vsb.cz/"+linklang2+"problem/"+hledamklon['project_id']+"\" target=\"_blank\"><span class='lang'>"+lang2+"</span></a><div class='question'>"
                     outstr=outstr+hledamklon['question_'+lang2]
                     outstr=outstr+"</div>"
                     for i in [hledamklon['answer_1_'+lang2],hledamklon['answer_2_'+lang2],hledamklon['answer_3_'+lang2],hledamklon['answer_4_'+lang2],hledamklon['answer_5_'+lang2],hledamklon['answer_6_'+lang2]] :

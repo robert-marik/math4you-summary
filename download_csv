@@ -1,4 +1,4 @@
-site=http://math4u.vsb.cz/
+site=https://math4u.vsb.cz/
 name=robert.marik
 pass=Rob45*Ma
 cookies=/tmp/cron-cookies.txt
@@ -10,17 +10,17 @@ wget --keep-session-cookies --save-cookies $cookies --load-cookies $cookies -O /
 
 for i in {32..87};
 do 
-   wget -O csv/${i}.csv --keep-session-cookies --save-cookies $cookies --load-cookies $cookies "http://math4u.vsb.cz/tex/problem_txt.csv/$i"
+   wget -O csv/${i}.csv --keep-session-cookies --save-cookies $cookies --load-cookies $cookies "https://math4u.vsb.cz/tex/problem_txt.csv/$i"
    sed -i -f sed_repl.txt csv/${i}.csv
 done
 
-wget -O csv/problem_img.csv --keep-session-cookies --save-cookies $cookies --load-cookies $cookies "http://math4u.vsb.cz/tex/problem_img.csv"
+wget -O csv/problem_img.csv --keep-session-cookies --save-cookies $cookies --load-cookies $cookies "https://math4u.vsb.cz/tex/problem_img.csv"
 sed -i -f sed_repl.txt csv/problem_img.csv
 
-wget -O csv/problem_txt_un.csv --keep-session-cookies --save-cookies $cookies --load-cookies $cookies "http://math4u.vsb.cz/tex/problem_txt_un.csv"
+wget -O csv/problem_txt_un.csv --keep-session-cookies --save-cookies $cookies --load-cookies $cookies "https://math4u.vsb.cz/tex/problem_txt_un.csv"
 sed -i -f sed_repl.txt csv/problem_txt_un.csv
 
-wget -O csv/problem_img_un.csv --keep-session-cookies --save-cookies $cookies --load-cookies $cookies "http://math4u.vsb.cz/tex/problem_img_un.csv"
+wget -O csv/problem_img_un.csv --keep-session-cookies --save-cookies $cookies --load-cookies $cookies "https://math4u.vsb.cz/tex/problem_img_un.csv"
 sed -i -f sed_repl.txt csv/problem_img_un.csv
 
 sed -i s/Moivre´/Moivre\'/g csv/problem_txt_un.csv
