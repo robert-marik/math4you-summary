@@ -139,14 +139,14 @@ for row in database:
 #        continue
     
     # fix for missing language in csv
-    if 'answer_1_es' not in row.keys():
-        row['answer_1_es']="NA"
-        row['answer_2_es']="NA"
-        row['answer_3_es']="NA"
-        row['answer_4_es']="NA"
-        row['answer_5_es']="NA"
-        row['answer_6_es']="NA"
-        row['question_es']="NA"
+#    if 'answer_1_es' not in row.keys():
+#        row['answer_1_es']="NA"
+#        row['answer_2_es']="NA"
+#        row['answer_3_es']="NA"
+#        row['answer_4_es']="NA"
+#        row['answer_5_es']="NA"
+#        row['answer_6_es']="NA"
+#        row['question_es']="NA"
         
     id=id+1
     download_images(row['question_image'])
