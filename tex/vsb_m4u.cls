@@ -43,7 +43,7 @@
 \DeclareOptionX{cs}{\def\langfile{cs}\PassOptionsToPackage{czech}{babel}\def\Itest{Interaktivn\'i test}}
 \DeclareOptionX{sk}{\def\langfile{sk}\PassOptionsToPackage{slovak}{babel}\def\Itest{Interakt\'ivny test}}
 \DeclareOptionX{pl}{\def\langfile{pl}\PassOptionsToPackage{polish}{babel}\def\Itest{Test interaktywny}}
-\DeclareOptionX{es}{\def\langfile{es}\PassOptionsToPackage{spanish}{babel}\def\Itest{Interactive test}}
+\DeclareOptionX{es}{\def\langfile{es}\PassOptionsToPackage{spanish}{babel}\def\Itest{Test interactivo}}
 \ifx\enlangfile\langfile {\PassOptionsToPackage{english}{babel}}\fi
 
 \ProcessOptionsX
