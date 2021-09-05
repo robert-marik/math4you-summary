@@ -356,7 +356,7 @@ function DisplayAnswer(fieldname,theanswer)
                 if ( f != null) 
                 {
                   var procenta = (100 * ptScore) / BodyMaximum;
-                  if (procenta < 0) {f.value="0\%";}  
+                  if (procenta < 0) {f.value="0";}  
                 }
                 else
                 {
