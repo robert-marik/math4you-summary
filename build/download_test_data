@@ -104,7 +104,7 @@ do
     bash prikaz_vytvor_test $i
     mv t_${i}.pdf test_${i}.pdf
     mv t_${i}.log test_${i}.log
-    mv test_${i}.pdf /var/www/m4uproject/m4u-cache/tests/
+    mv test_${i}.pdf /var/www/m4uproject/m4u-cache/pdf/
 #A    fi
 
 
@@ -115,10 +115,10 @@ do
         echo "TEST PAPER VERSION"
         mv tp_${i}-2up.pdf test_${i}.pdf
         mv tp_${i}.log test_${i}.log
-        mv test_${i}.pdf /var/www/m4uproject/m4u-cache/tests/
+        mv test_${i}.pdf /var/www/m4uproject/m4u-cache/pdf/
     fi
     
-    echo "$i,https://msr-latex.vsb.cz/m4uproject/m4u-cache/tests/test_${i}.pdf,0,$langcode" >> /var/www/m4uproject/m4u-cache/tests/import_new.csv
+    echo "$i,https://msr-latex.vsb.cz/m4uproject/m4u-cache/pdf/test_${i}.pdf,0,$langcode" >> /var/www/m4uproject/m4u-cache/tests/import_new.csv
 
 done
 
