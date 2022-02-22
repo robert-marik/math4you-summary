@@ -180,3 +180,36 @@ do
 
 done
 
+
+
+
+
+for i in {32..87};
+do 
+    echo CSV file $i
+    echo ===========
+    pdflatex "\def\soubor{${i}}\def\TWO{} \input driver_publish.tex "	
+    cp driver_publish.pdf pdf_un_publish/$i.pdf
+    cp driver_publish.log pdf_un_publish/$i.log
+
+    pdflatex "\def\soubor{${i}}\long\def\LANGcs#1{} \long\def\LANGsk#1{} \long\def\LANGpl#1{} \long\def\LANGes#1{} \input driver_publish.tex "
+    cp driver_publish.pdf pdf_un_publish/${i}en.pdf
+    cp driver_publish.log pdf_un_publish/${i}en.log
+
+    pdflatex "\def\soubor{${i}}\long\def\LANGen#1{} \long\def\LANGsk#1{} \long\def\LANGpl#1{} \long\def\LANGes#1{} \input driver_publish.tex "
+    cp driver_publish.pdf pdf_un_publish/${i}cs.pdf
+    cp driver_publish.log pdf_un_publish/${i}cs.log
+
+    pdflatex "\def\soubor{${i}}\long\def\LANGcs#1{} \long\def\LANGsk#1{} \long\def\LANGen#1{} \long\def\LANGes#1{} \input driver_publish.tex "
+    cp driver_publish.pdf pdf_un_publish/${i}pl.pdf
+    cp driver_publish.log pdf_un_publish/${i}pl.log
+
+    pdflatex "\def\soubor{${i}}\long\def\LANGcs#1{} \long\def\LANGen#1{} \long\def\LANGpl#1{} \long\def\LANGes#1{} \input driver_publish.tex "
+    cp driver_publish.pdf pdf_un_publish/${i}sk.pdf
+    cp driver_publish.log pdf_un_publish/${i}sk.log
+
+    pdflatex "\def\soubor{${i}}\long\def\LANGcs#1{} \long\def\LANGen#1{} \long\def\LANGpl#1{} \long\def\LANGsk#1{} \input driver_publish.tex "
+    cp driver_publish.pdf pdf_un_publish/${i}es.pdf
+    cp driver_publish.log pdf_un_publish/${i}es.log
+
+done

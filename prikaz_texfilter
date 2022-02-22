@@ -3,14 +3,17 @@ sed -i "s/$(echo -ne '\u2061')//g" tex_easy/*.tex
 sed -i "s/$(echo -ne '\u2061')//g" tex_clonable/*.tex
 sed -i "s/$(echo -ne '\u2061')//g" tex_un_translation/*.tex
 sed -i "s/$(echo -ne '\u2061')//g" tex_un_qa/*.tex
+sed -i "s/$(echo -ne '\u2061')//g" tex_un_publish/*.tex
 
 rpl "\array" "\PMATRIX" tex/40.tex
 rpl "\array" "\PMATRIX" tex_easy/40.tex
 rpl "\array" "\PMATRIX" tex_clonable/40.tex
+rpl "\array" "\PMATRIX" tex_publish/40.tex
 
 rpl "\left (\PMATRIX" "\left( \MATRIX" tex/40.tex
 rpl "\left (\PMATRIX" "\left( \MATRIX" tex_easy/40.tex
 rpl "\left (\PMATRIX" "\left( \MATRIX" tex_clonable/40.tex
+rpl "\left (\PMATRIX" "\left( \MATRIX" tex_publish/40.tex
 
 #rpl "\mathrm{zł}" "\text{z\l{}}" tex/*.tex
 
@@ -28,4 +31,7 @@ rpl "€" "EURO" tex_un_translation/*.tex
 
 sed -i "s/mathrm{zł}/text{z\\\\l{}}/g" tex_un_qa/*.tex
 rpl "€" "EURO" tex_un_qa/*.tex
+
+sed -i "s/mathrm{zł}/text{z\\\\l{}}/g" tex_un_publish/*.tex
+rpl "€" "EURO" tex_un_publish/*.tex
 
