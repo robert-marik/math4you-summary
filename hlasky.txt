@@ -151,7 +151,7 @@ en@5@Your math knowledge\\ is just like the square root of $-1$.
 es@1@¡Buen trabajo amigo!
 es@1@¡Buen trabajo! Sigue así. 
 es@1@¡Eres el mejor! Creo que es el momento de celebrar, ¿no?
-es@1@¡Eres un campeón!
+es@1@¡Perfecto!
 es@1@¡Eso fue exelente!
 es@1@Esperar! ¡Sheldon se va a poner celoso!
 es@1@¡Genial, ahora puedes intentar resolver uno de los problemas del Premio Millennium!
