@@ -79,7 +79,7 @@ id=0
 database=[]
 database_easy=[]
 
-with open("csv/problem_txt_un.csv", 'rb') as csvfile:
+with open("csv/problem_txt_un.csv", 'r') as csvfile:
     spamreader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
     for row in spamreader:
         if row['state']=="translation":
@@ -90,7 +90,7 @@ with open("csv/problem_txt_un.csv", 'rb') as csvfile:
             database.append(row)
         if row['easy']=="1":
             database_easy.append(row['title'])
-with open("csv/problem_img_un.csv", 'rb') as csvfile:
+with open("csv/problem_img_un.csv", 'r') as csvfile:
     spamreader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
     for row in spamreader:
         if row['state']=="translation":
@@ -114,7 +114,8 @@ downloadfiles=True
 #for i in filenames:
 
 
-os.system("rm tex_un_qa/* tex_un_qa_easy/*  tex_un_translation/*  html_un_qa/* html_un_qa_easy/* html_un_translation/* html_un_publish/* tex_un_publish/*")
+os.system("rm tex_un_qa/* tex_un_qa_easy/*  tex_un_translation/*  html_un_qa/* html_un_qa_easy/* html_un_translation/* html_un_publish/* tex_un_publish/* unmatched_id.txt")
+os.system("touch unmatched_id.txt")
 
 typos=""    
 
@@ -151,7 +152,16 @@ for row in database:
 #        row['answer_5_es']="NA"
 #        row['answer_6_es']="NA"
 #        row['question_es']="NA"
-        
+
+
+    if row['subarea'] in seznamKoduPodoblasti:
+       kod_podoblasti = seznamKoduPodoblasti[row['subarea']]
+    else:
+       outstr = "Failed to match subarea "+row['subarea']+" in question "+row['project_id']
+       print (outstr)
+       with open("unmatched_id.txt", 'a') as the_file:
+          the_file.write(outstr+"\n")
+       continue
     id=id+1
     print("Question "+row['project_id'])
     download_images(row['question_image'])
@@ -251,13 +261,13 @@ for row in database:
             if row['answer_'+num+'_image']!='':
                 outstr=outstr+"\n\IMGanswer{"+filenameSVGtoPDF(str(row['answer_'+num+'_image'].split("/")[-1]))+"}"
     outstr=outstr+"\End\n"
-    with open("tex_un_"+row["state"]+"/"+(seznamKoduPodoblasti[row['subarea']])+'.tex', 'a') as the_file:
+    with open("tex_un_"+row["state"]+"/"+(kod_podoblasti)+'.tex', 'a') as the_file:
         the_file.write(outstr)
     if row["state"]=="qa" or row["state"]=="translation":
-       with open("tex_un_publish/"+(seznamKoduPodoblasti[row['subarea']])+'.tex', 'a') as the_file:
+       with open("tex_un_publish/"+(kod_podoblasti)+'.tex', 'a') as the_file:
           the_file.write(outstr)
     if row["state"]=="qa" and row["easy"]=="1":
-       with open("tex_un_qa_easy/"+(seznamKoduPodoblasti[row['subarea']])+'.tex', 'a') as the_file:
+       with open("tex_un_qa_easy/"+(kod_podoblasti)+'.tex', 'a') as the_file:
           the_file.write(outstr)
 
     outstr="\n"
@@ -283,12 +293,12 @@ for row in database:
             if row['answer_'+num+'_image']!='':
                 outstr=outstr+"<img src=pics/"+str(row['answer_'+num+'_image'].split("/")[-1])+">"
     outstr=outstr+"</div>\n"
-    with open("html_un_"+row["state"]+"/"+(seznamKoduPodoblasti[row['subarea']])+'.html', 'a') as the_file:
+    with open("html_un_"+row["state"]+"/"+(kod_podoblasti)+'.html', 'a') as the_file:
         the_file.write(outstr)
     if row["state"]=="qa" or row["state"]=="translation":
-       with open("html_un_publish/"+(seznamKoduPodoblasti[row['subarea']])+'.html', 'a') as the_file:
+       with open("html_un_publish/"+(kod_podoblasti)+'.html', 'a') as the_file:
           the_file.write(outstr)
     if row["state"]=="qa" and row["easy"]=="1":
-       with open("html_un_qa_easy/"+(seznamKoduPodoblasti[row['subarea']])+'.html', 'a') as the_file:
+       with open("html_un_qa_easy/"+(kod_podoblasti)+'.html', 'a') as the_file:
           the_file.write(outstr)
 

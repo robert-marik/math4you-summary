@@ -2,7 +2,7 @@
 % pdflatex "\def\TWO{} \input driver.tex "
 
 \nonstopmode
-\ifx\soubor\undefined\def\soubor{50}\fi
+\ifx\soubor\undefined\def\soubor{40}\fi
 \ifx\TITLE\undefined \def\TITLE{Test title}\fi
 \documentclass{article}
 \usepackage[margin=1in]{geometry}
@@ -111,6 +111,11 @@ Exercises for You.\\Please do not redistribute the material. }
   \end{pmatrix}
 }
 
+\def\MATRIX#1{
+  \begin{matrix}
+    #1
+  \end{matrix}
+}
 
 \edef\myfile{tex_un_qa/\soubor.tex}
 \expandafter\InputIfFileExists\expandafter{\myfile}{}{}

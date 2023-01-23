@@ -148,80 +148,81 @@ en@5@This is like a foreign movie to you;\\ you still need subtitles.
 en@5@We should blame the weather!
 en@5@What a calamity!
 en@5@Your math knowledge\\ is just like the square root of $-1$.
+es@1@¡Eres el mejor! Creo que es el momento de celebrar, ¿no?
 es@1@¡Buen trabajo amigo!
 es@1@¡Buen trabajo! Sigue así. 
-es@1@¡Eres el mejor! Creo que es el momento de celebrar, ¿no?
-es@1@¡Perfecto!
-es@1@¡Eso fue exelente!
-es@1@Esperar! ¡Sheldon se va a poner celoso!
-es@1@¡Genial, ahora puedes intentar resolver uno de los problemas del Premio Millennium!
-es@1@¡Impresionante! ¡Seguid así!
+es@1@¡Buen trabajo! Simplemente ten cuidado con el alcohol antes de un examen, podría dañar tus células cerebrales.
+es@1@¡Excelente! ¡Una maravilla!
+es@1@¡Genial! ¡Ahora a por la Medalla Fields!
+es@1@¡Impresionante! ¡Sigue así!
 es@1@¡Magnífico! ¡Increíble!
-es@1@¡Perfecto!¡Eres muy bueno en esto!
-es@1@¡Qué buen trabajo! Solo tenga cuidado con el alcohol antes de un examen. Podría dañar sus células cerebrales.
+es@1@¡Perfecto! Eres una máquina.
+es@1@¡Perfecto! ¡Eres muy bueno en esto!
+es@1@¡Qué cerebrito! ¡Sheldon se va a poner celoso!
 es@1@¡Super! ¡Eso es lo que yo llamo un buen trabajo!
-es@1@¡Tenemos un Einstein!
 es@1@¡Te superaste hoy!
+es@1@¡Tenemos un Einstein!
 es@1@¡Vaya! ¿Tus amigos por casualidad te llaman Wolfram o quizás Alpha?
-es@2@¡Así me gusta! ¡Un poquito más y será perfecto!
-es@2@¡Casi la rompes!
-es@2@Casi lo logras. Casi.
-es@2@¡Casi perfecto! ¡La próxima vez será impecable!
-es@2@El título a \textit  {la mejor de la clase} Hermione 
-es@2@Eso es como cuando terminas segundo en una competencia cuando podrías haberla ganado.
-es@2@Estabas a punto de sacar un 1,\\ incluso así ¡muy bien hecho!
-es@2@¡Estuviste muy cerca!\\Acabas de hacer un mal paso.
-es@2@Estuviste tan cerca de la victoria. ¡Sigue intentando!
-es@2@¡Estuvo cerca! La próxima vez brillarás\\ como una estrella.
-es@2@¡Menudo trabajo! ¡Toma un biscuit!
+es@2@ ¡Así me gusta! ¡Un poquito más y será perfecto!
+es@2@A puntito de tenerlo perfecto, ¡muy bien hecho!
+es@2@Compites con Hermione por el título del "mejor de la clase".
+es@2@Es como quedar segundo cuando podrías haber ganado.
+es@2@Has estado tan cerca de la victoria… ¡Sigue intentándolo!
 es@2@Te faltó muy poco. Inténtalo otra vez
-es@2@Te faltó un pequeño pas.\\¡Próxima vez será genial!
-es@2@Te ha faltado poco. 
-es@3@Aguanta, hay tiempo para mejorar.
+es@2@Te faltó muy poquito… ¡La próxima vez será excelente!
+es@2@Todavía no eres Einstein, ¡pero muy buen trabajo!
+es@2@¡Buen trabajo! Toma una galleta.
+es@2@¡Casi lo clavas!
+es@2@¡Casi perfecto!  ¡La próxima vez será impecable!
+es@2@¡Estuvo cerca! La próxima vez brillarás como una estrella.
+es@2@¡Genial! A unos pasitos de la perfección.
+es@2@¡Has estado muy cerca! Solo has dado un paso en falso.
+es@2@¡Uy! ¡Casi inmejorable! Casi.
 es@3@Aunque lo has hecho más o menos bien, puedes hacerlo mejor, ¿no crees?
-es@3@Cometer errores es mejor que la maldita perfección
-es@3@Está bien, pero podría ser mejor. 
-es@3@Justo medio. 
-es@3@La próxima vez será mejor, ya verás.
-es@3@¡Lo puedes hacer mejor!\\ ¡Tienes que esforzarte más!
+es@3@Está bien, pero podría estar mejor.
+es@3@Inténtalo de nuevo, ¡con práctica mejorarás!
+es@3@Más o menos lo comprendes, pero necesitas practicar.
+es@3@Nadie es perfecto.
+es@3@Ni maravilloso ni terrible. Estás a medio camino.
+es@3@No desesperes: nunca es tarde para mejorar.
 es@3@No es lo peor, pero puedes hacerlo mejor. ¡Inténtalo de nuevo!
-es@3@No está mal, pero podría estar mejor.\\Estás llegando
-es@3@No está nada mal… La próxima vez será mejor. 
-es@3@No fue lo peor, pero la próxima vez come un trozo de chocolate y definitivamente te ayudará.
-es@3@¿Ser promedio o no ser promedio?\\ Esa es la pregunta.
-es@3@Todos cometemos errores, sobre todo hay que aprender de ellos. 
+es@3@No está mal, pero tienes que ponerte las pilas.
+es@3@No fue lo peor, pero la próxima vez come un trozo de chocolate y seguro que te ayudará. 
+es@3@Seamos optimistas, la mitad de las respuestas están correctas.
+es@3@Todos cometemos errores, lo importante es aprender de ellos y no rendirse.
 es@3@Todos los grandes científicos cometieron errores en su vida. Igual que tú.
-es@3@Ya lo comprendes pero tienes que practicar
-es@4@¡Aprobado por los pelos! Estudie más porque la próxima vez no tendrá tanta suerte
-es@4@Cometiste muchos errores.\\ Todavía no eres bueno en esto.
-es@4@Ehm, tú no tienes a Dios tomado de la barba ¡Bájate de esa nube!
-es@4@Eso no lo resolviste muy bien.\\ Deberias estudiar mas.
-es@4@Evitaste una F, pero eso no significa que no tengas que estudiar más.
-es@4@Intenta de nuevo.
+es@3@¡Lo puedes hacer mejor! ¡Tienes que esforzarte más!
+es@3@¿Ser o no mediocre? Esa es la cuestión.
+es@4@Has aprobado, pero hay mucho margen de mejora.
+es@4@Has cometido muchos errores, debes practicar más.
+es@4@Inténtalo de nuevo, ¡no tires la toalla!
 es@4@Lástima, es posible que debas practicar más.
-es@4@Lo tienes. ¡No tires la toalla!
-es@4@No era un enigma\\ ¿Dónde está el problema?
-es@4@Pudo acabar mucho peor.
+es@4@No ha acabado muy bien… Deberías estudiar más.
 es@4@Puede que no seas un futuro ganador de la Medalla Fields, pero puedes hacerlo mejor en esta prueba.
-es@4@Se puede mejorar.
-es@4@Solo un poco mejor y estarás en la media.
+es@4@Tampoco era Enigma, ¿dónde está el problema?
+es@4@Te has librado del suspenso, ¡pero por los pelos! Hay que estudiar más.
 es@4@Tienes que currar, tú puedes.
-es@4@Tienes que ser positivo,\\ podría ser peor. 
-es@5@¡Deberíamos culpar al clima!
-es@5@El peor momento ha sido que lo único que sabes del exámen es tu nombre
-es@5@¡Estás en el horno!\\ Intenta con otra prueba.
-es@5@Esto es como una película extranjera para ti; todavía necesitas subtítulos
-es@5@Hagamos como que nunca sucedió.
-es@5@Hubo un tiempo en que Einstein tampoco podía contar hasta diez.
-es@5@La mayoría de sus respuestas fueron, lamentablemente, como $\pi $: irracionales.\\ Estarás mejor la próxima vez.
-es@5@Las estrellas no se alinearon\\ a tu favor hoy 
-es@5@¡Lo peor ha sido cuando terminas un problema de matemáticas y tu respuesta ni siquiera es una de las opciones…
+es@4@Tienes que ser positivo, podría ser peor. 
+es@4@Un poco más y llegarás al punto medio.
+es@4@¡Aprobado por los pelos! Estudia más porque la próxima vez no tendrás tanta suerte.
+es@4@¡Baja de las nubes y estudia un poco más!
+es@4@¡Podría haber sido peor!
+es@4@¿Estás ahorrando energía para la próxima vez?
+es@5@Al principio ni siquiera Einstein era capaz de contar hasta 10.
+es@5@De aquí ya no puedes sacar nada… Prueba con otro, a ver qué tal.
+es@5@Ese momento incómodo en el que te das cuenta de que lo único que sabes contestar del examen es tu nombre.
+es@5@Ese momento incómodo en el que terminas un problema de matemáticas y tu solución ni siquiera está entre las opciones…
+es@5@Hoy los astros no estaban alineados a tu favor.
+es@5@La próxima vez no multipliques tus conocimientos por cero.
+es@5@Lamentablemente, la mayoría de tus repuestas fueron como pi: irracionales. Lo harás mejor la próxima vez.
 es@5@Misión fallida. Los conseguiremos la próxima vez.
-es@5@No se por dónd eempezar
-es@5@¡Que desastre!
-es@5@Resuelves problemas de matemáticas muy mal 
-es@5@¿Sabes que tienes que hacer clic en la respuesta correcta?
-es@5@Tu conocimiento matemático\\ es como la raíz cuadrada de $-1$.
+es@5@No es tu culpa, ¿verdad? ¿Entonces de quién? ¿del vecino?
+es@5@Para ti esto es como una película extranjera: necesitas subtítulos.
+es@5@Tu conocimiento matemático es como la raíz cuadrada de -1.
+es@5@Una cosita: ¿de verdad sabes que tienes que marcar la respuesta correcta?
+es@5@Vamos a hacer como que esto no ha pasado.
+es@5@¡Qué desastre!
+es@5@¿Has visto a una gallina volar? Pues tú eres igual resolviendo problemas matemáticos.
 pl@1@Ale z ciebie Einstein!
 pl@1@Dzisiaj przeszedłeś samego siebie!
 pl@1@Jesteś mistrzem!
