@@ -1,4 +1,4 @@
-for i in {32..87};
+for i in {32..87} 144;
 do 
     echo CSV file $i
     echo ===========
@@ -29,7 +29,7 @@ do
 done
 
 
-for i in {32..87};
+for i in {32..87} 144;
 do 
     echo CSV file $i
     echo ===========
@@ -59,7 +59,7 @@ do
 
 done
 
-for i in {32..87};
+for i in {32..87} 144;
 do 
     echo CSV file $i
     echo ===========
@@ -89,7 +89,7 @@ do
 
 done
 
-for i in {32..87};
+for i in {32..87} 144;
 do 
     echo CSV file $i
     echo ===========
@@ -120,7 +120,7 @@ do
 done
 
 
-for i in {32..87};
+for i in {32..87} 144;
 do 
     echo CSV file $i
     echo ===========
@@ -150,7 +150,7 @@ do
 
 done
 
-for i in {32..87};
+for i in {32..87} 144;
 do 
     echo CSV file $i
     echo ===========
@@ -184,7 +184,7 @@ done
 
 
 
-for i in {32..87};
+for i in {32..87} 144;
 do 
     echo CSV file $i
     echo ===========

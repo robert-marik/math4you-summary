@@ -2,7 +2,7 @@ rm html/typo.html
 rm html_clonable/report_clonable.php 
 
 echo "<head><meta charset='UTF-8'></head><body>" > html/typo.html
-for i in {32..87};
+for i in {32..87} 144;
 do 
     echo CSV file $i
     echo ===========

@@ -70,6 +70,7 @@ subareaToName("84","Primitive function")
 subareaToName("85","Definite integral")
 subareaToName("86","Applications of definite integral")
 subareaToName("87","Percent problems")
+subareaToName("144","Calculations with logarithms")
 
 langlist=['en','pl','cs','sk','es']
 

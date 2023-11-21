@@ -52,6 +52,8 @@ cp pdf_un_translation/*.* /var/www/math4you/data/pdf_un_translation
 cp pdf_un_publish/*.* /var/www/math4you/data/pdf_un_publish
 
 cp html_clonable/*.* /var/www/math4you/data/html_clonable
+sed -i 's/\\textbf{\([^}]*\)\}/<b>\1<\/b>/g' /var/www/math4you/data/*/*.html
+
 cp pics/*.* /var/www/math4you/data/pics
 date > /var/www/math4you/data/last_update
 
