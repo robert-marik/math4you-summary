@@ -22,6 +22,7 @@ bash prepocitej_clonable.sh > html_clonable/pocet.php
 bash prepocitej_translation.sh > html_un_translation/pocet.php
 bash prepocitej_publish.sh > html_un_pusblish/pocet.php
 cat html_un_translation/??.html > html_un_translation/all.html
+cat html_un_translation/???.html >> html_un_translation/all.html
 
 cp pdf/*.* /var/www/math4you/data/pdf
 cp html/*.* /var/www/math4you/data/html
@@ -71,12 +72,11 @@ bash recent es > /var/www/math4you/data/html/recent_es.html
 
 bash save_to_html
 
-
-bash spellcheck cs
-bash spellcheck sk
-bash spellcheck en
-bash spellcheck pl
-bash spellcheck es
+bash spellcheck cs > /dev/null
+bash spellcheck sk > /dev/null
+bash spellcheck en > /dev/null
+bash spellcheck pl > /dev/null
+bash spellcheck es > /dev/null
 
 cp txt/list_*.txt /var/www/temp/
 cp spell_correct.* /var/www/temp/
