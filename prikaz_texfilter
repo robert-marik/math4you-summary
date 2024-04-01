@@ -43,6 +43,14 @@ rpl "\left (\PMATRIX" "\left( \MATRIX" tex_un_qa/40.tex
 rpl "\left (\PMATRIX" "\left( \MATRIX" tex_un_publish/40.tex
 rpl "\left (\PMATRIX" "\left( \MATRIX" tex_un_translation/40.tex
 
+rpl "\array" "\MATRIX" tex/131.tex
+rpl "\array" "\MATRIX" tex_easy/131.tex
+rpl "\array" "\MATRIX" tex_clonable/131.tex
+rpl "\array" "\MATRIX" tex_publish/131.tex
+rpl "\array" "\MATRIX" tex_un_qa/131.tex
+rpl "\array" "\MATRIX" tex_un_publish/131.tex
+rpl "\array" "\MATRIX" tex_un_translation/131.tex
+
 #rpl "\mathrm{zł}" "\text{z\l{}}" tex/*.tex
 
 sed -i "s/mathrm{zł}/text{z\\\\l{}}/g" tex/*.tex
