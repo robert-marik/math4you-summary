@@ -23,7 +23,7 @@ subareaToName("36","Absolute value")
 subareaToName("37","Linear equations and inequalities")
 subareaToName("38","Quadratic equations and inequalities")
 subareaToName("39","Higher degree equations and inequalities")
-subareaToName("40","Systems of equations and inequalities")
+subareaToName("40","Systems of linear equations and inequalities")
 subareaToName("41","Rational equations and inequalities")
 subareaToName("42","Absolute value equations and inequalities")
 subareaToName("43","Radical equations and inequalities")
@@ -74,6 +74,7 @@ subareaToName("87","Percent problems")
 subareaToName("144","Calculations with logarithms")
 subareaToName("131","Matrices and determinants")
 subareaToName("133","Systems of nonlinear equations and inequalities")
+subareaToName("130","Analyzing function behavior")
 
 
 langlist=['en','pl','cs','sk','es']

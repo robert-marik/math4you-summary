@@ -8,7 +8,7 @@ wget --keep-session-cookies --save-cookies $cookies --load-cookies $cookies -O /
         --post-data="name=$name&pass=$pass&op=Log%20in&form_id=user_login" \
         "${site}user?destination=login_redirect"
 
-for i in {32..87} 144 131 133;
+for i in {32..87} 144 131 133 130;
 do 
    wget -O csv/${i}.csv --keep-session-cookies --save-cookies $cookies --load-cookies $cookies "https://math4u.vsb.cz/tex/problem_txt.csv/$i"
    sed -i -f sed_repl.txt csv/${i}.csv
