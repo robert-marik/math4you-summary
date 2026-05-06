@@ -246,7 +246,7 @@ $BABEL
 \end{minipage}
 \hss {\color{myblue} \vrule}\hss
 \begin{minipage}[t]{9cm}
-  \vspace*{-1cm}
+  \vspace*{-.6cm}
   \footnotesize
   \MFUmanifest
 \end{minipage}%\vrule

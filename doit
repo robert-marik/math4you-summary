@@ -78,8 +78,8 @@ bash spellcheck en > /dev/null
 bash spellcheck pl > /dev/null
 bash spellcheck es > /dev/null
 
-cp txt/list_*.txt /var/www/temp/
-cp spell_correct.* /var/www/temp/
+#cp txt/list_*.txt /var/www/temp/
+#cp spell_correct.* /var/www/temp/
 
 
 python read_un_pandas.py > /var/www/math4you/pandas.txt
