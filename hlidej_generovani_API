@@ -1,0 +1,10 @@
+#!/bin/sh
+while inotifywait -e modify -e create -e delete /var/www/m4uproject/m4u-cache/build/log/uzivatelAPI.log; do
+  echo "---------------ZACATEK--------------------------" >> ~/math4you-summary/generovaniAPI.log 
+  date >> ~/math4you-summary/generovaniAPI.log
+  cd /home/marik/math4you-summary
+  /home/marik/miniforge3/bin/python3 math4uAPI.py >> ~/math4you-summary/generovaniAPI.log 
+  sleep 2  
+  /home/marik/miniforge3/bin/python3 math4uAPI.py >> ~/math4you-summary/generovaniAPI.log 
+  echo "---------------KONEC----------------------------" >> ~/math4you-summary/generovaniAPI.log 
+done

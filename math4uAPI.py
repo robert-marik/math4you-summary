@@ -1,9 +1,28 @@
-#import pandas as pd
+upload = True
 
 
 import csv
 import random
 import os
+from datetime import date
+from pathlib import Path
+import logging
+from poslat_email import send_email
+
+logger = logging.getLogger(__name__)
+#logger.setLevel(logging.DEBUG)
+
+now = date.today()
+# get current month and year
+year = now.year
+month = now.month
+directory = f"/var/www/m4uproject/tests/pdf/{year}-{month:02d}"
+url = f"http://math4u-latex.vsb.cz/m4uproject/tests/pdf/{year}-{month:02d}"
+
+print(f"Starting the script on {now}")
+
+# create directory if it does not exist
+Path(directory).mkdir(parents=True, exist_ok=True)
 
 def filenameSVGtoPDF(filename):
     if filename[-9:]==".pdf_.svg":
@@ -109,7 +128,7 @@ def get_questions(definice_otazek,language='en'):
           answers=[]
           for i in ['1','2','3','4','5','6']:
               if row['answer_'+i+'_image']!="":
-                  answers=answers+["\MYincludegraphics{%s}"%filenameSVGtoPDF(str(row['answer_'+i+'_image'].split("/")[-1]))]
+                  answers=answers+["\\MYincludegraphics{%s}"%filenameSVGtoPDF(str(row['answer_'+i+'_image'].split("/")[-1]))]
           answers[0]="*"+answers[0]
           if row['fixed_answer']=="1":
               answers=answers[::-1] #reverse
@@ -234,6 +253,19 @@ $BABEL
 \setlength\aboveanswersSkip{20pt}
 \renewcommand{\parallel}{\mathrel{|\mkern-.8mu|}} 
 \begin{document} 
+
+\def\PMATRIX#1{
+  \begin{pmatrix}
+    #1
+  \end{pmatrix}
+}
+
+\def\MATRIX#1{
+  \begin{matrix}
+    #1
+  \end{matrix}
+}
+
 
 \definecolor{myblue}{HTML}{6487D2}
 
@@ -366,7 +398,7 @@ host = 'https://api.math4u.vsb.cz/'
 api = 'jsonapi/'
 
 # Login
-pp('Login')
+logger.debug('Login')
 payload = {
     "name": "tex",
     "pass": "texarka@math4u"
@@ -375,18 +407,16 @@ payload = {
 r = requests.post(host + 'user/login?_format=json', json=payload)
 
 if r.status_code != 200:
-    pp(r.status_code)
-    pp('exiting ...')
+    logger.debug(r.status_code)
+    logger.debug('exiting ...')
     exit
 else:
     accessToken = r.json()['access_token']
 
-pp(r.status_code)
-#pp(accessToken)
-
+logger.debug(f"Status code is {r.status_code}")
 
 # Get changes
-pp('Get')
+logger.debug('Get')
 
 headers = {
     'Accept': 'application/vnd.api+json',
@@ -402,15 +432,17 @@ params = {
 
 r = requests.get(host + api + 'node/pdf_test', headers= headers, params=params)
 
-pp(r.status_code)
-pp(r.json())
+logger.debug(r.status_code)
+logger.debug(r.json())
 data = r.json()['data']
 pocitadlo = 0
 
-
+#data = data[:2]
+# pp(f'Delka:  {len(data)}')
+# data=[]
 for i in data:
     pocitadlo = pocitadlo + 1    
-    title = i['attributes']['title']
+    title = i['attributes']['title'].replace("_"," ")
     lang = i['attributes']['langcode']
     id = i['id']
     questions = [str(j) for j in i['attributes']['field_test_problems']]
@@ -426,20 +458,35 @@ for i in data:
     else:
         template = template_perm
         options = r"\PassOptionsToClass{"+lang+"}{vsb_m4u}"
-    print(title+" "+lang+" "+id+" "+str(pdflink))
+    logger.debug(title+" "+lang+" "+id+" "+str(pdflink))
     test = get_file_latex(questions=questions,lang=lang, title=title, template = template, options=options)
     text_file = open("buildAPI/"+id+".tex", "w")
     n = text_file.write(test)
     text_file.close()
+
+    logger.debug(f'LaTeX file {id}.tex created')
+    logger.debug(f'The target directory is {directory}')
     if typ == 'w':
-        os.system("bash prelatex_substitution.sh buildAPI/%s.tex; cd buildAPI ; export TEXINPUTS=\".:..//:\" ; pdflatex %s.tex > /dev/null ; pdflatex %s.tex > /dev/null ; pdfnup --batch --suffix 2up %s.pdf ; rm %s.pdf; mv %s-2up.pdf /var/www/m4uproject/m4u-cache/pdf/api/%s.pdf ; mv %s.log log/ ; echo Finished written test"%(id,id,id,id,id,id,id,id))
+        logger.debug('Starting to write test')
+        os.system(f"bash prelatex_substitution.sh buildAPI/{id}.tex; cd buildAPI ; export TEXINPUTS=\".:../tex//:../pics//:\" ; pdflatex {id}.tex > /dev/null ; pdflatex {id}.tex > /dev/null ; pdfjam {id}.pdf --nup 2x1 --suffix 2up --batch --landscape ; rm {id}.pdf; mv {id}-2up.pdf {directory}/{id}.pdf ; mv {id}.log log/ ; echo Finished written test")
     else:
-        os.system("bash prelatex_substitution.sh buildAPI/%s.tex; cd buildAPI ; export TEXINPUTS=\".:..//:\" ; pdflatex %s.tex > /dev/null ; pdflatex %s.tex > /dev/null ; pdflatex %s.tex > /dev/null ; mv %s.pdf /var/www/m4uproject/m4u-cache/pdf/api/ ; mv %s.log log/ ; echo Finished etest"%(id,id,id,id,id,id))
+        logger.debug('Starting to write etest')
+        os.system(f"bash prelatex_substitution.sh buildAPI/{id}.tex; cd buildAPI ; export TEXINPUTS=\".:../tex//:../pics//:\" ; pdflatex {id}.tex > /dev/null ; pdflatex {id}.tex > /dev/null ; pdflatex {id}.tex > /dev/null ; mv {id}.pdf {directory}/ ; mv {id}.log log/ ; echo Finished etest")
 
 
+    # If the file {directory}/{id}.pdf does not exist, send and email.
+    if not os.path.isfile(f"{directory}/{id}.pdf"):
+        logger.debug(f"File {directory}/{id}.pdf does not exist, sending email")
+        send_email(recipient="robert.marik.cz@gmail.com", 
+                   subject="Math4U Teacher test generation failed", 
+                   content=f"Test {title} ({id}) se nepodařilo vygenerovat. Prosím zkontrolujte systém.")
 
-    pp('Patch')
-    uri = 'https://msr-latex.vsb.cz/m4uproject/m4u-cache/pdf/api/'+id+'.pdf'
+    logger.debug('Patch')
+    uri = f'{url}/{id}.pdf'
+
+    send_email(recipient="robert.marik.cz@gmail.com", 
+               subject="Math4U Teacher test created", 
+               content=f"Test {title} ({id}) byl vytvořen a je dostupný na {uri}")
     
     payload = {
         "data": {
@@ -453,11 +500,13 @@ for i in data:
             }
         }
     }
-    r = requests.patch(host + api + 'node/pdf_test/' + id, headers= headers, json=payload)
-    pp(r.status_code)
+    logger.debug(payload)
+    if upload:
+        r = requests.patch(host + api + 'node/pdf_test/' + id, headers= headers, json=payload)
+        logger.debug(r.status_code)
     
 
-os.system("bash generuj_hlasky.sh ; cd buildAPI && rm *.aux *.cut *.reseni")
+os.system("bash generuj_hlasky.sh ; cd buildAPI && rm *.aux *.cut *.reseni *.qsl *.sol *.out")
 
 
 # TODO extract values from r.json

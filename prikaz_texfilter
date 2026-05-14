@@ -19,37 +19,37 @@ sed -i "s/$(echo -ne '\u2212')/-/g" tex_un_translation/*.tex
 sed -i "s/$(echo -ne '\u2212')/-/g" tex_un_qa/*.tex
 sed -i "s/$(echo -ne '\u2212')/-/g" tex_un_publish/*.tex
 
-rpl "\array" "\PMATRIX" tex/40.tex
-rpl "\array" "\PMATRIX" tex_easy/40.tex
-rpl "\array" "\PMATRIX" tex_clonable/40.tex
-rpl "\array" "\PMATRIX" tex_publish/40.tex
-rpl "\array" "\PMATRIX" tex_un_qa/40.tex
-rpl "\array" "\PMATRIX" tex_un_publish/40.tex
-rpl "\array" "\PMATRIX" tex_un_translation/40.tex
+rpl "\\\\array" "\\\\PMATRIX" tex/40.tex
+rpl "\\\\array" "\\\\PMATRIX" tex_easy/40.tex
+rpl "\\\\array" "\\\\PMATRIX" tex_clonable/40.tex
+rpl "\\\\array" "\\\\PMATRIX" tex_publish/40.tex
+rpl "\\\\array" "\\\\PMATRIX" tex_un_qa/40.tex
+rpl "\\\\array" "\\\\PMATRIX" tex_un_publish/40.tex
+rpl "\\\\array" "\\\\PMATRIX" tex_un_translation/40.tex
 
-perl -p -i -e 's/\\left *\( *\n/\\left (/' tex/40.tex
-perl -p -i -e 's/\\left *\( *\n/\\left (/' tex_easy/40.tex
-perl -p -i -e 's/\\left *\( *\n/\\left (/' tex_clonable/40.tex
-perl -p -i -e 's/\\left *\( *\n/\\left (/' tex_publish/40.tex
-perl -p -i -e 's/\\left *\( *\n/\\left (/' tex_un_qa/40.tex
-perl -p -i -e 's/\\left *\( *\n/\\left (/' tex_un_publish/40.tex
-perl -p -i -e 's/\\left *\( *\n/\\left (/' tex_un_translation/40.tex
+perl -p -i -e 's/\\\\left *\( *\n/\\\\left (/' tex/40.tex
+perl -p -i -e 's/\\\\left *\( *\n/\\\\left (/' tex_easy/40.tex
+perl -p -i -e 's/\\\\left *\( *\n/\\\\left (/' tex_clonable/40.tex
+perl -p -i -e 's/\\\\left *\( *\n/\\\\left (/' tex_publish/40.tex
+perl -p -i -e 's/\\\\left *\( *\n/\\\\left (/' tex_un_qa/40.tex
+perl -p -i -e 's/\\\\left *\( *\n/\\\\left (/' tex_un_publish/40.tex
+perl -p -i -e 's/\\\\left *\( *\n/\\\\left (/' tex_un_translation/40.tex
 
-rpl "\left (\PMATRIX" "\left( \MATRIX" tex/40.tex
-rpl "\left (\PMATRIX" "\left( \MATRIX" tex_easy/40.tex
-rpl "\left (\PMATRIX" "\left( \MATRIX" tex_clonable/40.tex
-rpl "\left (\PMATRIX" "\left( \MATRIX" tex_publish/40.tex
-rpl "\left (\PMATRIX" "\left( \MATRIX" tex_un_qa/40.tex
-rpl "\left (\PMATRIX" "\left( \MATRIX" tex_un_publish/40.tex
-rpl "\left (\PMATRIX" "\left( \MATRIX" tex_un_translation/40.tex
+rpl "\\\\left (\\\\PMATRIX" "\\\\left( \\\\MATRIX" tex/40.tex
+rpl "\\\\left (\\\\PMATRIX" "\\\\left( \\\\MATRIX" tex_easy/40.tex
+rpl "\\\\left (\\\\PMATRIX" "\\\\left( \\\\MATRIX" tex_clonable/40.tex
+rpl "\\\\left (\\\\PMATRIX" "\\\\left( \\\\MATRIX" tex_publish/40.tex
+rpl "\\\\left (\\\\PMATRIX" "\\\\left( \\\\MATRIX" tex_un_qa/40.tex
+rpl "\\\\left (\\\\PMATRIX" "\\\\left( \\\\MATRIX" tex_un_publish/40.tex
+rpl "\\\\left (\\\\PMATRIX" "\\\\left( \\\\MATRIX" tex_un_translation/40.tex
 
-rpl "\array" "\MATRIX" tex/131.tex
-rpl "\array" "\MATRIX" tex_easy/131.tex
-rpl "\array" "\MATRIX" tex_clonable/131.tex
-rpl "\array" "\MATRIX" tex_publish/131.tex
-rpl "\array" "\MATRIX" tex_un_qa/131.tex
-rpl "\array" "\MATRIX" tex_un_publish/131.tex
-rpl "\array" "\MATRIX" tex_un_translation/131.tex
+rpl "\\\\array" "\\\\MATRIX" tex/131.tex
+rpl "\\\\array" "\\\\MATRIX" tex_easy/131.tex
+rpl "\\\\array" "\\\\MATRIX" tex_clonable/131.tex
+rpl "\\\\array" "\\\\MATRIX" tex_publish/131.tex
+rpl "\\\\array" "\\\\MATRIX" tex_un_qa/131.tex
+rpl "\\\\array" "\\\\MATRIX" tex_un_publish/131.tex
+rpl "\\\\array" "\\\\MATRIX" tex_un_translation/131.tex
 
 #rpl "\mathrm{zł}" "\text{z\l{}}" tex/*.tex
 

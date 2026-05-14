@@ -84,7 +84,7 @@ for rrow in definice_otazek:
     if rrow in databasedict:
         row = databasedict[rrow]
     else:
-        print "%Chybi otazka "+str(rrow)
+        print ("%Chybi otazka "+str(rrow))
     n=n+1
     if "answer_1_cs" in row:  # text answer
         if row["question_image"]!="":
@@ -140,7 +140,7 @@ for rrow in definice_otazek:
         output=output+"\n{"+', '.join(str(x) for x in answers)+"}\n"
 
 
-print output
+print (output)
 
 exit()
 
@@ -178,7 +178,7 @@ def download_images(img):
     if img!="":
         filename=img.split("/")
         if downloadfiles:
-            print "Downloading "+img
+            print ("Downloading "+img)
             os.system("wget https://math4u.vsb.cz/"+img+" -q -O pics/"+str(filename[-1]))
             if filename[-1][-4:]==".svg":
                 os.system("inkscape --file=pics/"+str(filename[-1])+" --export-area-page --without-gui --export-pdf=pics/"+filenameSVGtoPDF(str(filename[-1])))
@@ -192,12 +192,12 @@ for row in database:
             for l in ['en','cs','pl','sk']:
                 row['answer_'+str(number)+'_'+str(l)]=''
     outstr="\n"
-    outstr=outstr+"\Data\ID{"+row['project_id']+"}\n"
-    outstr=outstr+"\Updated{"+row['updated']+"}\n"
-    outstr=outstr+"\Level{"+row['level']+"}\n"
-    outstr=outstr+"\SubArea{"+row['subarea']+"}\n"
+    outstr=outstr+"\\Data\\ID{"+row['project_id']+"}\n"
+    outstr=outstr+"\\Updated{"+row['updated']+"}\n"
+    outstr=outstr+"\\Level{"+row['level']+"}\n"
+    outstr=outstr+"\\SubArea{"+row['subarea']+"}\n"
     if row['question_image']!="":
-        outstr=outstr+"\IMG{"+filenameSVGtoPDF(str(row['question_image'].split("/")[-1]))+"}\n"
+        outstr=outstr+"\\IMG{"+filenameSVGtoPDF(str(row['question_image'].split("/")[-1]))+"}\n"
     testen=row['answer_1_en']+row['answer_2_en']+row['answer_3_en']+row['answer_4_en']+row['answer_5_en']+row['answer_6_en']+row['question_en']
     testcs=row['answer_1_cs']+row['answer_2_cs']+row['answer_3_cs']+row['answer_4_cs']+row['answer_5_cs']+row['answer_6_cs']+row['question_cs']
     testsk=row['answer_1_sk']+row['answer_2_sk']+row['answer_3_sk']+row['answer_4_sk']+row['answer_5_sk']+row['answer_6_sk']+row['question_sk']
@@ -255,8 +255,8 @@ for row in database:
 #        row['answer_6_pl']=""
 #        row['question_pl']="NOT TRANSLATED"
     for lang in ['en','pl','cs','sk']:
-        outstr=outstr+"\LANG"+lang+"{\n"
-        outstr=outstr+"\Question{\n"
+        outstr=outstr+"\\LANG"+lang+"{\n"
+        outstr=outstr+"\\Question{\n"
         outstr=outstr+row['question_'+lang]
         outstr=outstr+"}\n"
         for i in [row['answer_1_'+lang],row['answer_2_'+lang],row['answer_3_'+lang],row['answer_4_'+lang],row['answer_5_'+lang],row['answer_6_'+lang]] :
@@ -265,8 +265,8 @@ for row in database:
     if "answer_1_image" in row:
         for num in ['1','2','3','4','5','6']:
             if row['answer_'+num+'_image']!='':
-                outstr=outstr+"\n\IMGanswer{"+filenameSVGtoPDF(str(row['answer_'+num+'_image'].split("/")[-1]))+"}"
-    outstr=outstr+"\End\n"
+                outstr=outstr+"\n\\IMGanswer{"+filenameSVGtoPDF(str(row['answer_'+num+'_image'].split("/")[-1]))+"}"
+    outstr=outstr+"\\End\n"
     with open("tex/"+row['subarea_id']+'.tex', 'a') as the_file:
         the_file.write(outstr)
     outstr="\n"
