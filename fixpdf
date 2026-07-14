@@ -1,0 +1,11 @@
+i=`head -n1 $1 | cut -d . -f2`
+
+if [ $i -gt 4 ];
+then
+  echo Converting $1 pdf "->" ps "->" pdf
+  pdf2ps $1 a.ps
+  ps2pdf a.ps $(basename "$1")
+  rm a.ps
+else
+  echo "File $1 does not need conversion"
+fi
