@@ -1,0 +1,5 @@
+# sed replacements
+s/<div[^>]*>//g
+s/<\/div>//g
+s/<b>/\\textbf{/g
+s/<\/b>/}/g

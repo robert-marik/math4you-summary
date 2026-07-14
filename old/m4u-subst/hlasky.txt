@@ -1,0 +1,238 @@
+en@1@Amazing! Wonderful! 
+en@1@Somebody knows their stuff!
+en@1@Congratulations on being awesome!
+en@1@High five! Good job!
+en@1@Can't get any better!
+en@1@Respect!
+en@1@You got this!
+en@1@Hell yeah!
+en@1@Fantastic! Superb!
+en@1@Excellent!
+en@1@Awesome!
+en@1@Super!
+en@1@That's brilliant!
+en@1@Exactly right!
+en@1@Keep doing your job!
+en@1@Congratulations!
+en@1@You deserve a standing ovation.
+en@1@You are great!
+en@1@Great job!
+en@2@Well done.
+en@2@Pretty good!
+en@2@Excellent! So close!
+en@2@Almost there, keep going!
+en@2@Good job!
+en@2@Above average.
+en@2@This was hard, but you did it!
+en@3@Not bad, but needs improvement.
+en@3@Could be better.
+en@3@Middle of the road,\\ you can do better!
+en@3@Sufficient.
+en@3@You can do better than this.
+en@3@Satisfactory.
+en@3@Decent!
+en@3@Adequate. 
+en@3@Alright!
+en@3@Not your best.
+en@3@Try again, practice makes perfect!
+en@4@No luck today! Maybe next time.
+en@4@I just hope you never give up.
+en@4@Hug a friend and try again.
+en@4@Stay positive!\\ You can do better than this!
+en@4@Needs improvement.
+en@4@Try harder.
+en@4@Not quite the worst result!
+en@4@Get help.
+en@4@Almost adequate.
+en@4@Nearly average.
+en@5@At least you can't score any lower?
+en@5@I'm not saying you're bad\dots  but\dots 
+en@5@Only 4 grades away from the top!
+en@5@Look at the positives -- you can only score higher from now on, right?
+en@5@Wait, what?
+en@5@Go hug a kitten, you need to. 
+en@5@Nice try but no cigar!
+en@5@We need to talk!
+en@5@You tried\dots 
+en@5@I'm so sorry for you.
+en@5@I'm sorry.
+en@5@Please get help.
+en@5@Are you blind pal?
+en@5@Poorly, you have to practice more.
+pl@1@Niesamowicie! Wspaniale!
+pl@1@Ktoś zna się na rzeczy!
+pl@1@Gratulacje jesteś wspaniały!
+pl@1@Przybij piątkę! Dobra robota!
+pl@1@Lepiej się nie da!
+pl@1@Szacunek!
+pl@1@Mamy to!
+pl@1@Piekielnie dobrze!
+pl@1@Fantastycznie! Świetnie!
+pl@1@Doskonale!
+pl@1@Wspaniale!
+pl@1@Super!
+pl@1@Cudownie!
+pl@1@Dokładnie tak!
+pl@1@Oby tak dalej!
+pl@1@Gratulacje!
+pl@1@Należą Ci się owacje na stojąco!
+pl@1@Jesteś świetny!
+pl@1@Dobra robota!
+pl@2@Dobra robota!
+pl@2@Całkiem dobrze!
+pl@2@Doskonale!\\ Jesteś blisko osiągnięcia celu!
+pl@2@Prawie dobrze! Kontynuuj!
+pl@2@Dobra robota!
+pl@2@Powyżej średniej.
+pl@2@To było trudne, ale dałeś radę!
+pl@3@Nie jest źle,\\ ale musisz jeszcze popracować.
+pl@3@Mogło być lepiej.
+pl@3@Jesteś w połowie drogi,\\ stać cię na więcej!
+pl@3@Wystarczająco.
+pl@3@Potrafisz to zrobić lepiej.
+pl@3@Satysfakcjonująco.
+pl@3@Przyzwoicie!
+pl@3@Właściwie.
+pl@3@W porządku
+pl@3@Nie najlepiej.
+pl@3@Praktyka czyni mistrza
+pl@4@Dzisiaj się nie udało.\\ Może następnym razem.
+pl@4@Mam nadzieję,\\ że nigdy sie nie poddajesz.
+pl@4@Przytul przyjaciela i spróbuj jeszcze raz.
+pl@4@Myśl pozytywnie. Stać cię na więcej.
+pl@4@Musisz jeszcze popracować. 
+pl@4@Postaraj się bardziej.
+pl@4@Nie najgorszy wynik. 
+pl@4@Poproś o pomoc. 
+pl@4@Prawie poprawnie.
+pl@4@Prawie przeciętnie. 
+pl@5@Na szczęscie gorzej już nie będzie.  
+pl@5@Nie mówię, że jesteś kiepski, ale\dots 
+pl@5@Tylko 4 stopnie dzielą cię\\ od najlepszego wyniku.
+pl@5@Popatrz na dobre strony --  od teraz może być już tylko lepiej.
+pl@5@Czekaj, że co?
+pl@5@Niech ktoś cię przytuli,\\ potrzebujesz tego.
+pl@5@Blisko, ale niezupełnie!
+pl@5@Musimy to przedyskutować!
+pl@5@Próbowałeś...
+pl@5@Tak mi przykro!
+pl@5@Przykro mi.
+pl@5@Poproś kogoś o pomoc.
+pl@5@Masz kłopoty ze wzrokiem?
+pl@5@Kiepsko, musisz więcej ćwiczyć.
+sk@1@Úžasné!
+sk@1@Nikto nieje lepší ako ty.
+sk@1@Lepšie to už nemohlo byť.
+sk@1@Excelentné!!!
+sk@1@Blahoželáme!
+sk@1@Super!
+sk@1@Rešpekt.
+sk@1@Presne tak.
+sk@1@Zaslúžiš si potlesk.
+sk@1@Skvelé!
+sk@1@Dobrá práca.
+sk@1@Niekto sa vyzná\dots 
+sk@2@Dobre
+sk@2@Môže byť
+sk@2@Celkom dobre
+sk@2@V pohode
+sk@2@Dosť blízko
+sk@2@Nadpriemer
+sk@2@Bolo to ťažké ale dokázal si to
+sk@3@Nie zlé
+sk@3@Zapracuj na sebe
+sk@3@Mohlo to byť lepšie
+sk@3@Uspokojivé
+sk@3@Vieš to urobiť aj lepšie
+sk@3@OK
+sk@3@Nebol to tvoj najlepší výkon
+sk@3@Skús ešte raz
+sk@4@Možno nabudúce
+sk@4@Dúfam, že sa nikdy nevzdáš
+sk@4@Obíjm priateľa a skús znova
+sk@4@Ostaň pozitívny, vieš to aj lepšie
+sk@4@Nestrácaj nádej
+sk@4@Potrebuješ sa zlepšiť
+sk@5@Horšie sa už asi nedá
+sk@5@Nehovorím že si zlý, ale \dots 
+sk@5@Katastrofa
+sk@5@Aspoň si skúsil \dots 
+sk@5@Potrebujeme sa porozprávať
+sk@5@Je mi ľúto
+sk@5@Vyhľadaj pomoc
+sk@5@Si slepý?
+sk@5@Dobrý pokus, ale celé zle
+sk@5@Uz iba 4 stupne a si najlepší
+cs@1@Úžasné! Skvělé!
+cs@1@Kdo umí, ten umí!
+cs@1@Ó, Ty jsi úžasný!
+cs@1@Dobrá práce!
+cs@1@Líp už to nejde!
+cs@1@Klobouk dolů!
+cs@1@Trefa do černého!
+cs@1@Zatraceně dobré
+cs@1@Fantastické! Vynikající! 
+cs@1@Excelentní!
+cs@1@Úchvatné! Velkolepé!
+cs@1@Super!
+cs@1@Brilantní! 
+cs@1@Naprosto správně!
+cs@1@Dobrá práce! Jen tak dál!
+cs@1@Gratulace!
+cs@1@Perfektní! Tleskám!
+cs@1@Jsi borec!
+cs@1@Skvělý výsledek!
+cs@1@Smekám!
+cs@2@Už jen kousek a máš to na výbornou!
+cs@2@Ještě se na to zkus podívat.
+cs@2@Ještě si to vyzkoušej.
+cs@2@Chybí už jen kousek k dokonalosti.
+cs@2@Skoro bez chyby.
+cs@2@Jsi blízko dokonalosti!
+cs@2@Dobrý výkon!
+cs@2@Zasloužíš si pochvalu,\\ skoro všechno dobře!
+cs@2@Dvojka je super!
+cs@2@To je fajn.
+cs@2@Skoro jednička.
+cs@2@Tak to bylo o fous\dots
+cs@2@Jen jeden krůček od vrcholu.
+cs@2@Skoro, ale za dva.
+cs@3@Není to nejhorší.
+cs@3@Chce to ještě trénovat.
+cs@3@Máš na víc!
+cs@3@Přece nechceš být průměr?
+cs@3@Zlatá střední cesta? 
+cs@3@Ještě se na to mrkni.
+cs@3@Zlatý střed, zkoušej dál.
+cs@3@Dobrý, vskutku dobrý. 
+cs@3@Dobrá práce.
+cs@3@Zlatý průměr, ale mohlo by to být lepší.
+cs@3@Zlatý střed.
+cs@3@Napodruhé to bude lepší, uvidíš!
+cs@4@Zkus to ještě jednou.
+cs@4@Ještě si to procvič a zkus to znovu.
+cs@4@Není to úplná katastrofa.
+cs@4@Asi špatný den, co?
+cs@4@Cení se snaha.
+cs@4@Těsně by to prošlo.
+cs@4@Není to nejhorší,\\ ale dobré to taky není\dots
+cs@4@Příště to musí být lepší.
+cs@4@To musíš zlepšit.
+cs@4@Nevadí, příště to bude lepší.
+cs@4@Zkus to znovu.
+cs@4@Mohlo to dopadnout ještě hůř!
+cs@5@Horší už to nebude!
+cs@5@Ne, že bys byl úplně neschopný, ale\dots
+cs@5@Jen 4 stupně od vrcholu!
+cs@5@Na druhou stranu -- teď už to může být jenom lepší, ne?
+cs@5@Co, co, co \dots{} cože?!!!
+cs@5@To se nepovedlo!\\ Nepotřebuješ obejmout?
+cs@5@Dobrý pokus, ale šampíčko neotvírej!
+cs@5@Měli bychom si vážně promluvit!
+cs@5@Aspoň jsi to zkusil!
+cs@5@Je mi Tě trochu líto!
+cs@5@Je mi líto.  Co už!?!
+cs@5@Pomóóóc! Zachraň se, kdo můžeš!
+cs@5@To není sportka!
+cs@5@Počítat, počítat, počítat!
+cs@5@Nejspíš Tě zklamal matematický cit.

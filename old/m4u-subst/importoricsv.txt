@@ -1,0 +1,166 @@
+"30400","Which of the given graphs is the graph of exponential function \( 
+f(x)=5\cdot 0{,}2^x\)?","Který z následujících grafů je graf 
+exponenciální funkce \( f(x)=5\cdot 0{,}2^x\)?","Który z poniższych 
+wykresów jest  wykresem funkcji wykładniczej \( f(x)=5\cdot 
+0{,}2^x\)?","Ktorý z nasledujúcich grafov je graf exponenciálnej funkcie \( 
+f(x)=5\cdot 0{,}2^x\)?"
+"30944","Identify which of the graphs below represents the  function \( 
+f(x)=|2x-4|-|x-1|;\ x\in\langle-4;4\rangle \).","Na kterém obrázku je graf 
+funkce \( f(x)=|2x-4|-|x-1|;\ x\in\langle-4;4\rangle \)?","Z podanych wykresów 
+wybierz ten, który przedstawia funkcję  \( f(x)=|2x-4|-|x-1|;\ 
+x\in\langle-4;4\rangle \).","Ktorý z nasledujúcich grafov je graf funkcie \( 
+f(x)=|2x-4|-|x-1|;\ x\in\langle-4;4\rangle \)?"
+"30945","Identify which of the graphs below represents  the function \( 
+f(x)=x+1-|x+1|;\ x\in\langle-4;4\rangle \).","Na kterém obrázku je graf 
+funkce \( f(x)=x+1-|x+1|;\ x\in\langle-4;4\rangle \)?","Określ, który z 
+poniższych wykresów przedstawia funkcję  \( f(x)=x+1-|x+1|;\ 
+x\in\langle-4;4\rangle \).","Ktorý z nasledujúcich grafov je grafom funkcie 
+\( f(x)=x+1-|x+1|;\ x\in\langle-4;4\rangle \)?"
+"30955","Identify which of the graphs represents the function \( f \) with  the 
+domain \( \langle-4; 2) \) and the range  \( (-5; 3\rangle \).","Určete graf 
+funkce, jejímž definičním oborem je interval  \( \langle-4; 2) \) a oborem 
+hodnot interval \( (-5; 3\rangle \).","Który z poniższych wykresów 
+przedstawia funkcję \( f \) z dziedziną  \( \langle-4; 2) \) i zakresem \( 
+(-5; 3\rangle \)?","Určte graf funkcie, ktorej definičný obor je interval \( 
+\langle-4; 2) \) a obor hodnôt je interval \( (-5; 3\rangle \)."
+"31198","Identify the graph of the function \( f(x)=\sqrt{|-x|};\ 
+x\in\langle-9;9\rangle \).","Určete graf funkce \( f(x)=\sqrt{|-x|};\ 
+x\in\langle-9;9\rangle \).","Wybierz wykres funkcji \( f(x)=\sqrt{|-x|};\ 
+x\in\langle-9;9\rangle \).","Ktorý z následujúcich grafov je graf funkcie \( 
+f(x)=\sqrt{|-x|};\ x\in\langle-9;9\rangle \)?"
+"31309","Let \( f(x)=|x-|x| | \), \( x\in\langle-5;5\rangle \). Choose the 
+graph of \( f \).","Na kterém obrázku je graf funkce  \( f(x)=|x-|x| | \), \( 
+x\in\langle-5;5\rangle \)?","Załóżmy, że \( f(x)=|x-|x| | \), \( 
+x\in\langle-5;5\rangle \). Wybierz wykres funkcji  \( f \).","Ktorý z 
+následujúcich grafov je graf funkcie \( f(x)=|x-|x| | \), \( 
+x\in\langle-5;5\rangle \)?"
+"31331","Which of the following graphs is the graph of the logarithmic function 
+\( f(x)=2-\log_{0{,}4}⁡x \)?","Který z následujících grafů je grafem 
+logaritmické funkce \( f(x)=2-\log_{0{,}4}⁡x \)?","Który z poniższych 
+wykresów jest wykresem funkcji logarytmicznej \( f(x)=2-\log_{0{,}4}⁡x 
+\)?","Ktorý z nasledujúcich grafov je graf logaritmickej funkcie \( 
+f(x)=2-\log_{0{,}4}⁡x \)?"
+"31502","Determine the graph of the function \( f(x)=0{,}5\sin(2x) + 1 
+\).","Který z grafů je grafem funkce \( f(x)=0{,}5\sin(2x) + 1 \)?","Wskaż 
+wykres funkcji \( f(x)=0{,}5\sin(2x) + 1 \).","Ktorý z grafov je graf funkcie  
+\( f(x)=0{,}5\sin(2x) + 1 \)?"
+"31743","Identify which of the graphs below represents the function \( 
+f(x)=\frac{4x-3}{3x+4};\ x\in\langle-1;5\rangle \).","Na kterém obrázku je 
+graf funkce \( f(x)=\frac{4x-3}{3x+4};\ x\in\langle-1;5\rangle \)?","Który z 
+poniższych wykresów przedstawia funkcję  \( f(x)=\frac{4x-3}{3x+4};\ 
+x\in\langle-1;5\rangle \)?","Ktorý z nasledujúcich grafov je graf funkcie \( 
+f(x)=\frac{4x-3}{3x+4};\ x\in\langle-1;5\rangle \)?"
+"31744","Identify which of the graphs below represents the function \( 
+f(x)=\left|\frac{1-2x}{x-4}\right|;\ x\in\langle-\frac52;\frac52\rangle 
+\).","Na kterém obrázku je graf funkce \( 
+f(x)=\left|\frac{1-2x}{x-4}\right|;\ x\in\langle-\frac52;\frac52\rangle 
+\)?","Który z poniższych wykresów przedstawia funkcję \( 
+f(x)=\left|\frac{1-2x}{x-4}\right|;\ x\in\langle-\frac52;\frac52\rangle 
+\)?","Ktorý z nasledujúcich grafov je graf funkcie \( 
+f(x)=\left|\frac{1-2x}{x-4}\right|;\ x\in\langle-\frac52;\frac52\rangle \)?"
+"31962","We were given a sequence \( \left( 1{,}5n\right)^{\infty}_{n=1} \). 
+Which of the diagrams shows correctly the first five elements of the 
+sequence?","Je dána posloupnost \( \left( 1{,}5n\right)^{\infty}_{n=1} \). 
+Vyberte obrázek, na kterém je správně vyznačeno prvních pět členů 
+dané posloupnosti.","Dany jest ciąg \( \left( 1{,}5n\right)^{\infty}_{n=1} 
+\). 
+Który z  diagramów poprawnie wskazuje pięć pierwszych wyrazów tego 
+ciągu?","Je daná postupnosť \( \left( 1{,}5n\right)^{\infty}_{n=1} \). 
+Vyberte obrázok, na ktorom je správne vyznačených prvých päť členov 
+danej postupnosti."
+"32045","In a simple electric circuit a voltage source and a variable resistor  
+with resistance \( R \) in the range  \( \langle1\Omega;10\Omega\rangle \) are 
+connected.  Suppose the source gives fixed voltage of \( 5\,\mathrm{V} \). From 
+the graphs given below select the one that describes the dependence of the 
+electric current \( I \) on the resistance \( R \) in this circuit. (Note: The 
+relationship between electric currant, voltage and resistance is described by 
+Ohm’s law: \( U=RI \).)","V jednoduchém elektrickém obvodu je ke zdroji 
+napětí připojen rezistor s proměnným odporem \( R \) o rozsahu \( 
+\langle1\Omega;10\Omega\rangle \). Napětí \( U \) na svorkách zdroje je 
+konstantní o velikosti \( 5\,\mathrm{V} \). Vyberte graf funkce vyjadřující 
+závislost proudu \( I \) v tomto obvodu na odporu rezistoru \( R \). 
+(Nápověda: Vztah mezi elektrickým odporem, napětím a proudem udává 
+Ohmův zákon: \( U=RI \).)","W prostym obwodzie elektrycznym podłączone jest 
+źródło napięcia i rezystor o oporze \( R \) w zakresie   \( 
+\langle1\Omega;10\Omega\rangle \). Załóżmy, że źródło podaje stałe 
+napięcie \( 5\,\mathrm{V} \). Z poniższych wykresów wybierz jeden, który 
+przedstawia zależność pomiędzy prądem elektrycznym \( I \) a oporem \( R 
+\) w tym obwodzie. (Wskazówka: Związek pomiędzy obwodem elektrycznym, 
+napięciem i oporem jest określony jest przez prawo Ohma: \( U=RI \).)","V 
+jednoduchom elektrickom obvode je pripojený k zdroju napätia rezistor s 
+priemerným odporom \( R \) s rozsahom \( \langle1\Omega;10\Omega\rangle \). 
+Napätie \( U \) na svorkách zdroja je konštantné s veľkosťou \( 
+5\,\mathrm{V} \). Vyberte graf funkcie, ktorý vyjadruje závislosť prúdu \( 
+I \) v tomto obvode na odpore rezistora \( R \). (Pomôcka: Vzťah medzi 
+elektrickým odporom, napätím a prúdom udáva Ohmov zákon: \( U=RI \).)"
+"32139","Choose the diagram which shows the number line with the correct 
+solution set of the given inequality depicted in blue.
+\[ 2\log_{0{,}1}⁡(x-1) > \log_{0{,}1}⁡4 \]","Rozhodněte, který z 
+následujících intervalů znázorněných na číselné ose modrou barvou je 
+řešením dané nerovnice.
+\[ 2\log_{0{,}1}⁡(x-1) > \log_{0{,}1}⁡4 \]","Wybierz wykres, który 
+przedstawia zbiór rozwiązań podanej nierówności oznaczonej kolorem 
+niebieskim. 
+\[ 2\log_{0{,}1}⁡(x-1) > \log_{0{,}1}⁡4 \]","Rozhodnite, ktorý z 
+nasledujúcich intervalov znázornených na číselnej osi modrou farbou je 
+riešením danej nerovnice.
+\[ 2\log_{0{,}1}⁡(x-1) > \log_{0{,}1}⁡4 \]"
+"32335","The thin lens equation \( \frac1a+\frac1{a'}=\frac1f \) describes the 
+quantitative relationship between the object distance \( a \), the image 
+distance \( a' \), and the focal length \( f \). Let the focal length of a thin 
+lens be \( 0{,}5\,\mathrm{m} \). Choose the picture that shows the object 
+distance vs. image distance graph, if \( 
+a\in\langle0{,}1\,\mathrm{m};0{,}4\,\mathrm{m}\rangle\cup\langle0{,}6\,\mathrm{m
+};3{,}0\,\mathrm{m}\rangle \).","Polohu obrazu předmětu zobrazeného tenkou 
+čočkou popisuje zobrazovací rovnice: \( \frac1a+\frac1{a'}=\frac1f \). Na 
+kterém obrázku je graf závislosti obrazové vzdálenosti \( a' \) na 
+předmětové vzdálenosti  \( a \) při zobrazení tenkou čočkou s 
+ohniskovou vzdálenosti \( f = 0{,}5\,\mathrm{m} \) pro \( 
+a\in\langle0{,}1\,\mathrm{m};0{,}4\,\mathrm{m}\rangle\cup\langle0{,}6\,\mathrm{m
+};3{,}0\,\mathrm{m}\rangle \)?","Równanie cienkich soczewek \( 
+\frac1a+\frac1{a'}=\frac1f \) opisuje ilościową zależność pomiędzy 
+odległością obiektu \( a \), odległością obrazu \( a' \), a długością 
+ogniskową \( f \). Niech długość ogniskowych cienkiej soczewki wynosi \( 
+0{,}5\,\mathrm{m} \). Wybierz rysunek, który przedstawia odległość 
+przedmiotu od wykresu odległości obrazu jeśli \( 
+a\in\langle0{,}1\,\mathrm{m};0{,}4\,\mathrm{m}\rangle\cup\langle0{,}6\,\mathrm{m
+};3{,}0\,\mathrm{m}\rangle \).","Polohu obrazu predmetu zobrazeného tenkou 
+šošovkou popisuje zobrazovacia rovnica: \( \frac1a+\frac1{a'}=\frac1f \). Na 
+ktorom obrázku je graf závislosti obrazovej vzdialenosti \( a' \) na 
+predmetovej vzdialenosti  \( a \) pri zobrazení tenkou šošovkou s ohniskovou 
+vzdialenosťou \( f = 0{,}5\,\mathrm{m} \) pre \( 
+a\in\langle0{,}1\,\mathrm{m};0{,}4\,\mathrm{m}\rangle\cup\langle0{,}6\,\mathrm{m
+};3{,}0\,\mathrm{m}\rangle \)?"
+"32933","We are given the line segment \( AB \):
+\begin{align*}
+x&=2+2t, \\
+y&=-1+t;\ t\in\langle0;1\rangle,
+\end{align*}
+and the points \( K=\left[\frac72;-\frac14\right] \), \( L=[-2;-3] \) and \( 
+M=\left[5;\frac12\right] \). Choose a picture where the mutual position of the 
+points \( A \), \( B \), \( K \), \( L \), and \( M \) is indicated 
+correctly.","Je dána úsečka \( AB \):
+\begin{align*}
+x&=2+2t, \\
+y&=-1+t;\ t\in\langle0;1\rangle,
+\end{align*}
+a body \( K=\left[\frac72;-\frac14\right] \), \( L=[-2;-3] \) a \( 
+M=\left[5;\frac12\right] \). Vyberte obrázek, na kterém je správně 
+vyznačena vzájemná poloha všech pěti bodů \( A \), \( B \), \( K \), \( L 
+\) a \( M \).","Dany jest odcinek \( AB \):
+\begin{align*}
+x&=2+2t, \\
+y&=-1+t;\ t\in\langle0;1\rangle,
+\end{align*}
+oraz punkty \( K=\left[\frac72;-\frac14\right] \), \( L=[-2;-3] \) i \( 
+M=\left[5;\frac12\right] \). Wybierz rysunek, na którym znajduje się poprawne 
+wzajemne położenie punktów  \( A \), \( B \), \( K \), \( L \), i \( M 
+\).","Je daná úsečka \( AB \):
+\begin{align*}
+x&=2+2t, \\
+y&=-1+t;\ t\in\langle0;1\rangle,
+\end{align*}
+a body \( K=\left[\frac72;-\frac14\right] \), \( L=[-2;-3] \) a \( 
+M=\left[5;\frac12\right] \). Vyberte obrázok, na ktorom je správne 
+vyznačená vzájomná poloha všetkých piatich bodov \( A \), \( B \), \( K 
+\), \( L \) a \( M \)."
