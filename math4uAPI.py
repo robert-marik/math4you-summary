@@ -4,6 +4,7 @@ upload = True
 import csv
 import random
 import os
+import sys
 from datetime import date
 from pathlib import Path
 import logging
@@ -436,6 +437,7 @@ logger.debug(r.status_code)
 logger.debug(r.json())
 data = r.json()['data']
 pocitadlo = 0
+selhane = []
 
 #data = data[:2]
 # pp(f'Delka:  {len(data)}')
@@ -477,6 +479,7 @@ for i in data:
     # If the file {directory}/{id}.pdf does not exist, send and email.
     if not os.path.isfile(f"{directory}/{id}.pdf"):
         logger.debug(f"File {directory}/{id}.pdf does not exist, sending email")
+        selhane.append(f"{title} ({id})")
         send_email(recipient="robert.marik.cz@gmail.com", 
                    subject="Math4U Teacher test generation failed", 
                    content=f"Test {title} ({id}) se nepodařilo vygenerovat. Prosím zkontrolujte systém.")
@@ -506,7 +509,11 @@ for i in data:
         logger.debug(r.status_code)
     
 
-os.system("bash generuj_hlasky.sh ; cd buildAPI && rm *.aux *.cut *.reseni *.qsl *.sol *.out")
+os.system("bash generuj_hlasky.sh ; cd buildAPI && rm -f *.aux *.cut *.reseni *.qsl *.sol *.out")
+
+if selhane:
+    print("Nepodarilo se vygenerovat testy: " + ", ".join(selhane), file=sys.stderr)
+    sys.exit(1)
 
 
 # TODO extract values from r.json

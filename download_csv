@@ -1,3 +1,4 @@
+set -e
 site=https://math4u.vsb.cz/
 name=robert.marik
 pass=Rob45*Ma

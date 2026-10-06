@@ -6,9 +6,9 @@ for i in {32..87} 144 131 133 146;
 do 
     echo CSV file $i
     echo ===========
-    python read.py $i
+    /home/marik/miniforge3/bin/python3 read.py $i
 done
 
 
-python read_un.py
+/home/marik/miniforge3/bin/python3 read_un.py
 
